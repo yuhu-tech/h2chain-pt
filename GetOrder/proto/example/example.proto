@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package go.micro.srv.GetOrder;
+
+service Example {
+	rpc GetOrder(Request) returns (Response) {}
+
+}
+
+
+message Request {
+    string orderid =1;
+}
+
+message Response {
+	string errno = 1;
+    string errmsg = 2;
+    message order{
+        int64 orderid = 1;
+        string orderuser = 2;
+    }
+    repeated order data = 3;
+}
