@@ -6,27 +6,27 @@ package TODO;
 
 service QueryManager {
     //hotel query
-    rpc HetelQueryOrder (HetelQueryRequest) returns (HetelQueryReply) {}
+    rpc HotelQueryOrder (HotelQueryRequest) returns (HotelQueryReply) {}
 
     //adviser query
     rpc AdviserQueryOrder (AdviserQueryRequest) returns (AdviserQueryReply) {}
 
     //pt query
-    rpc PtQueryOrder (PtQueryRequest) returns (PtQueryReply) {}
+    rpc PtQueryOrder (PTQueryRequest) returns (PTQueryReply) {}
 
     TODO query order's pt
 
 }
 
 
-message HetelQueryRequest {
-    timestam date = 1;
+message HotelQueryRequest {
+    timestamp date = 1;
     string order_id = 2;
     string order_status = 3;
 }
 
 
-message HetelQueryReply {
+message HotelQueryReply {
     message HotelOrder {
         string order_id = 1;
         string adviser =2;
@@ -68,7 +68,7 @@ message HetelQueryReply {
 }
 
 message AdviserQueryRequest {
-    timestam date = 1;
+    timestamp date = 1;
     string order_id = 2;
     string order_status = 3;
 }
@@ -116,16 +116,16 @@ message AdviserQueryReply {
 }
 
 
-message PtQueryRequest {
-    timestam date = 1;
+message PTQueryRequest {
+    timestamp date = 1;
     string order_id = 2;
     string order_status = 3;
 }
 
 
-message PtQueryReply {
+message PTQueryReply {
     message PtOrder {
-        tring order_id = 1;
+        string order_id = 1;
         string adviser =2;
         string adviser_phone = 3;
         string adviser_company = 4;
@@ -161,5 +161,5 @@ message PtQueryReply {
         bool is_refused = 34;
         bool is_rejected = 35;
    }
-  repeated PtOrder ptorders =
+  repeated PTOrder ptorders = 1;
 }

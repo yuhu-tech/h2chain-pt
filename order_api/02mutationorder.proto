@@ -5,6 +5,9 @@ syntax = "proto3";
 package TODO;
 
 service MutationManager {
+  //hotel create order
+  rpc HotelCreateOrder (HotelCreateOrderRequest) returns (HotelCreateOrderReply) {}
+
   //hotel modify order
   rpc HotelModifyOrder (HotelModifyOrderRequest) returns (HotelModifyOrderReply) {}
 
@@ -12,11 +15,29 @@ service MutationManager {
   rpc HotelCloseOrder (HotelCloseOrderRequest) returns (HotelCloseOrderReply) {}
 
   //post order by adviser
-  rpc AdviserpostOrder (AdviserpostOrderRequest) returns (AdviserpostOrderReply) {}
+  rpc AdviserPostOrder (AdviserPostOrderRequest) returns (AdviserPostOrderReply) {}
 
   //register order by pt
-  rpc PtRegisterOrder (PtRegisterOrderRequest) returns (PtRegisterOrderReply) {}
+  rpc PTRegisterOrder (PTRegisterOrderRequest) returns (PTRegisterOrderReply) {}
 
+}
+
+message HotelCreateOrderRequest {
+  string name = 1;
+  string job = 2;
+  uint64 date = 3;
+  uint64 start_time = 4;
+  uint64 duration = 5;
+  uint64 count = 6;
+  uint64 count_male = 7;
+  uint64 count_female = 8;
+  uint64 adviser = 9;
+}
+
+
+message HotelCreateOrderReply {
+  uint64 order_id = 1;
+  string create_result =2;
 }
 
 
@@ -46,7 +67,7 @@ message HotelCloseOrderReply {
   string hotel_close_result =1;
 }
 
-message AdviserpostOrderRequest {
+message AdviserPostOrderRequest {
   string order_id = 1;
   bool is_float = 2;
   uint64 hourly_salary = 3;
@@ -55,16 +76,16 @@ message AdviserpostOrderRequest {
 }
 
 
-message AdviserpostOrderReply {
+message AdviserPostOrderReply {
   string adviser_post_result =1;
 }
 
 
-message PtRegisterOrderRequest {
+message PTRegisterOrderRequest {
   string order_id = 1;
 }
 
 
-message PtRegisterOrderReply {
+message PTRegisterOrderReply {
   string pt_register_result =1;
 }
