@@ -1,0 +1,165 @@
+
+syntax = "proto3";
+
+
+package TODO;
+
+service QueryManager {
+    //hotel query
+    rpc HetelQueryOrder (HetelQueryRequest) returns (HetelQueryReply) {}
+
+    //adviser query
+    rpc AdviserQueryOrder (AdviserQueryRequest) returns (AdviserQueryReply) {}
+
+    //pt query
+    rpc PtQueryOrder (PtQueryRequest) returns (PtQueryReply) {}
+
+    TODO query order's pt
+
+}
+
+
+message HetelQueryRequest {
+    timestam date = 1;
+    string order_id = 2;
+    string order_status = 3;
+}
+
+
+message HetelQueryReply {
+    message HotelOrder {
+        string order_id = 1;
+        string adviser =2;
+        string adviser_phone = 3;
+        string adviser_company = 4;
+        string job = 5;
+        timestamp date = 6;
+        timestamp start_time = 7;
+        uint64 duration = 8;
+        string  gender_mode = 9;
+        uint64 count = 10;
+        uint64 count_yet = 11;
+        uint64 count_male = 12;
+        uint64 count_male_yet = 13;
+        uint64 count_female = 14;
+        uint64 count_female_yet = 15;
+        bool is_time_changed = 16;
+        timestamp start_time_changed = 17;
+        uint64 duration_changed = 18;
+        bool is_count_changed = 19;
+        string gender_mode_changed = 20;
+        uint64 count_changed = 21;
+        uint64 count_male_changed = 22;
+        uint64 count_female_changed = 23;
+        string hotel_name = 24;
+        uint64 hourly_salary = 25;
+        bool is_float = 26;
+        string work_content = 27;
+        string attention = 28;
+        string hotel_phone = 29;
+        TODO hotel_latitude = 30;
+        TODO hotel_longitude = 31;
+        TODO hotel_intro = 32;
+        TODO adviser_company_intro = 33;
+        bool is_refused = 34;
+        bool is_rejected = 35;
+    }
+   repeated HotelOrder hotelorders = 1;
+}
+
+message AdviserQueryRequest {
+    timestam date = 1;
+    string order_id = 2;
+    string order_status = 3;
+}
+
+
+message AdviserQueryReply {
+    message AdviserOrder {
+        string order_id = 1;
+        string adviser =2;
+        string adviser_phone = 3;
+        string adviser_company = 4;
+        string job = 5;
+        timestamp date = 6;
+        timestamp start_time = 7;
+        uint64 duration = 8;
+        string  gender_mode =
+        uint64 count = 10;
+        uint64 count_yet = 11;
+        uint64 count_male = 12;
+        uint64 count_male_yet = 13;
+        uint64 count_female = 14;
+        uint64 count_female_yet = 15;
+        bool is_time_changed = 16;
+        timestamp start_time_changed = 17;
+        uint64 duration_changed = 18;
+        bool is_count_changed = 19;
+        string gender_mode_changed = 20;
+        uint64 count_changed = 21;
+        uint64 count_male_changed = 22;
+        uint64 count_female_changed = 23;
+        string hotel_name = 24;
+        uint64 hourly_salary = 25;
+        bool is_float = 26;
+        string work_content = 27;
+        string attention = 28;
+        string hotel_phone = 29;
+        TODO hotel_latitude = 30;
+        TODO hotel_longitude = 31;
+        TODO hotel_intro = 32;
+        TODO adviser_company_intro = 33;
+        bool is_refused = 34;
+        bool is_rejected = 35;
+     }
+    repeated AdviserOrder adviserorders = 1;
+}
+
+
+message PtQueryRequest {
+    timestam date = 1;
+    string order_id = 2;
+    string order_status = 3;
+}
+
+
+message PtQueryReply {
+    message PtOrder {
+        tring order_id = 1;
+        string adviser =2;
+        string adviser_phone = 3;
+        string adviser_company = 4;
+        string job = 5;
+        timestamp date = 6;
+        timestamp start_time = 7;
+        uint64 duration = 8;
+        string  gender_mode = 9;
+        uint64 count = 10;
+        uint64 count_yet = 11;
+        uint64 count_male = 12;
+        uint64 count_male_yet = 13;
+        uint64 count_female = 14;
+        uint64 count_female_yet = 15;
+        bool is_time_changed = 16;
+        timestamp start_time_changed = 17;
+        uint64 duration_changed = 18;
+        bool is_count_changed = 19;
+        string gender_mode_changed = 20;
+        uint64 count_changed = 21;
+        uint64 count_male_changed = 22;
+        uint64 count_female_changed = 23;
+        string hotel_name = 24;
+        uint64 hourly_salary = 25;
+        bool is_float = 26;
+        string work_content = 27;
+        string attention = 28;
+        string hotel_phone = 29;
+        TODO hotel_latitude = 30;
+        TODO hotel_longitude = 31;
+        TODO hotel_intro = 32;
+        TODO adviser_company_intro = 33;
+        bool is_refused = 34;
+        bool is_rejected = 35;
+   }
+  repeated PtOrder ptorders =
+}
