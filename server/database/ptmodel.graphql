@@ -1,0 +1,20 @@
+type ptUser {
+  id: ID! @unique
+  name: String!
+  password: String!
+  ptprofile: ptProfile!
+}
+
+type ptProfile{
+  name: String!
+  phone: String! @unique
+  id_card: String! @unique
+  gender: String!
+  identity: String!
+  height: Int!
+  weight: Int!
+  ptuser: ptUser!
+}
+
+
+
