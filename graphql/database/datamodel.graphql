@@ -1,0 +1,6 @@
+type Order {
+  id: ID! @unique
+  hotel_id: ID!
+  hr_id: ID!
+  adviser_id: ID!
+}
