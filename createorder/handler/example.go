@@ -30,7 +30,7 @@ func (e *Example) Call(ctx context.Context, req *api.Request, rsp *api.Response)
 	// extract the client from the context
 	exampleClient, ok := client.ExampleFromContext(ctx)
 	if !ok {
-		return errors.InternalServerError("go.micro.order_api.createorder.example.call", "example client not found")
+		return errors.InternalServerError("go.micro.api.createorder.example.call", "example client not found")
 	}
 
 	// make request
@@ -38,7 +38,7 @@ func (e *Example) Call(ctx context.Context, req *api.Request, rsp *api.Response)
 		Name: extractValue(req.Post["name"]),
 	})
 	if err != nil {
-		return errors.InternalServerError("go.micro.order_api.createorder.example.call", err.Error())
+		return errors.InternalServerError("go.micro.api.createorder.example.call", err.Error())
 	}
 
 	b, _ := json.Marshal(response)
