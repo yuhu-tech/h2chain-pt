@@ -1,0 +1,54 @@
+type OrderOrigin {
+    id:                         ID! @unique
+    hotel_id:                   ID!
+    hr_id:                      ID!
+    adviser_id:                 ID!
+    date_time                   Int!
+    duration:                   Int!
+    mode:                       Int!
+    count:                      Int!
+    count_male:                 Int!
+    order_hotel_modify:         []OrderHotelModify
+    order_adviser_modify:       []OrderAdviserModify
+    order_candidate:            []Candidate
+}
+
+//OrderState
+type OrderHotelModify {
+    id:                         ID! @unique
+    order_origin_id             ID!
+    revision:                   Int!
+    timestamp:                  Int!
+    is_changed:                 Int!
+    count_yet:                  Int!
+    count_male_yet:             Int!
+    count_changed:              Int
+    count_male_changed:         Int
+    count_female_changed:       Int
+    start_time_changed:         Int
+    duration_changed:           Int
+    mode_changed:               Int
+}
+
+type OrderAdviserModify{
+    id:                         ID! @unique
+    order_origin_id             ID!
+    revision:                   Int!
+    timestamp:                  Int!
+    is_float                    Int!
+    count_yet:                  Int
+    count_male_yet:             Int
+    count_changed:              Int
+    count_male_changed:         Int
+}
+
+type Candidate {
+    id:                         ID! @unique
+    order_origin_id:            ID!
+    adviser_id:                 ID!
+    agent_id:                   ID!
+    pt_id:                      ID!
+    apply_time:                 Int!
+    sign_in_time:               Int!
+}
+
