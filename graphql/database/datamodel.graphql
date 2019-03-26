@@ -8,6 +8,10 @@ type OrderOrigin {
     mode: Int!
     count: Int!
     countMale: Int!
+    status: Int!
+    orderHotelModify: [OrderHotelModify]
+    orderAdviserModify: [OrderAdviserModify]
+    candidate: [Candidate]
 }
 
 
@@ -17,6 +21,8 @@ type OrderHotelModify {
     timestamp: Int!
     count: Int
     countMale: Int
+    countYet: Int
+    countMaleYet: Int
     startTime: Int
     duration: Int
     mode: Int
@@ -26,11 +32,9 @@ type OrderAdviserModify{
     id: ID! @unique
     revision: Int!
     timeStamp: Int!
-    isFloat: Int!
-    countYet: Int
-    countMaleYet: Int
-    countChanged: Int
-    countMaleChanged: Int
+    isFloat: Int
+    count:Int
+    countMale: Int
 }
 
 type Candidate {

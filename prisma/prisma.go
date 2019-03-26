@@ -127,7 +127,7 @@ func (client *Client) OrderAdviserModify(params OrderAdviserModifyWhereUniqueInp
 		params,
 		[2]string{"OrderAdviserModifyWhereUniqueInput!", "OrderAdviserModify"},
 		"orderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "countYet", "countMaleYet", "countChanged", "countMaleChanged"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -161,7 +161,7 @@ func (client *Client) OrderAdviserModifies(params *OrderAdviserModifiesParams) *
 		wparams,
 		[3]string{"OrderAdviserModifyWhereInput", "OrderAdviserModifyOrderByInput", "OrderAdviserModify"},
 		"orderAdviserModifies",
-		[]string{"id", "revision", "timeStamp", "isFloat", "countYet", "countMaleYet", "countChanged", "countMaleChanged"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
 
 	return &OrderAdviserModifyExecArray{ret}
 }
@@ -186,7 +186,7 @@ func (client *Client) OrderHotelModify(params OrderHotelModifyWhereUniqueInput) 
 		params,
 		[2]string{"OrderHotelModifyWhereUniqueInput!", "OrderHotelModify"},
 		"orderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "startTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -220,7 +220,7 @@ func (client *Client) OrderHotelModifies(params *OrderHotelModifiesParams) *Orde
 		wparams,
 		[3]string{"OrderHotelModifyWhereInput", "OrderHotelModifyOrderByInput", "OrderHotelModify"},
 		"orderHotelModifies",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "startTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
 
 	return &OrderHotelModifyExecArray{ret}
 }
@@ -245,7 +245,7 @@ func (client *Client) OrderOrigin(params OrderOriginWhereUniqueInput) *OrderOrig
 		params,
 		[2]string{"OrderOriginWhereUniqueInput!", "OrderOrigin"},
 		"orderOrigin",
-		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale"})
+		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale", "status"})
 
 	return &OrderOriginExec{ret}
 }
@@ -279,7 +279,7 @@ func (client *Client) OrderOrigins(params *OrderOriginsParams) *OrderOriginExecA
 		wparams,
 		[3]string{"OrderOriginWhereInput", "OrderOriginOrderByInput", "OrderOrigin"},
 		"orderOrigins",
-		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale"})
+		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale", "status"})
 
 	return &OrderOriginExecArray{ret}
 }
@@ -383,7 +383,7 @@ func (client *Client) CreateOrderAdviserModify(params OrderAdviserModifyCreateIn
 		params,
 		[2]string{"OrderAdviserModifyCreateInput!", "OrderAdviserModify"},
 		"createOrderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "countYet", "countMaleYet", "countChanged", "countMaleChanged"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -401,7 +401,7 @@ func (client *Client) UpdateOrderAdviserModify(params OrderAdviserModifyUpdatePa
 		},
 		[3]string{"OrderAdviserModifyUpdateInput!", "OrderAdviserModifyWhereUniqueInput!", "OrderAdviserModify"},
 		"updateOrderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "countYet", "countMaleYet", "countChanged", "countMaleChanged"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -438,7 +438,7 @@ func (client *Client) UpsertOrderAdviserModify(params OrderAdviserModifyUpsertPa
 		uparams,
 		[4]string{"OrderAdviserModifyWhereUniqueInput!", "OrderAdviserModifyCreateInput!", "OrderAdviserModifyUpdateInput!", "OrderAdviserModify"},
 		"upsertOrderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "countYet", "countMaleYet", "countChanged", "countMaleChanged"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -448,7 +448,7 @@ func (client *Client) DeleteOrderAdviserModify(params OrderAdviserModifyWhereUni
 		params,
 		[2]string{"OrderAdviserModifyWhereUniqueInput!", "OrderAdviserModify"},
 		"deleteOrderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "countYet", "countMaleYet", "countChanged", "countMaleChanged"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -463,7 +463,7 @@ func (client *Client) CreateOrderHotelModify(params OrderHotelModifyCreateInput)
 		params,
 		[2]string{"OrderHotelModifyCreateInput!", "OrderHotelModify"},
 		"createOrderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "startTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -481,7 +481,7 @@ func (client *Client) UpdateOrderHotelModify(params OrderHotelModifyUpdateParams
 		},
 		[3]string{"OrderHotelModifyUpdateInput!", "OrderHotelModifyWhereUniqueInput!", "OrderHotelModify"},
 		"updateOrderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "startTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -518,7 +518,7 @@ func (client *Client) UpsertOrderHotelModify(params OrderHotelModifyUpsertParams
 		uparams,
 		[4]string{"OrderHotelModifyWhereUniqueInput!", "OrderHotelModifyCreateInput!", "OrderHotelModifyUpdateInput!", "OrderHotelModify"},
 		"upsertOrderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "startTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -528,7 +528,7 @@ func (client *Client) DeleteOrderHotelModify(params OrderHotelModifyWhereUniqueI
 		params,
 		[2]string{"OrderHotelModifyWhereUniqueInput!", "OrderHotelModify"},
 		"deleteOrderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "startTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -543,7 +543,7 @@ func (client *Client) CreateOrderOrigin(params OrderOriginCreateInput) *OrderOri
 		params,
 		[2]string{"OrderOriginCreateInput!", "OrderOrigin"},
 		"createOrderOrigin",
-		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale"})
+		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale", "status"})
 
 	return &OrderOriginExec{ret}
 }
@@ -561,7 +561,7 @@ func (client *Client) UpdateOrderOrigin(params OrderOriginUpdateParams) *OrderOr
 		},
 		[3]string{"OrderOriginUpdateInput!", "OrderOriginWhereUniqueInput!", "OrderOrigin"},
 		"updateOrderOrigin",
-		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale"})
+		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale", "status"})
 
 	return &OrderOriginExec{ret}
 }
@@ -598,7 +598,7 @@ func (client *Client) UpsertOrderOrigin(params OrderOriginUpsertParams) *OrderOr
 		uparams,
 		[4]string{"OrderOriginWhereUniqueInput!", "OrderOriginCreateInput!", "OrderOriginUpdateInput!", "OrderOrigin"},
 		"upsertOrderOrigin",
-		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale"})
+		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale", "status"})
 
 	return &OrderOriginExec{ret}
 }
@@ -608,7 +608,7 @@ func (client *Client) DeleteOrderOrigin(params OrderOriginWhereUniqueInput) *Ord
 		params,
 		[2]string{"OrderOriginWhereUniqueInput!", "OrderOrigin"},
 		"deleteOrderOrigin",
-		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale"})
+		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale", "status"})
 
 	return &OrderOriginExec{ret}
 }
@@ -617,14 +617,6 @@ func (client *Client) DeleteManyOrderOrigins(params *OrderOriginWhereInput) *Bat
 	exec := client.Client.DeleteMany(params, "OrderOriginWhereInput", "deleteManyOrderOrigins")
 	return &BatchPayloadExec{exec}
 }
-
-type MutationType string
-
-const (
-	MutationTypeCreated MutationType = "CREATED"
-	MutationTypeUpdated MutationType = "UPDATED"
-	MutationTypeDeleted MutationType = "DELETED"
-)
 
 type CandidateOrderByInput string
 
@@ -650,51 +642,51 @@ const (
 type OrderAdviserModifyOrderByInput string
 
 const (
-	OrderAdviserModifyOrderByInputIDAsc                OrderAdviserModifyOrderByInput = "id_ASC"
-	OrderAdviserModifyOrderByInputIDDesc               OrderAdviserModifyOrderByInput = "id_DESC"
-	OrderAdviserModifyOrderByInputRevisionAsc          OrderAdviserModifyOrderByInput = "revision_ASC"
-	OrderAdviserModifyOrderByInputRevisionDesc         OrderAdviserModifyOrderByInput = "revision_DESC"
-	OrderAdviserModifyOrderByInputTimeStampAsc         OrderAdviserModifyOrderByInput = "timeStamp_ASC"
-	OrderAdviserModifyOrderByInputTimeStampDesc        OrderAdviserModifyOrderByInput = "timeStamp_DESC"
-	OrderAdviserModifyOrderByInputIsFloatAsc           OrderAdviserModifyOrderByInput = "isFloat_ASC"
-	OrderAdviserModifyOrderByInputIsFloatDesc          OrderAdviserModifyOrderByInput = "isFloat_DESC"
-	OrderAdviserModifyOrderByInputCountYetAsc          OrderAdviserModifyOrderByInput = "countYet_ASC"
-	OrderAdviserModifyOrderByInputCountYetDesc         OrderAdviserModifyOrderByInput = "countYet_DESC"
-	OrderAdviserModifyOrderByInputCountMaleYetAsc      OrderAdviserModifyOrderByInput = "countMaleYet_ASC"
-	OrderAdviserModifyOrderByInputCountMaleYetDesc     OrderAdviserModifyOrderByInput = "countMaleYet_DESC"
-	OrderAdviserModifyOrderByInputCountChangedAsc      OrderAdviserModifyOrderByInput = "countChanged_ASC"
-	OrderAdviserModifyOrderByInputCountChangedDesc     OrderAdviserModifyOrderByInput = "countChanged_DESC"
-	OrderAdviserModifyOrderByInputCountMaleChangedAsc  OrderAdviserModifyOrderByInput = "countMaleChanged_ASC"
-	OrderAdviserModifyOrderByInputCountMaleChangedDesc OrderAdviserModifyOrderByInput = "countMaleChanged_DESC"
-	OrderAdviserModifyOrderByInputCreatedAtAsc         OrderAdviserModifyOrderByInput = "createdAt_ASC"
-	OrderAdviserModifyOrderByInputCreatedAtDesc        OrderAdviserModifyOrderByInput = "createdAt_DESC"
-	OrderAdviserModifyOrderByInputUpdatedAtAsc         OrderAdviserModifyOrderByInput = "updatedAt_ASC"
-	OrderAdviserModifyOrderByInputUpdatedAtDesc        OrderAdviserModifyOrderByInput = "updatedAt_DESC"
+	OrderAdviserModifyOrderByInputIDAsc         OrderAdviserModifyOrderByInput = "id_ASC"
+	OrderAdviserModifyOrderByInputIDDesc        OrderAdviserModifyOrderByInput = "id_DESC"
+	OrderAdviserModifyOrderByInputRevisionAsc   OrderAdviserModifyOrderByInput = "revision_ASC"
+	OrderAdviserModifyOrderByInputRevisionDesc  OrderAdviserModifyOrderByInput = "revision_DESC"
+	OrderAdviserModifyOrderByInputTimeStampAsc  OrderAdviserModifyOrderByInput = "timeStamp_ASC"
+	OrderAdviserModifyOrderByInputTimeStampDesc OrderAdviserModifyOrderByInput = "timeStamp_DESC"
+	OrderAdviserModifyOrderByInputIsFloatAsc    OrderAdviserModifyOrderByInput = "isFloat_ASC"
+	OrderAdviserModifyOrderByInputIsFloatDesc   OrderAdviserModifyOrderByInput = "isFloat_DESC"
+	OrderAdviserModifyOrderByInputCountAsc      OrderAdviserModifyOrderByInput = "count_ASC"
+	OrderAdviserModifyOrderByInputCountDesc     OrderAdviserModifyOrderByInput = "count_DESC"
+	OrderAdviserModifyOrderByInputCountMaleAsc  OrderAdviserModifyOrderByInput = "countMale_ASC"
+	OrderAdviserModifyOrderByInputCountMaleDesc OrderAdviserModifyOrderByInput = "countMale_DESC"
+	OrderAdviserModifyOrderByInputCreatedAtAsc  OrderAdviserModifyOrderByInput = "createdAt_ASC"
+	OrderAdviserModifyOrderByInputCreatedAtDesc OrderAdviserModifyOrderByInput = "createdAt_DESC"
+	OrderAdviserModifyOrderByInputUpdatedAtAsc  OrderAdviserModifyOrderByInput = "updatedAt_ASC"
+	OrderAdviserModifyOrderByInputUpdatedAtDesc OrderAdviserModifyOrderByInput = "updatedAt_DESC"
 )
 
 type OrderHotelModifyOrderByInput string
 
 const (
-	OrderHotelModifyOrderByInputIDAsc         OrderHotelModifyOrderByInput = "id_ASC"
-	OrderHotelModifyOrderByInputIDDesc        OrderHotelModifyOrderByInput = "id_DESC"
-	OrderHotelModifyOrderByInputRevisionAsc   OrderHotelModifyOrderByInput = "revision_ASC"
-	OrderHotelModifyOrderByInputRevisionDesc  OrderHotelModifyOrderByInput = "revision_DESC"
-	OrderHotelModifyOrderByInputTimestampAsc  OrderHotelModifyOrderByInput = "timestamp_ASC"
-	OrderHotelModifyOrderByInputTimestampDesc OrderHotelModifyOrderByInput = "timestamp_DESC"
-	OrderHotelModifyOrderByInputCountAsc      OrderHotelModifyOrderByInput = "count_ASC"
-	OrderHotelModifyOrderByInputCountDesc     OrderHotelModifyOrderByInput = "count_DESC"
-	OrderHotelModifyOrderByInputCountMaleAsc  OrderHotelModifyOrderByInput = "countMale_ASC"
-	OrderHotelModifyOrderByInputCountMaleDesc OrderHotelModifyOrderByInput = "countMale_DESC"
-	OrderHotelModifyOrderByInputStartTimeAsc  OrderHotelModifyOrderByInput = "startTime_ASC"
-	OrderHotelModifyOrderByInputStartTimeDesc OrderHotelModifyOrderByInput = "startTime_DESC"
-	OrderHotelModifyOrderByInputDurationAsc   OrderHotelModifyOrderByInput = "duration_ASC"
-	OrderHotelModifyOrderByInputDurationDesc  OrderHotelModifyOrderByInput = "duration_DESC"
-	OrderHotelModifyOrderByInputModeAsc       OrderHotelModifyOrderByInput = "mode_ASC"
-	OrderHotelModifyOrderByInputModeDesc      OrderHotelModifyOrderByInput = "mode_DESC"
-	OrderHotelModifyOrderByInputCreatedAtAsc  OrderHotelModifyOrderByInput = "createdAt_ASC"
-	OrderHotelModifyOrderByInputCreatedAtDesc OrderHotelModifyOrderByInput = "createdAt_DESC"
-	OrderHotelModifyOrderByInputUpdatedAtAsc  OrderHotelModifyOrderByInput = "updatedAt_ASC"
-	OrderHotelModifyOrderByInputUpdatedAtDesc OrderHotelModifyOrderByInput = "updatedAt_DESC"
+	OrderHotelModifyOrderByInputIDAsc            OrderHotelModifyOrderByInput = "id_ASC"
+	OrderHotelModifyOrderByInputIDDesc           OrderHotelModifyOrderByInput = "id_DESC"
+	OrderHotelModifyOrderByInputRevisionAsc      OrderHotelModifyOrderByInput = "revision_ASC"
+	OrderHotelModifyOrderByInputRevisionDesc     OrderHotelModifyOrderByInput = "revision_DESC"
+	OrderHotelModifyOrderByInputTimestampAsc     OrderHotelModifyOrderByInput = "timestamp_ASC"
+	OrderHotelModifyOrderByInputTimestampDesc    OrderHotelModifyOrderByInput = "timestamp_DESC"
+	OrderHotelModifyOrderByInputCountAsc         OrderHotelModifyOrderByInput = "count_ASC"
+	OrderHotelModifyOrderByInputCountDesc        OrderHotelModifyOrderByInput = "count_DESC"
+	OrderHotelModifyOrderByInputCountMaleAsc     OrderHotelModifyOrderByInput = "countMale_ASC"
+	OrderHotelModifyOrderByInputCountMaleDesc    OrderHotelModifyOrderByInput = "countMale_DESC"
+	OrderHotelModifyOrderByInputCountYetAsc      OrderHotelModifyOrderByInput = "countYet_ASC"
+	OrderHotelModifyOrderByInputCountYetDesc     OrderHotelModifyOrderByInput = "countYet_DESC"
+	OrderHotelModifyOrderByInputCountMaleYetAsc  OrderHotelModifyOrderByInput = "countMaleYet_ASC"
+	OrderHotelModifyOrderByInputCountMaleYetDesc OrderHotelModifyOrderByInput = "countMaleYet_DESC"
+	OrderHotelModifyOrderByInputStartTimeAsc     OrderHotelModifyOrderByInput = "startTime_ASC"
+	OrderHotelModifyOrderByInputStartTimeDesc    OrderHotelModifyOrderByInput = "startTime_DESC"
+	OrderHotelModifyOrderByInputDurationAsc      OrderHotelModifyOrderByInput = "duration_ASC"
+	OrderHotelModifyOrderByInputDurationDesc     OrderHotelModifyOrderByInput = "duration_DESC"
+	OrderHotelModifyOrderByInputModeAsc          OrderHotelModifyOrderByInput = "mode_ASC"
+	OrderHotelModifyOrderByInputModeDesc         OrderHotelModifyOrderByInput = "mode_DESC"
+	OrderHotelModifyOrderByInputCreatedAtAsc     OrderHotelModifyOrderByInput = "createdAt_ASC"
+	OrderHotelModifyOrderByInputCreatedAtDesc    OrderHotelModifyOrderByInput = "createdAt_DESC"
+	OrderHotelModifyOrderByInputUpdatedAtAsc     OrderHotelModifyOrderByInput = "updatedAt_ASC"
+	OrderHotelModifyOrderByInputUpdatedAtDesc    OrderHotelModifyOrderByInput = "updatedAt_DESC"
 )
 
 type OrderOriginOrderByInput string
@@ -718,285 +710,147 @@ const (
 	OrderOriginOrderByInputCountDesc     OrderOriginOrderByInput = "count_DESC"
 	OrderOriginOrderByInputCountMaleAsc  OrderOriginOrderByInput = "countMale_ASC"
 	OrderOriginOrderByInputCountMaleDesc OrderOriginOrderByInput = "countMale_DESC"
+	OrderOriginOrderByInputStatusAsc     OrderOriginOrderByInput = "status_ASC"
+	OrderOriginOrderByInputStatusDesc    OrderOriginOrderByInput = "status_DESC"
 	OrderOriginOrderByInputCreatedAtAsc  OrderOriginOrderByInput = "createdAt_ASC"
 	OrderOriginOrderByInputCreatedAtDesc OrderOriginOrderByInput = "createdAt_DESC"
 	OrderOriginOrderByInputUpdatedAtAsc  OrderOriginOrderByInput = "updatedAt_ASC"
 	OrderOriginOrderByInputUpdatedAtDesc OrderOriginOrderByInput = "updatedAt_DESC"
 )
 
-type OrderHotelModifyUpdateInput struct {
-	Revision  *int32 `json:"revision,omitempty"`
-	Timestamp *int32 `json:"timestamp,omitempty"`
-	Count     *int32 `json:"count,omitempty"`
-	CountMale *int32 `json:"countMale,omitempty"`
-	StartTime *int32 `json:"startTime,omitempty"`
-	Duration  *int32 `json:"duration,omitempty"`
-	Mode      *int32 `json:"mode,omitempty"`
+type MutationType string
+
+const (
+	MutationTypeCreated MutationType = "CREATED"
+	MutationTypeUpdated MutationType = "UPDATED"
+	MutationTypeDeleted MutationType = "DELETED"
+)
+
+type OrderHotelModifyCreateInput struct {
+	Revision     int32  `json:"revision"`
+	Timestamp    int32  `json:"timestamp"`
+	Count        *int32 `json:"count,omitempty"`
+	CountMale    *int32 `json:"countMale,omitempty"`
+	CountYet     *int32 `json:"countYet,omitempty"`
+	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
+	StartTime    *int32 `json:"startTime,omitempty"`
+	Duration     *int32 `json:"duration,omitempty"`
+	Mode         *int32 `json:"mode,omitempty"`
 }
 
 type CandidateWhereUniqueInput struct {
 	ID *string `json:"id,omitempty"`
 }
 
-type OrderHotelModifyWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
+type OrderAdviserModifyUpsertWithWhereUniqueNestedInput struct {
+	Where  OrderAdviserModifyWhereUniqueInput `json:"where"`
+	Update OrderAdviserModifyUpdateDataInput  `json:"update"`
+	Create OrderAdviserModifyCreateInput      `json:"create"`
 }
 
-type CandidateSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                    `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                           `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                          `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                          `json:"updatedFields_contains_some,omitempty"`
-	Node                       *CandidateWhereInput              `json:"node,omitempty"`
-	And                        []CandidateSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []CandidateSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []CandidateSubscriptionWhereInput `json:"NOT,omitempty"`
+type OrderHotelModifyScalarWhereInput struct {
+	ID                *string                            `json:"id,omitempty"`
+	IDNot             *string                            `json:"id_not,omitempty"`
+	IDIn              []string                           `json:"id_in,omitempty"`
+	IDNotIn           []string                           `json:"id_not_in,omitempty"`
+	IDLt              *string                            `json:"id_lt,omitempty"`
+	IDLte             *string                            `json:"id_lte,omitempty"`
+	IDGt              *string                            `json:"id_gt,omitempty"`
+	IDGte             *string                            `json:"id_gte,omitempty"`
+	IDContains        *string                            `json:"id_contains,omitempty"`
+	IDNotContains     *string                            `json:"id_not_contains,omitempty"`
+	IDStartsWith      *string                            `json:"id_starts_with,omitempty"`
+	IDNotStartsWith   *string                            `json:"id_not_starts_with,omitempty"`
+	IDEndsWith        *string                            `json:"id_ends_with,omitempty"`
+	IDNotEndsWith     *string                            `json:"id_not_ends_with,omitempty"`
+	Revision          *int32                             `json:"revision,omitempty"`
+	RevisionNot       *int32                             `json:"revision_not,omitempty"`
+	RevisionIn        []int32                            `json:"revision_in,omitempty"`
+	RevisionNotIn     []int32                            `json:"revision_not_in,omitempty"`
+	RevisionLt        *int32                             `json:"revision_lt,omitempty"`
+	RevisionLte       *int32                             `json:"revision_lte,omitempty"`
+	RevisionGt        *int32                             `json:"revision_gt,omitempty"`
+	RevisionGte       *int32                             `json:"revision_gte,omitempty"`
+	Timestamp         *int32                             `json:"timestamp,omitempty"`
+	TimestampNot      *int32                             `json:"timestamp_not,omitempty"`
+	TimestampIn       []int32                            `json:"timestamp_in,omitempty"`
+	TimestampNotIn    []int32                            `json:"timestamp_not_in,omitempty"`
+	TimestampLt       *int32                             `json:"timestamp_lt,omitempty"`
+	TimestampLte      *int32                             `json:"timestamp_lte,omitempty"`
+	TimestampGt       *int32                             `json:"timestamp_gt,omitempty"`
+	TimestampGte      *int32                             `json:"timestamp_gte,omitempty"`
+	Count             *int32                             `json:"count,omitempty"`
+	CountNot          *int32                             `json:"count_not,omitempty"`
+	CountIn           []int32                            `json:"count_in,omitempty"`
+	CountNotIn        []int32                            `json:"count_not_in,omitempty"`
+	CountLt           *int32                             `json:"count_lt,omitempty"`
+	CountLte          *int32                             `json:"count_lte,omitempty"`
+	CountGt           *int32                             `json:"count_gt,omitempty"`
+	CountGte          *int32                             `json:"count_gte,omitempty"`
+	CountMale         *int32                             `json:"countMale,omitempty"`
+	CountMaleNot      *int32                             `json:"countMale_not,omitempty"`
+	CountMaleIn       []int32                            `json:"countMale_in,omitempty"`
+	CountMaleNotIn    []int32                            `json:"countMale_not_in,omitempty"`
+	CountMaleLt       *int32                             `json:"countMale_lt,omitempty"`
+	CountMaleLte      *int32                             `json:"countMale_lte,omitempty"`
+	CountMaleGt       *int32                             `json:"countMale_gt,omitempty"`
+	CountMaleGte      *int32                             `json:"countMale_gte,omitempty"`
+	CountYet          *int32                             `json:"countYet,omitempty"`
+	CountYetNot       *int32                             `json:"countYet_not,omitempty"`
+	CountYetIn        []int32                            `json:"countYet_in,omitempty"`
+	CountYetNotIn     []int32                            `json:"countYet_not_in,omitempty"`
+	CountYetLt        *int32                             `json:"countYet_lt,omitempty"`
+	CountYetLte       *int32                             `json:"countYet_lte,omitempty"`
+	CountYetGt        *int32                             `json:"countYet_gt,omitempty"`
+	CountYetGte       *int32                             `json:"countYet_gte,omitempty"`
+	CountMaleYet      *int32                             `json:"countMaleYet,omitempty"`
+	CountMaleYetNot   *int32                             `json:"countMaleYet_not,omitempty"`
+	CountMaleYetIn    []int32                            `json:"countMaleYet_in,omitempty"`
+	CountMaleYetNotIn []int32                            `json:"countMaleYet_not_in,omitempty"`
+	CountMaleYetLt    *int32                             `json:"countMaleYet_lt,omitempty"`
+	CountMaleYetLte   *int32                             `json:"countMaleYet_lte,omitempty"`
+	CountMaleYetGt    *int32                             `json:"countMaleYet_gt,omitempty"`
+	CountMaleYetGte   *int32                             `json:"countMaleYet_gte,omitempty"`
+	StartTime         *int32                             `json:"startTime,omitempty"`
+	StartTimeNot      *int32                             `json:"startTime_not,omitempty"`
+	StartTimeIn       []int32                            `json:"startTime_in,omitempty"`
+	StartTimeNotIn    []int32                            `json:"startTime_not_in,omitempty"`
+	StartTimeLt       *int32                             `json:"startTime_lt,omitempty"`
+	StartTimeLte      *int32                             `json:"startTime_lte,omitempty"`
+	StartTimeGt       *int32                             `json:"startTime_gt,omitempty"`
+	StartTimeGte      *int32                             `json:"startTime_gte,omitempty"`
+	Duration          *int32                             `json:"duration,omitempty"`
+	DurationNot       *int32                             `json:"duration_not,omitempty"`
+	DurationIn        []int32                            `json:"duration_in,omitempty"`
+	DurationNotIn     []int32                            `json:"duration_not_in,omitempty"`
+	DurationLt        *int32                             `json:"duration_lt,omitempty"`
+	DurationLte       *int32                             `json:"duration_lte,omitempty"`
+	DurationGt        *int32                             `json:"duration_gt,omitempty"`
+	DurationGte       *int32                             `json:"duration_gte,omitempty"`
+	Mode              *int32                             `json:"mode,omitempty"`
+	ModeNot           *int32                             `json:"mode_not,omitempty"`
+	ModeIn            []int32                            `json:"mode_in,omitempty"`
+	ModeNotIn         []int32                            `json:"mode_not_in,omitempty"`
+	ModeLt            *int32                             `json:"mode_lt,omitempty"`
+	ModeLte           *int32                             `json:"mode_lte,omitempty"`
+	ModeGt            *int32                             `json:"mode_gt,omitempty"`
+	ModeGte           *int32                             `json:"mode_gte,omitempty"`
+	And               []OrderHotelModifyScalarWhereInput `json:"AND,omitempty"`
+	Or                []OrderHotelModifyScalarWhereInput `json:"OR,omitempty"`
+	Not               []OrderHotelModifyScalarWhereInput `json:"NOT,omitempty"`
 }
 
-type OrderAdviserModifyUpdateInput struct {
-	Revision         *int32 `json:"revision,omitempty"`
-	TimeStamp        *int32 `json:"timeStamp,omitempty"`
-	IsFloat          *int32 `json:"isFloat,omitempty"`
-	CountYet         *int32 `json:"countYet,omitempty"`
-	CountMaleYet     *int32 `json:"countMaleYet,omitempty"`
-	CountChanged     *int32 `json:"countChanged,omitempty"`
-	CountMaleChanged *int32 `json:"countMaleChanged,omitempty"`
+type OrderAdviserModifyUpdateDataInput struct {
+	Revision  *int32 `json:"revision,omitempty"`
+	TimeStamp *int32 `json:"timeStamp,omitempty"`
+	IsFloat   *int32 `json:"isFloat,omitempty"`
+	Count     *int32 `json:"count,omitempty"`
+	CountMale *int32 `json:"countMale,omitempty"`
 }
 
-type OrderOriginUpdateInput struct {
-	HotelId   *string `json:"hotelId,omitempty"`
-	HrId      *string `json:"hrId,omitempty"`
-	AdviserId *string `json:"adviserId,omitempty"`
-	Datetime  *int32  `json:"datetime,omitempty"`
-	Duration  *int32  `json:"duration,omitempty"`
-	Mode      *int32  `json:"mode,omitempty"`
-	Count     *int32  `json:"count,omitempty"`
-	CountMale *int32  `json:"countMale,omitempty"`
-}
-
-type OrderHotelModifyWhereInput struct {
-	ID              *string                      `json:"id,omitempty"`
-	IDNot           *string                      `json:"id_not,omitempty"`
-	IDIn            []string                     `json:"id_in,omitempty"`
-	IDNotIn         []string                     `json:"id_not_in,omitempty"`
-	IDLt            *string                      `json:"id_lt,omitempty"`
-	IDLte           *string                      `json:"id_lte,omitempty"`
-	IDGt            *string                      `json:"id_gt,omitempty"`
-	IDGte           *string                      `json:"id_gte,omitempty"`
-	IDContains      *string                      `json:"id_contains,omitempty"`
-	IDNotContains   *string                      `json:"id_not_contains,omitempty"`
-	IDStartsWith    *string                      `json:"id_starts_with,omitempty"`
-	IDNotStartsWith *string                      `json:"id_not_starts_with,omitempty"`
-	IDEndsWith      *string                      `json:"id_ends_with,omitempty"`
-	IDNotEndsWith   *string                      `json:"id_not_ends_with,omitempty"`
-	Revision        *int32                       `json:"revision,omitempty"`
-	RevisionNot     *int32                       `json:"revision_not,omitempty"`
-	RevisionIn      []int32                      `json:"revision_in,omitempty"`
-	RevisionNotIn   []int32                      `json:"revision_not_in,omitempty"`
-	RevisionLt      *int32                       `json:"revision_lt,omitempty"`
-	RevisionLte     *int32                       `json:"revision_lte,omitempty"`
-	RevisionGt      *int32                       `json:"revision_gt,omitempty"`
-	RevisionGte     *int32                       `json:"revision_gte,omitempty"`
-	Timestamp       *int32                       `json:"timestamp,omitempty"`
-	TimestampNot    *int32                       `json:"timestamp_not,omitempty"`
-	TimestampIn     []int32                      `json:"timestamp_in,omitempty"`
-	TimestampNotIn  []int32                      `json:"timestamp_not_in,omitempty"`
-	TimestampLt     *int32                       `json:"timestamp_lt,omitempty"`
-	TimestampLte    *int32                       `json:"timestamp_lte,omitempty"`
-	TimestampGt     *int32                       `json:"timestamp_gt,omitempty"`
-	TimestampGte    *int32                       `json:"timestamp_gte,omitempty"`
-	Count           *int32                       `json:"count,omitempty"`
-	CountNot        *int32                       `json:"count_not,omitempty"`
-	CountIn         []int32                      `json:"count_in,omitempty"`
-	CountNotIn      []int32                      `json:"count_not_in,omitempty"`
-	CountLt         *int32                       `json:"count_lt,omitempty"`
-	CountLte        *int32                       `json:"count_lte,omitempty"`
-	CountGt         *int32                       `json:"count_gt,omitempty"`
-	CountGte        *int32                       `json:"count_gte,omitempty"`
-	CountMale       *int32                       `json:"countMale,omitempty"`
-	CountMaleNot    *int32                       `json:"countMale_not,omitempty"`
-	CountMaleIn     []int32                      `json:"countMale_in,omitempty"`
-	CountMaleNotIn  []int32                      `json:"countMale_not_in,omitempty"`
-	CountMaleLt     *int32                       `json:"countMale_lt,omitempty"`
-	CountMaleLte    *int32                       `json:"countMale_lte,omitempty"`
-	CountMaleGt     *int32                       `json:"countMale_gt,omitempty"`
-	CountMaleGte    *int32                       `json:"countMale_gte,omitempty"`
-	StartTime       *int32                       `json:"startTime,omitempty"`
-	StartTimeNot    *int32                       `json:"startTime_not,omitempty"`
-	StartTimeIn     []int32                      `json:"startTime_in,omitempty"`
-	StartTimeNotIn  []int32                      `json:"startTime_not_in,omitempty"`
-	StartTimeLt     *int32                       `json:"startTime_lt,omitempty"`
-	StartTimeLte    *int32                       `json:"startTime_lte,omitempty"`
-	StartTimeGt     *int32                       `json:"startTime_gt,omitempty"`
-	StartTimeGte    *int32                       `json:"startTime_gte,omitempty"`
-	Duration        *int32                       `json:"duration,omitempty"`
-	DurationNot     *int32                       `json:"duration_not,omitempty"`
-	DurationIn      []int32                      `json:"duration_in,omitempty"`
-	DurationNotIn   []int32                      `json:"duration_not_in,omitempty"`
-	DurationLt      *int32                       `json:"duration_lt,omitempty"`
-	DurationLte     *int32                       `json:"duration_lte,omitempty"`
-	DurationGt      *int32                       `json:"duration_gt,omitempty"`
-	DurationGte     *int32                       `json:"duration_gte,omitempty"`
-	Mode            *int32                       `json:"mode,omitempty"`
-	ModeNot         *int32                       `json:"mode_not,omitempty"`
-	ModeIn          []int32                      `json:"mode_in,omitempty"`
-	ModeNotIn       []int32                      `json:"mode_not_in,omitempty"`
-	ModeLt          *int32                       `json:"mode_lt,omitempty"`
-	ModeLte         *int32                       `json:"mode_lte,omitempty"`
-	ModeGt          *int32                       `json:"mode_gt,omitempty"`
-	ModeGte         *int32                       `json:"mode_gte,omitempty"`
-	And             []OrderHotelModifyWhereInput `json:"AND,omitempty"`
-	Or              []OrderHotelModifyWhereInput `json:"OR,omitempty"`
-	Not             []OrderHotelModifyWhereInput `json:"NOT,omitempty"`
-}
-
-type OrderAdviserModifyWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
-}
-
-type OrderAdviserModifySubscriptionWhereInput struct {
-	MutationIn                 []MutationType                             `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                                    `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                                   `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                                   `json:"updatedFields_contains_some,omitempty"`
-	Node                       *OrderAdviserModifyWhereInput              `json:"node,omitempty"`
-	And                        []OrderAdviserModifySubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []OrderAdviserModifySubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []OrderAdviserModifySubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type OrderAdviserModifyWhereInput struct {
-	ID                    *string                        `json:"id,omitempty"`
-	IDNot                 *string                        `json:"id_not,omitempty"`
-	IDIn                  []string                       `json:"id_in,omitempty"`
-	IDNotIn               []string                       `json:"id_not_in,omitempty"`
-	IDLt                  *string                        `json:"id_lt,omitempty"`
-	IDLte                 *string                        `json:"id_lte,omitempty"`
-	IDGt                  *string                        `json:"id_gt,omitempty"`
-	IDGte                 *string                        `json:"id_gte,omitempty"`
-	IDContains            *string                        `json:"id_contains,omitempty"`
-	IDNotContains         *string                        `json:"id_not_contains,omitempty"`
-	IDStartsWith          *string                        `json:"id_starts_with,omitempty"`
-	IDNotStartsWith       *string                        `json:"id_not_starts_with,omitempty"`
-	IDEndsWith            *string                        `json:"id_ends_with,omitempty"`
-	IDNotEndsWith         *string                        `json:"id_not_ends_with,omitempty"`
-	Revision              *int32                         `json:"revision,omitempty"`
-	RevisionNot           *int32                         `json:"revision_not,omitempty"`
-	RevisionIn            []int32                        `json:"revision_in,omitempty"`
-	RevisionNotIn         []int32                        `json:"revision_not_in,omitempty"`
-	RevisionLt            *int32                         `json:"revision_lt,omitempty"`
-	RevisionLte           *int32                         `json:"revision_lte,omitempty"`
-	RevisionGt            *int32                         `json:"revision_gt,omitempty"`
-	RevisionGte           *int32                         `json:"revision_gte,omitempty"`
-	TimeStamp             *int32                         `json:"timeStamp,omitempty"`
-	TimeStampNot          *int32                         `json:"timeStamp_not,omitempty"`
-	TimeStampIn           []int32                        `json:"timeStamp_in,omitempty"`
-	TimeStampNotIn        []int32                        `json:"timeStamp_not_in,omitempty"`
-	TimeStampLt           *int32                         `json:"timeStamp_lt,omitempty"`
-	TimeStampLte          *int32                         `json:"timeStamp_lte,omitempty"`
-	TimeStampGt           *int32                         `json:"timeStamp_gt,omitempty"`
-	TimeStampGte          *int32                         `json:"timeStamp_gte,omitempty"`
-	IsFloat               *int32                         `json:"isFloat,omitempty"`
-	IsFloatNot            *int32                         `json:"isFloat_not,omitempty"`
-	IsFloatIn             []int32                        `json:"isFloat_in,omitempty"`
-	IsFloatNotIn          []int32                        `json:"isFloat_not_in,omitempty"`
-	IsFloatLt             *int32                         `json:"isFloat_lt,omitempty"`
-	IsFloatLte            *int32                         `json:"isFloat_lte,omitempty"`
-	IsFloatGt             *int32                         `json:"isFloat_gt,omitempty"`
-	IsFloatGte            *int32                         `json:"isFloat_gte,omitempty"`
-	CountYet              *int32                         `json:"countYet,omitempty"`
-	CountYetNot           *int32                         `json:"countYet_not,omitempty"`
-	CountYetIn            []int32                        `json:"countYet_in,omitempty"`
-	CountYetNotIn         []int32                        `json:"countYet_not_in,omitempty"`
-	CountYetLt            *int32                         `json:"countYet_lt,omitempty"`
-	CountYetLte           *int32                         `json:"countYet_lte,omitempty"`
-	CountYetGt            *int32                         `json:"countYet_gt,omitempty"`
-	CountYetGte           *int32                         `json:"countYet_gte,omitempty"`
-	CountMaleYet          *int32                         `json:"countMaleYet,omitempty"`
-	CountMaleYetNot       *int32                         `json:"countMaleYet_not,omitempty"`
-	CountMaleYetIn        []int32                        `json:"countMaleYet_in,omitempty"`
-	CountMaleYetNotIn     []int32                        `json:"countMaleYet_not_in,omitempty"`
-	CountMaleYetLt        *int32                         `json:"countMaleYet_lt,omitempty"`
-	CountMaleYetLte       *int32                         `json:"countMaleYet_lte,omitempty"`
-	CountMaleYetGt        *int32                         `json:"countMaleYet_gt,omitempty"`
-	CountMaleYetGte       *int32                         `json:"countMaleYet_gte,omitempty"`
-	CountChanged          *int32                         `json:"countChanged,omitempty"`
-	CountChangedNot       *int32                         `json:"countChanged_not,omitempty"`
-	CountChangedIn        []int32                        `json:"countChanged_in,omitempty"`
-	CountChangedNotIn     []int32                        `json:"countChanged_not_in,omitempty"`
-	CountChangedLt        *int32                         `json:"countChanged_lt,omitempty"`
-	CountChangedLte       *int32                         `json:"countChanged_lte,omitempty"`
-	CountChangedGt        *int32                         `json:"countChanged_gt,omitempty"`
-	CountChangedGte       *int32                         `json:"countChanged_gte,omitempty"`
-	CountMaleChanged      *int32                         `json:"countMaleChanged,omitempty"`
-	CountMaleChangedNot   *int32                         `json:"countMaleChanged_not,omitempty"`
-	CountMaleChangedIn    []int32                        `json:"countMaleChanged_in,omitempty"`
-	CountMaleChangedNotIn []int32                        `json:"countMaleChanged_not_in,omitempty"`
-	CountMaleChangedLt    *int32                         `json:"countMaleChanged_lt,omitempty"`
-	CountMaleChangedLte   *int32                         `json:"countMaleChanged_lte,omitempty"`
-	CountMaleChangedGt    *int32                         `json:"countMaleChanged_gt,omitempty"`
-	CountMaleChangedGte   *int32                         `json:"countMaleChanged_gte,omitempty"`
-	And                   []OrderAdviserModifyWhereInput `json:"AND,omitempty"`
-	Or                    []OrderAdviserModifyWhereInput `json:"OR,omitempty"`
-	Not                   []OrderAdviserModifyWhereInput `json:"NOT,omitempty"`
-}
-
-type OrderAdviserModifyCreateInput struct {
-	Revision         int32  `json:"revision"`
-	TimeStamp        int32  `json:"timeStamp"`
-	IsFloat          int32  `json:"isFloat"`
-	CountYet         *int32 `json:"countYet,omitempty"`
-	CountMaleYet     *int32 `json:"countMaleYet,omitempty"`
-	CountChanged     *int32 `json:"countChanged,omitempty"`
-	CountMaleChanged *int32 `json:"countMaleChanged,omitempty"`
-}
-
-type OrderOriginSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                      `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                             `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                            `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                            `json:"updatedFields_contains_some,omitempty"`
-	Node                       *OrderOriginWhereInput              `json:"node,omitempty"`
-	And                        []OrderOriginSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []OrderOriginSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []OrderOriginSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type CandidateUpdateManyMutationInput struct {
-	AdviserId  *string `json:"adviserId,omitempty"`
-	AgentId    *string `json:"agentId,omitempty"`
-	PtId       *string `json:"ptId,omitempty"`
-	ApplyTime  *int32  `json:"applyTime,omitempty"`
-	SignInTime *int32  `json:"signInTime,omitempty"`
-}
-
-type OrderAdviserModifyUpdateManyMutationInput struct {
-	Revision         *int32 `json:"revision,omitempty"`
-	TimeStamp        *int32 `json:"timeStamp,omitempty"`
-	IsFloat          *int32 `json:"isFloat,omitempty"`
-	CountYet         *int32 `json:"countYet,omitempty"`
-	CountMaleYet     *int32 `json:"countMaleYet,omitempty"`
-	CountChanged     *int32 `json:"countChanged,omitempty"`
-	CountMaleChanged *int32 `json:"countMaleChanged,omitempty"`
-}
-
-type CandidateUpdateInput struct {
-	AdviserId  *string `json:"adviserId,omitempty"`
-	AgentId    *string `json:"agentId,omitempty"`
-	PtId       *string `json:"ptId,omitempty"`
-	ApplyTime  *int32  `json:"applyTime,omitempty"`
-	SignInTime *int32  `json:"signInTime,omitempty"`
-}
-
-type OrderOriginCreateInput struct {
-	HotelId   string `json:"hotelId"`
-	HrId      string `json:"hrId"`
-	AdviserId string `json:"adviserId"`
-	Datetime  int32  `json:"datetime"`
-	Duration  int32  `json:"duration"`
-	Mode      int32  `json:"mode"`
-	Count     int32  `json:"count"`
-	CountMale int32  `json:"countMale"`
+type OrderHotelModifyCreateManyInput struct {
+	Create  []OrderHotelModifyCreateInput      `json:"create,omitempty"`
+	Connect []OrderHotelModifyWhereUniqueInput `json:"connect,omitempty"`
 }
 
 type OrderHotelModifySubscriptionWhereInput struct {
@@ -1010,106 +864,8 @@ type OrderHotelModifySubscriptionWhereInput struct {
 	Not                        []OrderHotelModifySubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
-type OrderOriginWhereInput struct {
-	ID                     *string                 `json:"id,omitempty"`
-	IDNot                  *string                 `json:"id_not,omitempty"`
-	IDIn                   []string                `json:"id_in,omitempty"`
-	IDNotIn                []string                `json:"id_not_in,omitempty"`
-	IDLt                   *string                 `json:"id_lt,omitempty"`
-	IDLte                  *string                 `json:"id_lte,omitempty"`
-	IDGt                   *string                 `json:"id_gt,omitempty"`
-	IDGte                  *string                 `json:"id_gte,omitempty"`
-	IDContains             *string                 `json:"id_contains,omitempty"`
-	IDNotContains          *string                 `json:"id_not_contains,omitempty"`
-	IDStartsWith           *string                 `json:"id_starts_with,omitempty"`
-	IDNotStartsWith        *string                 `json:"id_not_starts_with,omitempty"`
-	IDEndsWith             *string                 `json:"id_ends_with,omitempty"`
-	IDNotEndsWith          *string                 `json:"id_not_ends_with,omitempty"`
-	HotelId                *string                 `json:"hotelId,omitempty"`
-	HotelIdNot             *string                 `json:"hotelId_not,omitempty"`
-	HotelIdIn              []string                `json:"hotelId_in,omitempty"`
-	HotelIdNotIn           []string                `json:"hotelId_not_in,omitempty"`
-	HotelIdLt              *string                 `json:"hotelId_lt,omitempty"`
-	HotelIdLte             *string                 `json:"hotelId_lte,omitempty"`
-	HotelIdGt              *string                 `json:"hotelId_gt,omitempty"`
-	HotelIdGte             *string                 `json:"hotelId_gte,omitempty"`
-	HotelIdContains        *string                 `json:"hotelId_contains,omitempty"`
-	HotelIdNotContains     *string                 `json:"hotelId_not_contains,omitempty"`
-	HotelIdStartsWith      *string                 `json:"hotelId_starts_with,omitempty"`
-	HotelIdNotStartsWith   *string                 `json:"hotelId_not_starts_with,omitempty"`
-	HotelIdEndsWith        *string                 `json:"hotelId_ends_with,omitempty"`
-	HotelIdNotEndsWith     *string                 `json:"hotelId_not_ends_with,omitempty"`
-	HrId                   *string                 `json:"hrId,omitempty"`
-	HrIdNot                *string                 `json:"hrId_not,omitempty"`
-	HrIdIn                 []string                `json:"hrId_in,omitempty"`
-	HrIdNotIn              []string                `json:"hrId_not_in,omitempty"`
-	HrIdLt                 *string                 `json:"hrId_lt,omitempty"`
-	HrIdLte                *string                 `json:"hrId_lte,omitempty"`
-	HrIdGt                 *string                 `json:"hrId_gt,omitempty"`
-	HrIdGte                *string                 `json:"hrId_gte,omitempty"`
-	HrIdContains           *string                 `json:"hrId_contains,omitempty"`
-	HrIdNotContains        *string                 `json:"hrId_not_contains,omitempty"`
-	HrIdStartsWith         *string                 `json:"hrId_starts_with,omitempty"`
-	HrIdNotStartsWith      *string                 `json:"hrId_not_starts_with,omitempty"`
-	HrIdEndsWith           *string                 `json:"hrId_ends_with,omitempty"`
-	HrIdNotEndsWith        *string                 `json:"hrId_not_ends_with,omitempty"`
-	AdviserId              *string                 `json:"adviserId,omitempty"`
-	AdviserIdNot           *string                 `json:"adviserId_not,omitempty"`
-	AdviserIdIn            []string                `json:"adviserId_in,omitempty"`
-	AdviserIdNotIn         []string                `json:"adviserId_not_in,omitempty"`
-	AdviserIdLt            *string                 `json:"adviserId_lt,omitempty"`
-	AdviserIdLte           *string                 `json:"adviserId_lte,omitempty"`
-	AdviserIdGt            *string                 `json:"adviserId_gt,omitempty"`
-	AdviserIdGte           *string                 `json:"adviserId_gte,omitempty"`
-	AdviserIdContains      *string                 `json:"adviserId_contains,omitempty"`
-	AdviserIdNotContains   *string                 `json:"adviserId_not_contains,omitempty"`
-	AdviserIdStartsWith    *string                 `json:"adviserId_starts_with,omitempty"`
-	AdviserIdNotStartsWith *string                 `json:"adviserId_not_starts_with,omitempty"`
-	AdviserIdEndsWith      *string                 `json:"adviserId_ends_with,omitempty"`
-	AdviserIdNotEndsWith   *string                 `json:"adviserId_not_ends_with,omitempty"`
-	Datetime               *int32                  `json:"datetime,omitempty"`
-	DatetimeNot            *int32                  `json:"datetime_not,omitempty"`
-	DatetimeIn             []int32                 `json:"datetime_in,omitempty"`
-	DatetimeNotIn          []int32                 `json:"datetime_not_in,omitempty"`
-	DatetimeLt             *int32                  `json:"datetime_lt,omitempty"`
-	DatetimeLte            *int32                  `json:"datetime_lte,omitempty"`
-	DatetimeGt             *int32                  `json:"datetime_gt,omitempty"`
-	DatetimeGte            *int32                  `json:"datetime_gte,omitempty"`
-	Duration               *int32                  `json:"duration,omitempty"`
-	DurationNot            *int32                  `json:"duration_not,omitempty"`
-	DurationIn             []int32                 `json:"duration_in,omitempty"`
-	DurationNotIn          []int32                 `json:"duration_not_in,omitempty"`
-	DurationLt             *int32                  `json:"duration_lt,omitempty"`
-	DurationLte            *int32                  `json:"duration_lte,omitempty"`
-	DurationGt             *int32                  `json:"duration_gt,omitempty"`
-	DurationGte            *int32                  `json:"duration_gte,omitempty"`
-	Mode                   *int32                  `json:"mode,omitempty"`
-	ModeNot                *int32                  `json:"mode_not,omitempty"`
-	ModeIn                 []int32                 `json:"mode_in,omitempty"`
-	ModeNotIn              []int32                 `json:"mode_not_in,omitempty"`
-	ModeLt                 *int32                  `json:"mode_lt,omitempty"`
-	ModeLte                *int32                  `json:"mode_lte,omitempty"`
-	ModeGt                 *int32                  `json:"mode_gt,omitempty"`
-	ModeGte                *int32                  `json:"mode_gte,omitempty"`
-	Count                  *int32                  `json:"count,omitempty"`
-	CountNot               *int32                  `json:"count_not,omitempty"`
-	CountIn                []int32                 `json:"count_in,omitempty"`
-	CountNotIn             []int32                 `json:"count_not_in,omitempty"`
-	CountLt                *int32                  `json:"count_lt,omitempty"`
-	CountLte               *int32                  `json:"count_lte,omitempty"`
-	CountGt                *int32                  `json:"count_gt,omitempty"`
-	CountGte               *int32                  `json:"count_gte,omitempty"`
-	CountMale              *int32                  `json:"countMale,omitempty"`
-	CountMaleNot           *int32                  `json:"countMale_not,omitempty"`
-	CountMaleIn            []int32                 `json:"countMale_in,omitempty"`
-	CountMaleNotIn         []int32                 `json:"countMale_not_in,omitempty"`
-	CountMaleLt            *int32                  `json:"countMale_lt,omitempty"`
-	CountMaleLte           *int32                  `json:"countMale_lte,omitempty"`
-	CountMaleGt            *int32                  `json:"countMale_gt,omitempty"`
-	CountMaleGte           *int32                  `json:"countMale_gte,omitempty"`
-	And                    []OrderOriginWhereInput `json:"AND,omitempty"`
-	Or                     []OrderOriginWhereInput `json:"OR,omitempty"`
-	Not                    []OrderOriginWhereInput `json:"NOT,omitempty"`
+type OrderAdviserModifyWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
 }
 
 type CandidateCreateInput struct {
@@ -1120,18 +876,72 @@ type CandidateCreateInput struct {
 	SignInTime int32  `json:"signInTime"`
 }
 
-type OrderOriginWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
+type OrderAdviserModifyWhereInput struct {
+	ID              *string                        `json:"id,omitempty"`
+	IDNot           *string                        `json:"id_not,omitempty"`
+	IDIn            []string                       `json:"id_in,omitempty"`
+	IDNotIn         []string                       `json:"id_not_in,omitempty"`
+	IDLt            *string                        `json:"id_lt,omitempty"`
+	IDLte           *string                        `json:"id_lte,omitempty"`
+	IDGt            *string                        `json:"id_gt,omitempty"`
+	IDGte           *string                        `json:"id_gte,omitempty"`
+	IDContains      *string                        `json:"id_contains,omitempty"`
+	IDNotContains   *string                        `json:"id_not_contains,omitempty"`
+	IDStartsWith    *string                        `json:"id_starts_with,omitempty"`
+	IDNotStartsWith *string                        `json:"id_not_starts_with,omitempty"`
+	IDEndsWith      *string                        `json:"id_ends_with,omitempty"`
+	IDNotEndsWith   *string                        `json:"id_not_ends_with,omitempty"`
+	Revision        *int32                         `json:"revision,omitempty"`
+	RevisionNot     *int32                         `json:"revision_not,omitempty"`
+	RevisionIn      []int32                        `json:"revision_in,omitempty"`
+	RevisionNotIn   []int32                        `json:"revision_not_in,omitempty"`
+	RevisionLt      *int32                         `json:"revision_lt,omitempty"`
+	RevisionLte     *int32                         `json:"revision_lte,omitempty"`
+	RevisionGt      *int32                         `json:"revision_gt,omitempty"`
+	RevisionGte     *int32                         `json:"revision_gte,omitempty"`
+	TimeStamp       *int32                         `json:"timeStamp,omitempty"`
+	TimeStampNot    *int32                         `json:"timeStamp_not,omitempty"`
+	TimeStampIn     []int32                        `json:"timeStamp_in,omitempty"`
+	TimeStampNotIn  []int32                        `json:"timeStamp_not_in,omitempty"`
+	TimeStampLt     *int32                         `json:"timeStamp_lt,omitempty"`
+	TimeStampLte    *int32                         `json:"timeStamp_lte,omitempty"`
+	TimeStampGt     *int32                         `json:"timeStamp_gt,omitempty"`
+	TimeStampGte    *int32                         `json:"timeStamp_gte,omitempty"`
+	IsFloat         *int32                         `json:"isFloat,omitempty"`
+	IsFloatNot      *int32                         `json:"isFloat_not,omitempty"`
+	IsFloatIn       []int32                        `json:"isFloat_in,omitempty"`
+	IsFloatNotIn    []int32                        `json:"isFloat_not_in,omitempty"`
+	IsFloatLt       *int32                         `json:"isFloat_lt,omitempty"`
+	IsFloatLte      *int32                         `json:"isFloat_lte,omitempty"`
+	IsFloatGt       *int32                         `json:"isFloat_gt,omitempty"`
+	IsFloatGte      *int32                         `json:"isFloat_gte,omitempty"`
+	Count           *int32                         `json:"count,omitempty"`
+	CountNot        *int32                         `json:"count_not,omitempty"`
+	CountIn         []int32                        `json:"count_in,omitempty"`
+	CountNotIn      []int32                        `json:"count_not_in,omitempty"`
+	CountLt         *int32                         `json:"count_lt,omitempty"`
+	CountLte        *int32                         `json:"count_lte,omitempty"`
+	CountGt         *int32                         `json:"count_gt,omitempty"`
+	CountGte        *int32                         `json:"count_gte,omitempty"`
+	CountMale       *int32                         `json:"countMale,omitempty"`
+	CountMaleNot    *int32                         `json:"countMale_not,omitempty"`
+	CountMaleIn     []int32                        `json:"countMale_in,omitempty"`
+	CountMaleNotIn  []int32                        `json:"countMale_not_in,omitempty"`
+	CountMaleLt     *int32                         `json:"countMale_lt,omitempty"`
+	CountMaleLte    *int32                         `json:"countMale_lte,omitempty"`
+	CountMaleGt     *int32                         `json:"countMale_gt,omitempty"`
+	CountMaleGte    *int32                         `json:"countMale_gte,omitempty"`
+	And             []OrderAdviserModifyWhereInput `json:"AND,omitempty"`
+	Or              []OrderAdviserModifyWhereInput `json:"OR,omitempty"`
+	Not             []OrderAdviserModifyWhereInput `json:"NOT,omitempty"`
 }
 
-type OrderHotelModifyUpdateManyMutationInput struct {
-	Revision  *int32 `json:"revision,omitempty"`
-	Timestamp *int32 `json:"timestamp,omitempty"`
-	Count     *int32 `json:"count,omitempty"`
-	CountMale *int32 `json:"countMale,omitempty"`
-	StartTime *int32 `json:"startTime,omitempty"`
-	Duration  *int32 `json:"duration,omitempty"`
-	Mode      *int32 `json:"mode,omitempty"`
+type CandidateUpdateInput struct {
+	AdviserId  *string `json:"adviserId,omitempty"`
+	AgentId    *string `json:"agentId,omitempty"`
+	PtId       *string `json:"ptId,omitempty"`
+	ApplyTime  *int32  `json:"applyTime,omitempty"`
+	SignInTime *int32  `json:"signInTime,omitempty"`
 }
 
 type OrderOriginUpdateManyMutationInput struct {
@@ -1143,16 +953,380 @@ type OrderOriginUpdateManyMutationInput struct {
 	Mode      *int32  `json:"mode,omitempty"`
 	Count     *int32  `json:"count,omitempty"`
 	CountMale *int32  `json:"countMale,omitempty"`
+	Status    *int32  `json:"status,omitempty"`
 }
 
-type OrderHotelModifyCreateInput struct {
+type CandidateUpdateManyMutationInput struct {
+	AdviserId  *string `json:"adviserId,omitempty"`
+	AgentId    *string `json:"agentId,omitempty"`
+	PtId       *string `json:"ptId,omitempty"`
+	ApplyTime  *int32  `json:"applyTime,omitempty"`
+	SignInTime *int32  `json:"signInTime,omitempty"`
+}
+
+type CandidateUpdateManyWithWhereNestedInput struct {
+	Where CandidateScalarWhereInput    `json:"where"`
+	Data  CandidateUpdateManyDataInput `json:"data"`
+}
+
+type OrderAdviserModifyUpdateWithWhereUniqueNestedInput struct {
+	Where OrderAdviserModifyWhereUniqueInput `json:"where"`
+	Data  OrderAdviserModifyUpdateDataInput  `json:"data"`
+}
+
+type CandidateScalarWhereInput struct {
+	ID                     *string                     `json:"id,omitempty"`
+	IDNot                  *string                     `json:"id_not,omitempty"`
+	IDIn                   []string                    `json:"id_in,omitempty"`
+	IDNotIn                []string                    `json:"id_not_in,omitempty"`
+	IDLt                   *string                     `json:"id_lt,omitempty"`
+	IDLte                  *string                     `json:"id_lte,omitempty"`
+	IDGt                   *string                     `json:"id_gt,omitempty"`
+	IDGte                  *string                     `json:"id_gte,omitempty"`
+	IDContains             *string                     `json:"id_contains,omitempty"`
+	IDNotContains          *string                     `json:"id_not_contains,omitempty"`
+	IDStartsWith           *string                     `json:"id_starts_with,omitempty"`
+	IDNotStartsWith        *string                     `json:"id_not_starts_with,omitempty"`
+	IDEndsWith             *string                     `json:"id_ends_with,omitempty"`
+	IDNotEndsWith          *string                     `json:"id_not_ends_with,omitempty"`
+	AdviserId              *string                     `json:"adviserId,omitempty"`
+	AdviserIdNot           *string                     `json:"adviserId_not,omitempty"`
+	AdviserIdIn            []string                    `json:"adviserId_in,omitempty"`
+	AdviserIdNotIn         []string                    `json:"adviserId_not_in,omitempty"`
+	AdviserIdLt            *string                     `json:"adviserId_lt,omitempty"`
+	AdviserIdLte           *string                     `json:"adviserId_lte,omitempty"`
+	AdviserIdGt            *string                     `json:"adviserId_gt,omitempty"`
+	AdviserIdGte           *string                     `json:"adviserId_gte,omitempty"`
+	AdviserIdContains      *string                     `json:"adviserId_contains,omitempty"`
+	AdviserIdNotContains   *string                     `json:"adviserId_not_contains,omitempty"`
+	AdviserIdStartsWith    *string                     `json:"adviserId_starts_with,omitempty"`
+	AdviserIdNotStartsWith *string                     `json:"adviserId_not_starts_with,omitempty"`
+	AdviserIdEndsWith      *string                     `json:"adviserId_ends_with,omitempty"`
+	AdviserIdNotEndsWith   *string                     `json:"adviserId_not_ends_with,omitempty"`
+	AgentId                *string                     `json:"agentId,omitempty"`
+	AgentIdNot             *string                     `json:"agentId_not,omitempty"`
+	AgentIdIn              []string                    `json:"agentId_in,omitempty"`
+	AgentIdNotIn           []string                    `json:"agentId_not_in,omitempty"`
+	AgentIdLt              *string                     `json:"agentId_lt,omitempty"`
+	AgentIdLte             *string                     `json:"agentId_lte,omitempty"`
+	AgentIdGt              *string                     `json:"agentId_gt,omitempty"`
+	AgentIdGte             *string                     `json:"agentId_gte,omitempty"`
+	AgentIdContains        *string                     `json:"agentId_contains,omitempty"`
+	AgentIdNotContains     *string                     `json:"agentId_not_contains,omitempty"`
+	AgentIdStartsWith      *string                     `json:"agentId_starts_with,omitempty"`
+	AgentIdNotStartsWith   *string                     `json:"agentId_not_starts_with,omitempty"`
+	AgentIdEndsWith        *string                     `json:"agentId_ends_with,omitempty"`
+	AgentIdNotEndsWith     *string                     `json:"agentId_not_ends_with,omitempty"`
+	PtId                   *string                     `json:"ptId,omitempty"`
+	PtIdNot                *string                     `json:"ptId_not,omitempty"`
+	PtIdIn                 []string                    `json:"ptId_in,omitempty"`
+	PtIdNotIn              []string                    `json:"ptId_not_in,omitempty"`
+	PtIdLt                 *string                     `json:"ptId_lt,omitempty"`
+	PtIdLte                *string                     `json:"ptId_lte,omitempty"`
+	PtIdGt                 *string                     `json:"ptId_gt,omitempty"`
+	PtIdGte                *string                     `json:"ptId_gte,omitempty"`
+	PtIdContains           *string                     `json:"ptId_contains,omitempty"`
+	PtIdNotContains        *string                     `json:"ptId_not_contains,omitempty"`
+	PtIdStartsWith         *string                     `json:"ptId_starts_with,omitempty"`
+	PtIdNotStartsWith      *string                     `json:"ptId_not_starts_with,omitempty"`
+	PtIdEndsWith           *string                     `json:"ptId_ends_with,omitempty"`
+	PtIdNotEndsWith        *string                     `json:"ptId_not_ends_with,omitempty"`
+	ApplyTime              *int32                      `json:"applyTime,omitempty"`
+	ApplyTimeNot           *int32                      `json:"applyTime_not,omitempty"`
+	ApplyTimeIn            []int32                     `json:"applyTime_in,omitempty"`
+	ApplyTimeNotIn         []int32                     `json:"applyTime_not_in,omitempty"`
+	ApplyTimeLt            *int32                      `json:"applyTime_lt,omitempty"`
+	ApplyTimeLte           *int32                      `json:"applyTime_lte,omitempty"`
+	ApplyTimeGt            *int32                      `json:"applyTime_gt,omitempty"`
+	ApplyTimeGte           *int32                      `json:"applyTime_gte,omitempty"`
+	SignInTime             *int32                      `json:"signInTime,omitempty"`
+	SignInTimeNot          *int32                      `json:"signInTime_not,omitempty"`
+	SignInTimeIn           []int32                     `json:"signInTime_in,omitempty"`
+	SignInTimeNotIn        []int32                     `json:"signInTime_not_in,omitempty"`
+	SignInTimeLt           *int32                      `json:"signInTime_lt,omitempty"`
+	SignInTimeLte          *int32                      `json:"signInTime_lte,omitempty"`
+	SignInTimeGt           *int32                      `json:"signInTime_gt,omitempty"`
+	SignInTimeGte          *int32                      `json:"signInTime_gte,omitempty"`
+	And                    []CandidateScalarWhereInput `json:"AND,omitempty"`
+	Or                     []CandidateScalarWhereInput `json:"OR,omitempty"`
+	Not                    []CandidateScalarWhereInput `json:"NOT,omitempty"`
+}
+
+type OrderAdviserModifyUpdateManyInput struct {
+	Create     []OrderAdviserModifyCreateInput                      `json:"create,omitempty"`
+	Update     []OrderAdviserModifyUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []OrderAdviserModifyUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []OrderAdviserModifyWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []OrderAdviserModifyWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []OrderAdviserModifyWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []OrderAdviserModifyWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []OrderAdviserModifyScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []OrderAdviserModifyUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
+}
+
+type CandidateUpsertWithWhereUniqueNestedInput struct {
+	Where  CandidateWhereUniqueInput `json:"where"`
+	Update CandidateUpdateDataInput  `json:"update"`
+	Create CandidateCreateInput      `json:"create"`
+}
+
+type OrderAdviserModifyCreateInput struct {
 	Revision  int32  `json:"revision"`
-	Timestamp int32  `json:"timestamp"`
+	TimeStamp int32  `json:"timeStamp"`
+	IsFloat   *int32 `json:"isFloat,omitempty"`
 	Count     *int32 `json:"count,omitempty"`
 	CountMale *int32 `json:"countMale,omitempty"`
-	StartTime *int32 `json:"startTime,omitempty"`
-	Duration  *int32 `json:"duration,omitempty"`
-	Mode      *int32 `json:"mode,omitempty"`
+}
+
+type CandidateUpdateWithWhereUniqueNestedInput struct {
+	Where CandidateWhereUniqueInput `json:"where"`
+	Data  CandidateUpdateDataInput  `json:"data"`
+}
+
+type OrderAdviserModifyUpdateInput struct {
+	Revision  *int32 `json:"revision,omitempty"`
+	TimeStamp *int32 `json:"timeStamp,omitempty"`
+	IsFloat   *int32 `json:"isFloat,omitempty"`
+	Count     *int32 `json:"count,omitempty"`
+	CountMale *int32 `json:"countMale,omitempty"`
+}
+
+type OrderOriginWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type OrderAdviserModifyUpdateManyMutationInput struct {
+	Revision  *int32 `json:"revision,omitempty"`
+	TimeStamp *int32 `json:"timeStamp,omitempty"`
+	IsFloat   *int32 `json:"isFloat,omitempty"`
+	Count     *int32 `json:"count,omitempty"`
+	CountMale *int32 `json:"countMale,omitempty"`
+}
+
+type OrderOriginWhereInput struct {
+	ID                      *string                       `json:"id,omitempty"`
+	IDNot                   *string                       `json:"id_not,omitempty"`
+	IDIn                    []string                      `json:"id_in,omitempty"`
+	IDNotIn                 []string                      `json:"id_not_in,omitempty"`
+	IDLt                    *string                       `json:"id_lt,omitempty"`
+	IDLte                   *string                       `json:"id_lte,omitempty"`
+	IDGt                    *string                       `json:"id_gt,omitempty"`
+	IDGte                   *string                       `json:"id_gte,omitempty"`
+	IDContains              *string                       `json:"id_contains,omitempty"`
+	IDNotContains           *string                       `json:"id_not_contains,omitempty"`
+	IDStartsWith            *string                       `json:"id_starts_with,omitempty"`
+	IDNotStartsWith         *string                       `json:"id_not_starts_with,omitempty"`
+	IDEndsWith              *string                       `json:"id_ends_with,omitempty"`
+	IDNotEndsWith           *string                       `json:"id_not_ends_with,omitempty"`
+	HotelId                 *string                       `json:"hotelId,omitempty"`
+	HotelIdNot              *string                       `json:"hotelId_not,omitempty"`
+	HotelIdIn               []string                      `json:"hotelId_in,omitempty"`
+	HotelIdNotIn            []string                      `json:"hotelId_not_in,omitempty"`
+	HotelIdLt               *string                       `json:"hotelId_lt,omitempty"`
+	HotelIdLte              *string                       `json:"hotelId_lte,omitempty"`
+	HotelIdGt               *string                       `json:"hotelId_gt,omitempty"`
+	HotelIdGte              *string                       `json:"hotelId_gte,omitempty"`
+	HotelIdContains         *string                       `json:"hotelId_contains,omitempty"`
+	HotelIdNotContains      *string                       `json:"hotelId_not_contains,omitempty"`
+	HotelIdStartsWith       *string                       `json:"hotelId_starts_with,omitempty"`
+	HotelIdNotStartsWith    *string                       `json:"hotelId_not_starts_with,omitempty"`
+	HotelIdEndsWith         *string                       `json:"hotelId_ends_with,omitempty"`
+	HotelIdNotEndsWith      *string                       `json:"hotelId_not_ends_with,omitempty"`
+	HrId                    *string                       `json:"hrId,omitempty"`
+	HrIdNot                 *string                       `json:"hrId_not,omitempty"`
+	HrIdIn                  []string                      `json:"hrId_in,omitempty"`
+	HrIdNotIn               []string                      `json:"hrId_not_in,omitempty"`
+	HrIdLt                  *string                       `json:"hrId_lt,omitempty"`
+	HrIdLte                 *string                       `json:"hrId_lte,omitempty"`
+	HrIdGt                  *string                       `json:"hrId_gt,omitempty"`
+	HrIdGte                 *string                       `json:"hrId_gte,omitempty"`
+	HrIdContains            *string                       `json:"hrId_contains,omitempty"`
+	HrIdNotContains         *string                       `json:"hrId_not_contains,omitempty"`
+	HrIdStartsWith          *string                       `json:"hrId_starts_with,omitempty"`
+	HrIdNotStartsWith       *string                       `json:"hrId_not_starts_with,omitempty"`
+	HrIdEndsWith            *string                       `json:"hrId_ends_with,omitempty"`
+	HrIdNotEndsWith         *string                       `json:"hrId_not_ends_with,omitempty"`
+	AdviserId               *string                       `json:"adviserId,omitempty"`
+	AdviserIdNot            *string                       `json:"adviserId_not,omitempty"`
+	AdviserIdIn             []string                      `json:"adviserId_in,omitempty"`
+	AdviserIdNotIn          []string                      `json:"adviserId_not_in,omitempty"`
+	AdviserIdLt             *string                       `json:"adviserId_lt,omitempty"`
+	AdviserIdLte            *string                       `json:"adviserId_lte,omitempty"`
+	AdviserIdGt             *string                       `json:"adviserId_gt,omitempty"`
+	AdviserIdGte            *string                       `json:"adviserId_gte,omitempty"`
+	AdviserIdContains       *string                       `json:"adviserId_contains,omitempty"`
+	AdviserIdNotContains    *string                       `json:"adviserId_not_contains,omitempty"`
+	AdviserIdStartsWith     *string                       `json:"adviserId_starts_with,omitempty"`
+	AdviserIdNotStartsWith  *string                       `json:"adviserId_not_starts_with,omitempty"`
+	AdviserIdEndsWith       *string                       `json:"adviserId_ends_with,omitempty"`
+	AdviserIdNotEndsWith    *string                       `json:"adviserId_not_ends_with,omitempty"`
+	Datetime                *int32                        `json:"datetime,omitempty"`
+	DatetimeNot             *int32                        `json:"datetime_not,omitempty"`
+	DatetimeIn              []int32                       `json:"datetime_in,omitempty"`
+	DatetimeNotIn           []int32                       `json:"datetime_not_in,omitempty"`
+	DatetimeLt              *int32                        `json:"datetime_lt,omitempty"`
+	DatetimeLte             *int32                        `json:"datetime_lte,omitempty"`
+	DatetimeGt              *int32                        `json:"datetime_gt,omitempty"`
+	DatetimeGte             *int32                        `json:"datetime_gte,omitempty"`
+	Duration                *int32                        `json:"duration,omitempty"`
+	DurationNot             *int32                        `json:"duration_not,omitempty"`
+	DurationIn              []int32                       `json:"duration_in,omitempty"`
+	DurationNotIn           []int32                       `json:"duration_not_in,omitempty"`
+	DurationLt              *int32                        `json:"duration_lt,omitempty"`
+	DurationLte             *int32                        `json:"duration_lte,omitempty"`
+	DurationGt              *int32                        `json:"duration_gt,omitempty"`
+	DurationGte             *int32                        `json:"duration_gte,omitempty"`
+	Mode                    *int32                        `json:"mode,omitempty"`
+	ModeNot                 *int32                        `json:"mode_not,omitempty"`
+	ModeIn                  []int32                       `json:"mode_in,omitempty"`
+	ModeNotIn               []int32                       `json:"mode_not_in,omitempty"`
+	ModeLt                  *int32                        `json:"mode_lt,omitempty"`
+	ModeLte                 *int32                        `json:"mode_lte,omitempty"`
+	ModeGt                  *int32                        `json:"mode_gt,omitempty"`
+	ModeGte                 *int32                        `json:"mode_gte,omitempty"`
+	Count                   *int32                        `json:"count,omitempty"`
+	CountNot                *int32                        `json:"count_not,omitempty"`
+	CountIn                 []int32                       `json:"count_in,omitempty"`
+	CountNotIn              []int32                       `json:"count_not_in,omitempty"`
+	CountLt                 *int32                        `json:"count_lt,omitempty"`
+	CountLte                *int32                        `json:"count_lte,omitempty"`
+	CountGt                 *int32                        `json:"count_gt,omitempty"`
+	CountGte                *int32                        `json:"count_gte,omitempty"`
+	CountMale               *int32                        `json:"countMale,omitempty"`
+	CountMaleNot            *int32                        `json:"countMale_not,omitempty"`
+	CountMaleIn             []int32                       `json:"countMale_in,omitempty"`
+	CountMaleNotIn          []int32                       `json:"countMale_not_in,omitempty"`
+	CountMaleLt             *int32                        `json:"countMale_lt,omitempty"`
+	CountMaleLte            *int32                        `json:"countMale_lte,omitempty"`
+	CountMaleGt             *int32                        `json:"countMale_gt,omitempty"`
+	CountMaleGte            *int32                        `json:"countMale_gte,omitempty"`
+	Status                  *int32                        `json:"status,omitempty"`
+	StatusNot               *int32                        `json:"status_not,omitempty"`
+	StatusIn                []int32                       `json:"status_in,omitempty"`
+	StatusNotIn             []int32                       `json:"status_not_in,omitempty"`
+	StatusLt                *int32                        `json:"status_lt,omitempty"`
+	StatusLte               *int32                        `json:"status_lte,omitempty"`
+	StatusGt                *int32                        `json:"status_gt,omitempty"`
+	StatusGte               *int32                        `json:"status_gte,omitempty"`
+	OrderHotelModifyEvery   *OrderHotelModifyWhereInput   `json:"orderHotelModify_every,omitempty"`
+	OrderHotelModifySome    *OrderHotelModifyWhereInput   `json:"orderHotelModify_some,omitempty"`
+	OrderHotelModifyNone    *OrderHotelModifyWhereInput   `json:"orderHotelModify_none,omitempty"`
+	OrderAdviserModifyEvery *OrderAdviserModifyWhereInput `json:"orderAdviserModify_every,omitempty"`
+	OrderAdviserModifySome  *OrderAdviserModifyWhereInput `json:"orderAdviserModify_some,omitempty"`
+	OrderAdviserModifyNone  *OrderAdviserModifyWhereInput `json:"orderAdviserModify_none,omitempty"`
+	CandidateEvery          *CandidateWhereInput          `json:"candidate_every,omitempty"`
+	CandidateSome           *CandidateWhereInput          `json:"candidate_some,omitempty"`
+	CandidateNone           *CandidateWhereInput          `json:"candidate_none,omitempty"`
+	And                     []OrderOriginWhereInput       `json:"AND,omitempty"`
+	Or                      []OrderOriginWhereInput       `json:"OR,omitempty"`
+	Not                     []OrderOriginWhereInput       `json:"NOT,omitempty"`
+}
+
+type OrderHotelModifyUpdateManyDataInput struct {
+	Revision     *int32 `json:"revision,omitempty"`
+	Timestamp    *int32 `json:"timestamp,omitempty"`
+	Count        *int32 `json:"count,omitempty"`
+	CountMale    *int32 `json:"countMale,omitempty"`
+	CountYet     *int32 `json:"countYet,omitempty"`
+	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
+	StartTime    *int32 `json:"startTime,omitempty"`
+	Duration     *int32 `json:"duration,omitempty"`
+	Mode         *int32 `json:"mode,omitempty"`
+}
+
+type OrderAdviserModifyScalarWhereInput struct {
+	ID              *string                              `json:"id,omitempty"`
+	IDNot           *string                              `json:"id_not,omitempty"`
+	IDIn            []string                             `json:"id_in,omitempty"`
+	IDNotIn         []string                             `json:"id_not_in,omitempty"`
+	IDLt            *string                              `json:"id_lt,omitempty"`
+	IDLte           *string                              `json:"id_lte,omitempty"`
+	IDGt            *string                              `json:"id_gt,omitempty"`
+	IDGte           *string                              `json:"id_gte,omitempty"`
+	IDContains      *string                              `json:"id_contains,omitempty"`
+	IDNotContains   *string                              `json:"id_not_contains,omitempty"`
+	IDStartsWith    *string                              `json:"id_starts_with,omitempty"`
+	IDNotStartsWith *string                              `json:"id_not_starts_with,omitempty"`
+	IDEndsWith      *string                              `json:"id_ends_with,omitempty"`
+	IDNotEndsWith   *string                              `json:"id_not_ends_with,omitempty"`
+	Revision        *int32                               `json:"revision,omitempty"`
+	RevisionNot     *int32                               `json:"revision_not,omitempty"`
+	RevisionIn      []int32                              `json:"revision_in,omitempty"`
+	RevisionNotIn   []int32                              `json:"revision_not_in,omitempty"`
+	RevisionLt      *int32                               `json:"revision_lt,omitempty"`
+	RevisionLte     *int32                               `json:"revision_lte,omitempty"`
+	RevisionGt      *int32                               `json:"revision_gt,omitempty"`
+	RevisionGte     *int32                               `json:"revision_gte,omitempty"`
+	TimeStamp       *int32                               `json:"timeStamp,omitempty"`
+	TimeStampNot    *int32                               `json:"timeStamp_not,omitempty"`
+	TimeStampIn     []int32                              `json:"timeStamp_in,omitempty"`
+	TimeStampNotIn  []int32                              `json:"timeStamp_not_in,omitempty"`
+	TimeStampLt     *int32                               `json:"timeStamp_lt,omitempty"`
+	TimeStampLte    *int32                               `json:"timeStamp_lte,omitempty"`
+	TimeStampGt     *int32                               `json:"timeStamp_gt,omitempty"`
+	TimeStampGte    *int32                               `json:"timeStamp_gte,omitempty"`
+	IsFloat         *int32                               `json:"isFloat,omitempty"`
+	IsFloatNot      *int32                               `json:"isFloat_not,omitempty"`
+	IsFloatIn       []int32                              `json:"isFloat_in,omitempty"`
+	IsFloatNotIn    []int32                              `json:"isFloat_not_in,omitempty"`
+	IsFloatLt       *int32                               `json:"isFloat_lt,omitempty"`
+	IsFloatLte      *int32                               `json:"isFloat_lte,omitempty"`
+	IsFloatGt       *int32                               `json:"isFloat_gt,omitempty"`
+	IsFloatGte      *int32                               `json:"isFloat_gte,omitempty"`
+	Count           *int32                               `json:"count,omitempty"`
+	CountNot        *int32                               `json:"count_not,omitempty"`
+	CountIn         []int32                              `json:"count_in,omitempty"`
+	CountNotIn      []int32                              `json:"count_not_in,omitempty"`
+	CountLt         *int32                               `json:"count_lt,omitempty"`
+	CountLte        *int32                               `json:"count_lte,omitempty"`
+	CountGt         *int32                               `json:"count_gt,omitempty"`
+	CountGte        *int32                               `json:"count_gte,omitempty"`
+	CountMale       *int32                               `json:"countMale,omitempty"`
+	CountMaleNot    *int32                               `json:"countMale_not,omitempty"`
+	CountMaleIn     []int32                              `json:"countMale_in,omitempty"`
+	CountMaleNotIn  []int32                              `json:"countMale_not_in,omitempty"`
+	CountMaleLt     *int32                               `json:"countMale_lt,omitempty"`
+	CountMaleLte    *int32                               `json:"countMale_lte,omitempty"`
+	CountMaleGt     *int32                               `json:"countMale_gt,omitempty"`
+	CountMaleGte    *int32                               `json:"countMale_gte,omitempty"`
+	And             []OrderAdviserModifyScalarWhereInput `json:"AND,omitempty"`
+	Or              []OrderAdviserModifyScalarWhereInput `json:"OR,omitempty"`
+	Not             []OrderAdviserModifyScalarWhereInput `json:"NOT,omitempty"`
+}
+
+type OrderHotelModifyUpdateInput struct {
+	Revision     *int32 `json:"revision,omitempty"`
+	Timestamp    *int32 `json:"timestamp,omitempty"`
+	Count        *int32 `json:"count,omitempty"`
+	CountMale    *int32 `json:"countMale,omitempty"`
+	CountYet     *int32 `json:"countYet,omitempty"`
+	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
+	StartTime    *int32 `json:"startTime,omitempty"`
+	Duration     *int32 `json:"duration,omitempty"`
+	Mode         *int32 `json:"mode,omitempty"`
+}
+
+type OrderAdviserModifySubscriptionWhereInput struct {
+	MutationIn                 []MutationType                             `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                                    `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                                   `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                                   `json:"updatedFields_contains_some,omitempty"`
+	Node                       *OrderAdviserModifyWhereInput              `json:"node,omitempty"`
+	And                        []OrderAdviserModifySubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []OrderAdviserModifySubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []OrderAdviserModifySubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type OrderHotelModifyUpdateManyMutationInput struct {
+	Revision     *int32 `json:"revision,omitempty"`
+	Timestamp    *int32 `json:"timestamp,omitempty"`
+	Count        *int32 `json:"count,omitempty"`
+	CountMale    *int32 `json:"countMale,omitempty"`
+	CountYet     *int32 `json:"countYet,omitempty"`
+	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
+	StartTime    *int32 `json:"startTime,omitempty"`
+	Duration     *int32 `json:"duration,omitempty"`
+	Mode         *int32 `json:"mode,omitempty"`
 }
 
 type CandidateWhereInput struct {
@@ -1233,117 +1407,243 @@ type CandidateWhereInput struct {
 	Not                    []CandidateWhereInput `json:"NOT,omitempty"`
 }
 
-type OrderOriginConnectionExec struct {
-	exec *prisma.Exec
+type OrderOriginCreateInput struct {
+	HotelId            string                             `json:"hotelId"`
+	HrId               string                             `json:"hrId"`
+	AdviserId          string                             `json:"adviserId"`
+	Datetime           int32                              `json:"datetime"`
+	Duration           int32                              `json:"duration"`
+	Mode               int32                              `json:"mode"`
+	Count              int32                              `json:"count"`
+	CountMale          int32                              `json:"countMale"`
+	Status             int32                              `json:"status"`
+	OrderHotelModify   *OrderHotelModifyCreateManyInput   `json:"orderHotelModify,omitempty"`
+	OrderAdviserModify *OrderAdviserModifyCreateManyInput `json:"orderAdviserModify,omitempty"`
+	Candidate          *CandidateCreateManyInput          `json:"candidate,omitempty"`
 }
 
-func (instance *OrderOriginConnectionExec) PageInfo() *PageInfoExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
-
-	return &PageInfoExec{ret}
+type OrderHotelModifyWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
 }
 
-func (instance *OrderOriginConnectionExec) Edges() *OrderOriginEdgeExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "OrderOriginEdge"},
-		"edges",
-		[]string{"cursor"})
-
-	return &OrderOriginEdgeExec{ret}
+type OrderHotelModifyUpdateManyWithWhereNestedInput struct {
+	Where OrderHotelModifyScalarWhereInput    `json:"where"`
+	Data  OrderHotelModifyUpdateManyDataInput `json:"data"`
 }
 
-func (instance *OrderOriginConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateOrderOrigin"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return v, err
+type CandidateUpdateDataInput struct {
+	AdviserId  *string `json:"adviserId,omitempty"`
+	AgentId    *string `json:"agentId,omitempty"`
+	PtId       *string `json:"ptId,omitempty"`
+	ApplyTime  *int32  `json:"applyTime,omitempty"`
+	SignInTime *int32  `json:"signInTime,omitempty"`
 }
 
-func (instance OrderOriginConnectionExec) Exec(ctx context.Context) (*OrderOriginConnection, error) {
-	var v OrderOriginConnection
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
+type OrderAdviserModifyCreateManyInput struct {
+	Create  []OrderAdviserModifyCreateInput      `json:"create,omitempty"`
+	Connect []OrderAdviserModifyWhereUniqueInput `json:"connect,omitempty"`
 }
 
-func (instance OrderOriginConnectionExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
+type OrderAdviserModifyUpdateManyDataInput struct {
+	Revision  *int32 `json:"revision,omitempty"`
+	TimeStamp *int32 `json:"timeStamp,omitempty"`
+	IsFloat   *int32 `json:"isFloat,omitempty"`
+	Count     *int32 `json:"count,omitempty"`
+	CountMale *int32 `json:"countMale,omitempty"`
 }
 
-type OrderOriginConnectionExecArray struct {
-	exec *prisma.Exec
+type CandidateCreateManyInput struct {
+	Create  []CandidateCreateInput      `json:"create,omitempty"`
+	Connect []CandidateWhereUniqueInput `json:"connect,omitempty"`
 }
 
-func (instance OrderOriginConnectionExecArray) Exec(ctx context.Context) ([]OrderOriginConnection, error) {
-	var v []OrderOriginConnection
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
+type OrderOriginSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                      `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                             `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                            `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                            `json:"updatedFields_contains_some,omitempty"`
+	Node                       *OrderOriginWhereInput              `json:"node,omitempty"`
+	And                        []OrderOriginSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []OrderOriginSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []OrderOriginSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
-type OrderOriginConnection struct {
+type OrderOriginUpdateInput struct {
+	HotelId            *string                            `json:"hotelId,omitempty"`
+	HrId               *string                            `json:"hrId,omitempty"`
+	AdviserId          *string                            `json:"adviserId,omitempty"`
+	Datetime           *int32                             `json:"datetime,omitempty"`
+	Duration           *int32                             `json:"duration,omitempty"`
+	Mode               *int32                             `json:"mode,omitempty"`
+	Count              *int32                             `json:"count,omitempty"`
+	CountMale          *int32                             `json:"countMale,omitempty"`
+	Status             *int32                             `json:"status,omitempty"`
+	OrderHotelModify   *OrderHotelModifyUpdateManyInput   `json:"orderHotelModify,omitempty"`
+	OrderAdviserModify *OrderAdviserModifyUpdateManyInput `json:"orderAdviserModify,omitempty"`
+	Candidate          *CandidateUpdateManyInput          `json:"candidate,omitempty"`
 }
 
-type CandidateEdgeExec struct {
-	exec *prisma.Exec
+type CandidateUpdateManyDataInput struct {
+	AdviserId  *string `json:"adviserId,omitempty"`
+	AgentId    *string `json:"agentId,omitempty"`
+	PtId       *string `json:"ptId,omitempty"`
+	ApplyTime  *int32  `json:"applyTime,omitempty"`
+	SignInTime *int32  `json:"signInTime,omitempty"`
 }
 
-func (instance *CandidateEdgeExec) Node() *CandidateExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Candidate"},
-		"node",
-		[]string{"id", "adviserId", "agentId", "ptId", "applyTime", "signInTime"})
-
-	return &CandidateExec{ret}
+type OrderHotelModifyUpsertWithWhereUniqueNestedInput struct {
+	Where  OrderHotelModifyWhereUniqueInput `json:"where"`
+	Update OrderHotelModifyUpdateDataInput  `json:"update"`
+	Create OrderHotelModifyCreateInput      `json:"create"`
 }
 
-func (instance CandidateEdgeExec) Exec(ctx context.Context) (*CandidateEdge, error) {
-	var v CandidateEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
+type OrderHotelModifyUpdateDataInput struct {
+	Revision     *int32 `json:"revision,omitempty"`
+	Timestamp    *int32 `json:"timestamp,omitempty"`
+	Count        *int32 `json:"count,omitempty"`
+	CountMale    *int32 `json:"countMale,omitempty"`
+	CountYet     *int32 `json:"countYet,omitempty"`
+	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
+	StartTime    *int32 `json:"startTime,omitempty"`
+	Duration     *int32 `json:"duration,omitempty"`
+	Mode         *int32 `json:"mode,omitempty"`
 }
 
-func (instance CandidateEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
+type OrderHotelModifyUpdateWithWhereUniqueNestedInput struct {
+	Where OrderHotelModifyWhereUniqueInput `json:"where"`
+	Data  OrderHotelModifyUpdateDataInput  `json:"data"`
 }
 
-type CandidateEdgeExecArray struct {
-	exec *prisma.Exec
+type OrderHotelModifyUpdateManyInput struct {
+	Create     []OrderHotelModifyCreateInput                      `json:"create,omitempty"`
+	Update     []OrderHotelModifyUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []OrderHotelModifyUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []OrderHotelModifyWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []OrderHotelModifyWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []OrderHotelModifyWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []OrderHotelModifyWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []OrderHotelModifyScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []OrderHotelModifyUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
 }
 
-func (instance CandidateEdgeExecArray) Exec(ctx context.Context) ([]CandidateEdge, error) {
-	var v []CandidateEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
+type OrderHotelModifyWhereInput struct {
+	ID                *string                      `json:"id,omitempty"`
+	IDNot             *string                      `json:"id_not,omitempty"`
+	IDIn              []string                     `json:"id_in,omitempty"`
+	IDNotIn           []string                     `json:"id_not_in,omitempty"`
+	IDLt              *string                      `json:"id_lt,omitempty"`
+	IDLte             *string                      `json:"id_lte,omitempty"`
+	IDGt              *string                      `json:"id_gt,omitempty"`
+	IDGte             *string                      `json:"id_gte,omitempty"`
+	IDContains        *string                      `json:"id_contains,omitempty"`
+	IDNotContains     *string                      `json:"id_not_contains,omitempty"`
+	IDStartsWith      *string                      `json:"id_starts_with,omitempty"`
+	IDNotStartsWith   *string                      `json:"id_not_starts_with,omitempty"`
+	IDEndsWith        *string                      `json:"id_ends_with,omitempty"`
+	IDNotEndsWith     *string                      `json:"id_not_ends_with,omitempty"`
+	Revision          *int32                       `json:"revision,omitempty"`
+	RevisionNot       *int32                       `json:"revision_not,omitempty"`
+	RevisionIn        []int32                      `json:"revision_in,omitempty"`
+	RevisionNotIn     []int32                      `json:"revision_not_in,omitempty"`
+	RevisionLt        *int32                       `json:"revision_lt,omitempty"`
+	RevisionLte       *int32                       `json:"revision_lte,omitempty"`
+	RevisionGt        *int32                       `json:"revision_gt,omitempty"`
+	RevisionGte       *int32                       `json:"revision_gte,omitempty"`
+	Timestamp         *int32                       `json:"timestamp,omitempty"`
+	TimestampNot      *int32                       `json:"timestamp_not,omitempty"`
+	TimestampIn       []int32                      `json:"timestamp_in,omitempty"`
+	TimestampNotIn    []int32                      `json:"timestamp_not_in,omitempty"`
+	TimestampLt       *int32                       `json:"timestamp_lt,omitempty"`
+	TimestampLte      *int32                       `json:"timestamp_lte,omitempty"`
+	TimestampGt       *int32                       `json:"timestamp_gt,omitempty"`
+	TimestampGte      *int32                       `json:"timestamp_gte,omitempty"`
+	Count             *int32                       `json:"count,omitempty"`
+	CountNot          *int32                       `json:"count_not,omitempty"`
+	CountIn           []int32                      `json:"count_in,omitempty"`
+	CountNotIn        []int32                      `json:"count_not_in,omitempty"`
+	CountLt           *int32                       `json:"count_lt,omitempty"`
+	CountLte          *int32                       `json:"count_lte,omitempty"`
+	CountGt           *int32                       `json:"count_gt,omitempty"`
+	CountGte          *int32                       `json:"count_gte,omitempty"`
+	CountMale         *int32                       `json:"countMale,omitempty"`
+	CountMaleNot      *int32                       `json:"countMale_not,omitempty"`
+	CountMaleIn       []int32                      `json:"countMale_in,omitempty"`
+	CountMaleNotIn    []int32                      `json:"countMale_not_in,omitempty"`
+	CountMaleLt       *int32                       `json:"countMale_lt,omitempty"`
+	CountMaleLte      *int32                       `json:"countMale_lte,omitempty"`
+	CountMaleGt       *int32                       `json:"countMale_gt,omitempty"`
+	CountMaleGte      *int32                       `json:"countMale_gte,omitempty"`
+	CountYet          *int32                       `json:"countYet,omitempty"`
+	CountYetNot       *int32                       `json:"countYet_not,omitempty"`
+	CountYetIn        []int32                      `json:"countYet_in,omitempty"`
+	CountYetNotIn     []int32                      `json:"countYet_not_in,omitempty"`
+	CountYetLt        *int32                       `json:"countYet_lt,omitempty"`
+	CountYetLte       *int32                       `json:"countYet_lte,omitempty"`
+	CountYetGt        *int32                       `json:"countYet_gt,omitempty"`
+	CountYetGte       *int32                       `json:"countYet_gte,omitempty"`
+	CountMaleYet      *int32                       `json:"countMaleYet,omitempty"`
+	CountMaleYetNot   *int32                       `json:"countMaleYet_not,omitempty"`
+	CountMaleYetIn    []int32                      `json:"countMaleYet_in,omitempty"`
+	CountMaleYetNotIn []int32                      `json:"countMaleYet_not_in,omitempty"`
+	CountMaleYetLt    *int32                       `json:"countMaleYet_lt,omitempty"`
+	CountMaleYetLte   *int32                       `json:"countMaleYet_lte,omitempty"`
+	CountMaleYetGt    *int32                       `json:"countMaleYet_gt,omitempty"`
+	CountMaleYetGte   *int32                       `json:"countMaleYet_gte,omitempty"`
+	StartTime         *int32                       `json:"startTime,omitempty"`
+	StartTimeNot      *int32                       `json:"startTime_not,omitempty"`
+	StartTimeIn       []int32                      `json:"startTime_in,omitempty"`
+	StartTimeNotIn    []int32                      `json:"startTime_not_in,omitempty"`
+	StartTimeLt       *int32                       `json:"startTime_lt,omitempty"`
+	StartTimeLte      *int32                       `json:"startTime_lte,omitempty"`
+	StartTimeGt       *int32                       `json:"startTime_gt,omitempty"`
+	StartTimeGte      *int32                       `json:"startTime_gte,omitempty"`
+	Duration          *int32                       `json:"duration,omitempty"`
+	DurationNot       *int32                       `json:"duration_not,omitempty"`
+	DurationIn        []int32                      `json:"duration_in,omitempty"`
+	DurationNotIn     []int32                      `json:"duration_not_in,omitempty"`
+	DurationLt        *int32                       `json:"duration_lt,omitempty"`
+	DurationLte       *int32                       `json:"duration_lte,omitempty"`
+	DurationGt        *int32                       `json:"duration_gt,omitempty"`
+	DurationGte       *int32                       `json:"duration_gte,omitempty"`
+	Mode              *int32                       `json:"mode,omitempty"`
+	ModeNot           *int32                       `json:"mode_not,omitempty"`
+	ModeIn            []int32                      `json:"mode_in,omitempty"`
+	ModeNotIn         []int32                      `json:"mode_not_in,omitempty"`
+	ModeLt            *int32                       `json:"mode_lt,omitempty"`
+	ModeLte           *int32                       `json:"mode_lte,omitempty"`
+	ModeGt            *int32                       `json:"mode_gt,omitempty"`
+	ModeGte           *int32                       `json:"mode_gte,omitempty"`
+	And               []OrderHotelModifyWhereInput `json:"AND,omitempty"`
+	Or                []OrderHotelModifyWhereInput `json:"OR,omitempty"`
+	Not               []OrderHotelModifyWhereInput `json:"NOT,omitempty"`
 }
 
-type CandidateEdge struct {
-	Cursor string `json:"cursor"`
+type CandidateSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                    `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                           `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                          `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                          `json:"updatedFields_contains_some,omitempty"`
+	Node                       *CandidateWhereInput              `json:"node,omitempty"`
+	And                        []CandidateSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []CandidateSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []CandidateSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type OrderAdviserModifyUpdateManyWithWhereNestedInput struct {
+	Where OrderAdviserModifyScalarWhereInput    `json:"where"`
+	Data  OrderAdviserModifyUpdateManyDataInput `json:"data"`
+}
+
+type CandidateUpdateManyInput struct {
+	Create     []CandidateCreateInput                      `json:"create,omitempty"`
+	Update     []CandidateUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []CandidateUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []CandidateWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []CandidateWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []CandidateWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []CandidateWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []CandidateScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []CandidateUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
 }
 
 type OrderOriginPreviousValuesExec struct {
@@ -1386,36 +1686,26 @@ type OrderOriginPreviousValues struct {
 	Mode      int32  `json:"mode"`
 	Count     int32  `json:"count"`
 	CountMale int32  `json:"countMale"`
+	Status    int32  `json:"status"`
 }
 
-type OrderHotelModifySubscriptionPayloadExec struct {
+type OrderAdviserModifyEdgeExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *OrderHotelModifySubscriptionPayloadExec) Node() *OrderHotelModifyExec {
+func (instance *OrderAdviserModifyEdgeExec) Node() *OrderAdviserModifyExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "OrderHotelModify"},
+		[2]string{"", "OrderAdviserModify"},
 		"node",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "startTime", "duration", "mode"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
 
-	return &OrderHotelModifyExec{ret}
+	return &OrderAdviserModifyExec{ret}
 }
 
-func (instance *OrderHotelModifySubscriptionPayloadExec) PreviousValues() *OrderHotelModifyPreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "OrderHotelModifyPreviousValues"},
-		"previousValues",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "startTime", "duration", "mode"})
-
-	return &OrderHotelModifyPreviousValuesExec{ret}
-}
-
-func (instance OrderHotelModifySubscriptionPayloadExec) Exec(ctx context.Context) (*OrderHotelModifySubscriptionPayload, error) {
-	var v OrderHotelModifySubscriptionPayload
+func (instance OrderAdviserModifyEdgeExec) Exec(ctx context.Context) (*OrderAdviserModifyEdge, error) {
+	var v OrderAdviserModifyEdge
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -1426,249 +1716,22 @@ func (instance OrderHotelModifySubscriptionPayloadExec) Exec(ctx context.Context
 	return &v, nil
 }
 
-func (instance OrderHotelModifySubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+func (instance OrderAdviserModifyEdgeExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type OrderHotelModifySubscriptionPayloadExecArray struct {
+type OrderAdviserModifyEdgeExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance OrderHotelModifySubscriptionPayloadExecArray) Exec(ctx context.Context) ([]OrderHotelModifySubscriptionPayload, error) {
-	var v []OrderHotelModifySubscriptionPayload
+func (instance OrderAdviserModifyEdgeExecArray) Exec(ctx context.Context) ([]OrderAdviserModifyEdge, error) {
+	var v []OrderAdviserModifyEdge
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type OrderHotelModifySubscriptionPayload struct {
-	Mutation      MutationType `json:"mutation"`
-	UpdatedFields []string     `json:"updatedFields,omitempty"`
-}
-
-type OrderOriginEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *OrderOriginEdgeExec) Node() *OrderOriginExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "OrderOrigin"},
-		"node",
-		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale"})
-
-	return &OrderOriginExec{ret}
-}
-
-func (instance OrderOriginEdgeExec) Exec(ctx context.Context) (*OrderOriginEdge, error) {
-	var v OrderOriginEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance OrderOriginEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type OrderOriginEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderOriginEdgeExecArray) Exec(ctx context.Context) ([]OrderOriginEdge, error) {
-	var v []OrderOriginEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type OrderOriginEdge struct {
+type OrderAdviserModifyEdge struct {
 	Cursor string `json:"cursor"`
-}
-
-type OrderOriginExec struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderOriginExec) Exec(ctx context.Context) (*OrderOrigin, error) {
-	var v OrderOrigin
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance OrderOriginExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type OrderOriginExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderOriginExecArray) Exec(ctx context.Context) ([]OrderOrigin, error) {
-	var v []OrderOrigin
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type OrderOrigin struct {
-	ID        string `json:"id"`
-	HotelId   string `json:"hotelId"`
-	HrId      string `json:"hrId"`
-	AdviserId string `json:"adviserId"`
-	Datetime  int32  `json:"datetime"`
-	Duration  int32  `json:"duration"`
-	Mode      int32  `json:"mode"`
-	Count     int32  `json:"count"`
-	CountMale int32  `json:"countMale"`
-}
-
-type OrderHotelModifyEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *OrderHotelModifyEdgeExec) Node() *OrderHotelModifyExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "OrderHotelModify"},
-		"node",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "startTime", "duration", "mode"})
-
-	return &OrderHotelModifyExec{ret}
-}
-
-func (instance OrderHotelModifyEdgeExec) Exec(ctx context.Context) (*OrderHotelModifyEdge, error) {
-	var v OrderHotelModifyEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance OrderHotelModifyEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type OrderHotelModifyEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderHotelModifyEdgeExecArray) Exec(ctx context.Context) ([]OrderHotelModifyEdge, error) {
-	var v []OrderHotelModifyEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type OrderHotelModifyEdge struct {
-	Cursor string `json:"cursor"`
-}
-
-type PageInfoExec struct {
-	exec *prisma.Exec
-}
-
-func (instance PageInfoExec) Exec(ctx context.Context) (*PageInfo, error) {
-	var v PageInfo
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance PageInfoExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type PageInfoExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance PageInfoExecArray) Exec(ctx context.Context) ([]PageInfo, error) {
-	var v []PageInfo
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type PageInfo struct {
-	HasNextPage     bool    `json:"hasNextPage"`
-	HasPreviousPage bool    `json:"hasPreviousPage"`
-	StartCursor     *string `json:"startCursor,omitempty"`
-	EndCursor       *string `json:"endCursor,omitempty"`
-}
-
-type OrderOriginSubscriptionPayloadExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *OrderOriginSubscriptionPayloadExec) Node() *OrderOriginExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "OrderOrigin"},
-		"node",
-		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale"})
-
-	return &OrderOriginExec{ret}
-}
-
-func (instance *OrderOriginSubscriptionPayloadExec) PreviousValues() *OrderOriginPreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "OrderOriginPreviousValues"},
-		"previousValues",
-		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale"})
-
-	return &OrderOriginPreviousValuesExec{ret}
-}
-
-func (instance OrderOriginSubscriptionPayloadExec) Exec(ctx context.Context) (*OrderOriginSubscriptionPayload, error) {
-	var v OrderOriginSubscriptionPayload
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance OrderOriginSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type OrderOriginSubscriptionPayloadExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderOriginSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]OrderOriginSubscriptionPayload, error) {
-	var v []OrderOriginSubscriptionPayload
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type OrderOriginSubscriptionPayload struct {
-	Mutation      MutationType `json:"mutation"`
-	UpdatedFields []string     `json:"updatedFields,omitempty"`
 }
 
 type CandidateConnectionExec struct {
@@ -1739,12 +1802,47 @@ func (instance CandidateConnectionExecArray) Exec(ctx context.Context) ([]Candid
 type CandidateConnection struct {
 }
 
-type OrderHotelModifyExec struct {
+type OrderAdviserModifyConnectionExec struct {
 	exec *prisma.Exec
 }
 
-func (instance OrderHotelModifyExec) Exec(ctx context.Context) (*OrderHotelModify, error) {
-	var v OrderHotelModify
+func (instance *OrderAdviserModifyConnectionExec) PageInfo() *PageInfoExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+
+	return &PageInfoExec{ret}
+}
+
+func (instance *OrderAdviserModifyConnectionExec) Edges() *OrderAdviserModifyEdgeExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "OrderAdviserModifyEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	return &OrderAdviserModifyEdgeExec{ret}
+}
+
+func (instance *OrderAdviserModifyConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateOrderAdviserModify"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return v, err
+}
+
+func (instance OrderAdviserModifyConnectionExec) Exec(ctx context.Context) (*OrderAdviserModifyConnection, error) {
+	var v OrderAdviserModifyConnection
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -1755,29 +1853,204 @@ func (instance OrderHotelModifyExec) Exec(ctx context.Context) (*OrderHotelModif
 	return &v, nil
 }
 
-func (instance OrderHotelModifyExec) Exists(ctx context.Context) (bool, error) {
+func (instance OrderAdviserModifyConnectionExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type OrderHotelModifyExecArray struct {
+type OrderAdviserModifyConnectionExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance OrderHotelModifyExecArray) Exec(ctx context.Context) ([]OrderHotelModify, error) {
-	var v []OrderHotelModify
+func (instance OrderAdviserModifyConnectionExecArray) Exec(ctx context.Context) ([]OrderAdviserModifyConnection, error) {
+	var v []OrderAdviserModifyConnection
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type OrderHotelModify struct {
+type OrderAdviserModifyConnection struct {
+}
+
+type PageInfoExec struct {
+	exec *prisma.Exec
+}
+
+func (instance PageInfoExec) Exec(ctx context.Context) (*PageInfo, error) {
+	var v PageInfo
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance PageInfoExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type PageInfoExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance PageInfoExecArray) Exec(ctx context.Context) ([]PageInfo, error) {
+	var v []PageInfo
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type PageInfo struct {
+	HasNextPage     bool    `json:"hasNextPage"`
+	HasPreviousPage bool    `json:"hasPreviousPage"`
+	StartCursor     *string `json:"startCursor,omitempty"`
+	EndCursor       *string `json:"endCursor,omitempty"`
+}
+
+type OrderAdviserModifyExec struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderAdviserModifyExec) Exec(ctx context.Context) (*OrderAdviserModify, error) {
+	var v OrderAdviserModify
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance OrderAdviserModifyExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type OrderAdviserModifyExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderAdviserModifyExecArray) Exec(ctx context.Context) ([]OrderAdviserModify, error) {
+	var v []OrderAdviserModify
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type OrderAdviserModify struct {
 	ID        string `json:"id"`
 	Revision  int32  `json:"revision"`
-	Timestamp int32  `json:"timestamp"`
+	TimeStamp int32  `json:"timeStamp"`
+	IsFloat   *int32 `json:"isFloat,omitempty"`
 	Count     *int32 `json:"count,omitempty"`
 	CountMale *int32 `json:"countMale,omitempty"`
-	StartTime *int32 `json:"startTime,omitempty"`
-	Duration  *int32 `json:"duration,omitempty"`
-	Mode      *int32 `json:"mode,omitempty"`
+}
+
+type CandidateExec struct {
+	exec *prisma.Exec
+}
+
+func (instance CandidateExec) Exec(ctx context.Context) (*Candidate, error) {
+	var v Candidate
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CandidateExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CandidateExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CandidateExecArray) Exec(ctx context.Context) ([]Candidate, error) {
+	var v []Candidate
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type Candidate struct {
+	ID         string `json:"id"`
+	AdviserId  string `json:"adviserId"`
+	AgentId    string `json:"agentId"`
+	PtId       string `json:"ptId"`
+	ApplyTime  int32  `json:"applyTime"`
+	SignInTime int32  `json:"signInTime"`
+}
+
+type OrderOriginConnectionExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *OrderOriginConnectionExec) PageInfo() *PageInfoExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+
+	return &PageInfoExec{ret}
+}
+
+func (instance *OrderOriginConnectionExec) Edges() *OrderOriginEdgeExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "OrderOriginEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	return &OrderOriginEdgeExec{ret}
+}
+
+func (instance *OrderOriginConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateOrderOrigin"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return v, err
+}
+
+func (instance OrderOriginConnectionExec) Exec(ctx context.Context) (*OrderOriginConnection, error) {
+	var v OrderOriginConnection
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance OrderOriginConnectionExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type OrderOriginConnectionExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderOriginConnectionExecArray) Exec(ctx context.Context) ([]OrderOriginConnection, error) {
+	var v []OrderOriginConnection
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type OrderOriginConnection struct {
 }
 
 type CandidateSubscriptionPayloadExec struct {
@@ -1837,23 +2110,114 @@ type CandidateSubscriptionPayload struct {
 	UpdatedFields []string     `json:"updatedFields,omitempty"`
 }
 
-type OrderAdviserModifyEdgeExec struct {
+type OrderOriginExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *OrderAdviserModifyEdgeExec) Node() *OrderAdviserModifyExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "OrderAdviserModify"},
-		"node",
-		[]string{"id", "revision", "timeStamp", "isFloat", "countYet", "countMaleYet", "countChanged", "countMaleChanged"})
-
-	return &OrderAdviserModifyExec{ret}
+type OrderHotelModifyParamsExec struct {
+	Where   *OrderHotelModifyWhereInput
+	OrderBy *OrderHotelModifyOrderByInput
+	Skip    *int32
+	After   *string
+	Before  *string
+	First   *int32
+	Last    *int32
 }
 
-func (instance OrderAdviserModifyEdgeExec) Exec(ctx context.Context) (*OrderAdviserModifyEdge, error) {
-	var v OrderAdviserModifyEdge
+func (instance *OrderOriginExec) OrderHotelModify(params *OrderHotelModifyParamsExec) *OrderHotelModifyExecArray {
+	var wparams *prisma.WhereParams
+	if params != nil {
+		wparams = &prisma.WhereParams{
+			Where:   params.Where,
+			OrderBy: (*string)(params.OrderBy),
+			Skip:    params.Skip,
+			After:   params.After,
+			Before:  params.Before,
+			First:   params.First,
+			Last:    params.Last,
+		}
+	}
+
+	ret := instance.exec.Client.GetMany(
+		instance.exec,
+		wparams,
+		[3]string{"OrderHotelModifyWhereInput", "OrderHotelModifyOrderByInput", "OrderHotelModify"},
+		"orderHotelModify",
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
+
+	return &OrderHotelModifyExecArray{ret}
+}
+
+type OrderAdviserModifyParamsExec struct {
+	Where   *OrderAdviserModifyWhereInput
+	OrderBy *OrderAdviserModifyOrderByInput
+	Skip    *int32
+	After   *string
+	Before  *string
+	First   *int32
+	Last    *int32
+}
+
+func (instance *OrderOriginExec) OrderAdviserModify(params *OrderAdviserModifyParamsExec) *OrderAdviserModifyExecArray {
+	var wparams *prisma.WhereParams
+	if params != nil {
+		wparams = &prisma.WhereParams{
+			Where:   params.Where,
+			OrderBy: (*string)(params.OrderBy),
+			Skip:    params.Skip,
+			After:   params.After,
+			Before:  params.Before,
+			First:   params.First,
+			Last:    params.Last,
+		}
+	}
+
+	ret := instance.exec.Client.GetMany(
+		instance.exec,
+		wparams,
+		[3]string{"OrderAdviserModifyWhereInput", "OrderAdviserModifyOrderByInput", "OrderAdviserModify"},
+		"orderAdviserModify",
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
+
+	return &OrderAdviserModifyExecArray{ret}
+}
+
+type CandidateParamsExec struct {
+	Where   *CandidateWhereInput
+	OrderBy *CandidateOrderByInput
+	Skip    *int32
+	After   *string
+	Before  *string
+	First   *int32
+	Last    *int32
+}
+
+func (instance *OrderOriginExec) Candidate(params *CandidateParamsExec) *CandidateExecArray {
+	var wparams *prisma.WhereParams
+	if params != nil {
+		wparams = &prisma.WhereParams{
+			Where:   params.Where,
+			OrderBy: (*string)(params.OrderBy),
+			Skip:    params.Skip,
+			After:   params.After,
+			Before:  params.Before,
+			First:   params.First,
+			Last:    params.Last,
+		}
+	}
+
+	ret := instance.exec.Client.GetMany(
+		instance.exec,
+		wparams,
+		[3]string{"CandidateWhereInput", "CandidateOrderByInput", "Candidate"},
+		"candidate",
+		[]string{"id", "adviserId", "agentId", "ptId", "applyTime", "signInTime"})
+
+	return &CandidateExecArray{ret}
+}
+
+func (instance OrderOriginExec) Exec(ctx context.Context) (*OrderOrigin, error) {
+	var v OrderOrigin
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -1864,22 +2228,31 @@ func (instance OrderAdviserModifyEdgeExec) Exec(ctx context.Context) (*OrderAdvi
 	return &v, nil
 }
 
-func (instance OrderAdviserModifyEdgeExec) Exists(ctx context.Context) (bool, error) {
+func (instance OrderOriginExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type OrderAdviserModifyEdgeExecArray struct {
+type OrderOriginExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance OrderAdviserModifyEdgeExecArray) Exec(ctx context.Context) ([]OrderAdviserModifyEdge, error) {
-	var v []OrderAdviserModifyEdge
+func (instance OrderOriginExecArray) Exec(ctx context.Context) ([]OrderOrigin, error) {
+	var v []OrderOrigin
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type OrderAdviserModifyEdge struct {
-	Cursor string `json:"cursor"`
+type OrderOrigin struct {
+	ID        string `json:"id"`
+	HotelId   string `json:"hotelId"`
+	HrId      string `json:"hrId"`
+	AdviserId string `json:"adviserId"`
+	Datetime  int32  `json:"datetime"`
+	Duration  int32  `json:"duration"`
+	Mode      int32  `json:"mode"`
+	Count     int32  `json:"count"`
+	CountMale int32  `json:"countMale"`
+	Status    int32  `json:"status"`
 }
 
 type CandidatePreviousValuesExec struct {
@@ -1921,157 +2294,23 @@ type CandidatePreviousValues struct {
 	SignInTime int32  `json:"signInTime"`
 }
 
-type OrderAdviserModifyExec struct {
+type OrderHotelModifyEdgeExec struct {
 	exec *prisma.Exec
 }
 
-func (instance OrderAdviserModifyExec) Exec(ctx context.Context) (*OrderAdviserModify, error) {
-	var v OrderAdviserModify
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance OrderAdviserModifyExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type OrderAdviserModifyExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderAdviserModifyExecArray) Exec(ctx context.Context) ([]OrderAdviserModify, error) {
-	var v []OrderAdviserModify
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type OrderAdviserModify struct {
-	ID               string `json:"id"`
-	Revision         int32  `json:"revision"`
-	TimeStamp        int32  `json:"timeStamp"`
-	IsFloat          int32  `json:"isFloat"`
-	CountYet         *int32 `json:"countYet,omitempty"`
-	CountMaleYet     *int32 `json:"countMaleYet,omitempty"`
-	CountChanged     *int32 `json:"countChanged,omitempty"`
-	CountMaleChanged *int32 `json:"countMaleChanged,omitempty"`
-}
-
-type OrderHotelModifyPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderHotelModifyPreviousValuesExec) Exec(ctx context.Context) (*OrderHotelModifyPreviousValues, error) {
-	var v OrderHotelModifyPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance OrderHotelModifyPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type OrderHotelModifyPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderHotelModifyPreviousValuesExecArray) Exec(ctx context.Context) ([]OrderHotelModifyPreviousValues, error) {
-	var v []OrderHotelModifyPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type OrderHotelModifyPreviousValues struct {
-	ID        string `json:"id"`
-	Revision  int32  `json:"revision"`
-	Timestamp int32  `json:"timestamp"`
-	Count     *int32 `json:"count,omitempty"`
-	CountMale *int32 `json:"countMale,omitempty"`
-	StartTime *int32 `json:"startTime,omitempty"`
-	Duration  *int32 `json:"duration,omitempty"`
-	Mode      *int32 `json:"mode,omitempty"`
-}
-
-type OrderAdviserModifyPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderAdviserModifyPreviousValuesExec) Exec(ctx context.Context) (*OrderAdviserModifyPreviousValues, error) {
-	var v OrderAdviserModifyPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance OrderAdviserModifyPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type OrderAdviserModifyPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance OrderAdviserModifyPreviousValuesExecArray) Exec(ctx context.Context) ([]OrderAdviserModifyPreviousValues, error) {
-	var v []OrderAdviserModifyPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type OrderAdviserModifyPreviousValues struct {
-	ID               string `json:"id"`
-	Revision         int32  `json:"revision"`
-	TimeStamp        int32  `json:"timeStamp"`
-	IsFloat          int32  `json:"isFloat"`
-	CountYet         *int32 `json:"countYet,omitempty"`
-	CountMaleYet     *int32 `json:"countMaleYet,omitempty"`
-	CountChanged     *int32 `json:"countChanged,omitempty"`
-	CountMaleChanged *int32 `json:"countMaleChanged,omitempty"`
-}
-
-type OrderAdviserModifySubscriptionPayloadExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *OrderAdviserModifySubscriptionPayloadExec) Node() *OrderAdviserModifyExec {
+func (instance *OrderHotelModifyEdgeExec) Node() *OrderHotelModifyExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "OrderAdviserModify"},
+		[2]string{"", "OrderHotelModify"},
 		"node",
-		[]string{"id", "revision", "timeStamp", "isFloat", "countYet", "countMaleYet", "countChanged", "countMaleChanged"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
 
-	return &OrderAdviserModifyExec{ret}
+	return &OrderHotelModifyExec{ret}
 }
 
-func (instance *OrderAdviserModifySubscriptionPayloadExec) PreviousValues() *OrderAdviserModifyPreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "OrderAdviserModifyPreviousValues"},
-		"previousValues",
-		[]string{"id", "revision", "timeStamp", "isFloat", "countYet", "countMaleYet", "countChanged", "countMaleChanged"})
-
-	return &OrderAdviserModifyPreviousValuesExec{ret}
-}
-
-func (instance OrderAdviserModifySubscriptionPayloadExec) Exec(ctx context.Context) (*OrderAdviserModifySubscriptionPayload, error) {
-	var v OrderAdviserModifySubscriptionPayload
+func (instance OrderHotelModifyEdgeExec) Exec(ctx context.Context) (*OrderHotelModifyEdge, error) {
+	var v OrderHotelModifyEdge
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -2082,62 +2321,79 @@ func (instance OrderAdviserModifySubscriptionPayloadExec) Exec(ctx context.Conte
 	return &v, nil
 }
 
-func (instance OrderAdviserModifySubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+func (instance OrderHotelModifyEdgeExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type OrderAdviserModifySubscriptionPayloadExecArray struct {
+type OrderHotelModifyEdgeExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance OrderAdviserModifySubscriptionPayloadExecArray) Exec(ctx context.Context) ([]OrderAdviserModifySubscriptionPayload, error) {
-	var v []OrderAdviserModifySubscriptionPayload
+func (instance OrderHotelModifyEdgeExecArray) Exec(ctx context.Context) ([]OrderHotelModifyEdge, error) {
+	var v []OrderHotelModifyEdge
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type OrderAdviserModifySubscriptionPayload struct {
+type OrderHotelModifyEdge struct {
+	Cursor string `json:"cursor"`
+}
+
+type OrderHotelModifySubscriptionPayloadExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *OrderHotelModifySubscriptionPayloadExec) Node() *OrderHotelModifyExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "OrderHotelModify"},
+		"node",
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
+
+	return &OrderHotelModifyExec{ret}
+}
+
+func (instance *OrderHotelModifySubscriptionPayloadExec) PreviousValues() *OrderHotelModifyPreviousValuesExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "OrderHotelModifyPreviousValues"},
+		"previousValues",
+		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "startTime", "duration", "mode"})
+
+	return &OrderHotelModifyPreviousValuesExec{ret}
+}
+
+func (instance OrderHotelModifySubscriptionPayloadExec) Exec(ctx context.Context) (*OrderHotelModifySubscriptionPayload, error) {
+	var v OrderHotelModifySubscriptionPayload
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance OrderHotelModifySubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type OrderHotelModifySubscriptionPayloadExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderHotelModifySubscriptionPayloadExecArray) Exec(ctx context.Context) ([]OrderHotelModifySubscriptionPayload, error) {
+	var v []OrderHotelModifySubscriptionPayload
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type OrderHotelModifySubscriptionPayload struct {
 	Mutation      MutationType `json:"mutation"`
 	UpdatedFields []string     `json:"updatedFields,omitempty"`
-}
-
-type CandidateExec struct {
-	exec *prisma.Exec
-}
-
-func (instance CandidateExec) Exec(ctx context.Context) (*Candidate, error) {
-	var v Candidate
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CandidateExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CandidateExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CandidateExecArray) Exec(ctx context.Context) ([]Candidate, error) {
-	var v []Candidate
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type Candidate struct {
-	ID         string `json:"id"`
-	AdviserId  string `json:"adviserId"`
-	AgentId    string `json:"agentId"`
-	PtId       string `json:"ptId"`
-	ApplyTime  int32  `json:"applyTime"`
-	SignInTime int32  `json:"signInTime"`
 }
 
 type OrderHotelModifyConnectionExec struct {
@@ -2208,47 +2464,34 @@ func (instance OrderHotelModifyConnectionExecArray) Exec(ctx context.Context) ([
 type OrderHotelModifyConnection struct {
 }
 
-type OrderAdviserModifyConnectionExec struct {
+type OrderOriginSubscriptionPayloadExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *OrderAdviserModifyConnectionExec) PageInfo() *PageInfoExec {
+func (instance *OrderOriginSubscriptionPayloadExec) Node() *OrderOriginExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+		[2]string{"", "OrderOrigin"},
+		"node",
+		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale", "status"})
 
-	return &PageInfoExec{ret}
+	return &OrderOriginExec{ret}
 }
 
-func (instance *OrderAdviserModifyConnectionExec) Edges() *OrderAdviserModifyEdgeExec {
+func (instance *OrderOriginSubscriptionPayloadExec) PreviousValues() *OrderOriginPreviousValuesExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "OrderAdviserModifyEdge"},
-		"edges",
-		[]string{"cursor"})
+		[2]string{"", "OrderOriginPreviousValues"},
+		"previousValues",
+		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale", "status"})
 
-	return &OrderAdviserModifyEdgeExec{ret}
+	return &OrderOriginPreviousValuesExec{ret}
 }
 
-func (instance *OrderAdviserModifyConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateOrderAdviserModify"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return v, err
-}
-
-func (instance OrderAdviserModifyConnectionExec) Exec(ctx context.Context) (*OrderAdviserModifyConnection, error) {
-	var v OrderAdviserModifyConnection
+func (instance OrderOriginSubscriptionPayloadExec) Exec(ctx context.Context) (*OrderOriginSubscriptionPayload, error) {
+	var v OrderOriginSubscriptionPayload
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -2259,19 +2502,293 @@ func (instance OrderAdviserModifyConnectionExec) Exec(ctx context.Context) (*Ord
 	return &v, nil
 }
 
-func (instance OrderAdviserModifyConnectionExec) Exists(ctx context.Context) (bool, error) {
+func (instance OrderOriginSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type OrderAdviserModifyConnectionExecArray struct {
+type OrderOriginSubscriptionPayloadExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance OrderAdviserModifyConnectionExecArray) Exec(ctx context.Context) ([]OrderAdviserModifyConnection, error) {
-	var v []OrderAdviserModifyConnection
+func (instance OrderOriginSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]OrderOriginSubscriptionPayload, error) {
+	var v []OrderOriginSubscriptionPayload
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type OrderAdviserModifyConnection struct {
+type OrderOriginSubscriptionPayload struct {
+	Mutation      MutationType `json:"mutation"`
+	UpdatedFields []string     `json:"updatedFields,omitempty"`
+}
+
+type CandidateEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CandidateEdgeExec) Node() *CandidateExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Candidate"},
+		"node",
+		[]string{"id", "adviserId", "agentId", "ptId", "applyTime", "signInTime"})
+
+	return &CandidateExec{ret}
+}
+
+func (instance CandidateEdgeExec) Exec(ctx context.Context) (*CandidateEdge, error) {
+	var v CandidateEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CandidateEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CandidateEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CandidateEdgeExecArray) Exec(ctx context.Context) ([]CandidateEdge, error) {
+	var v []CandidateEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type CandidateEdge struct {
+	Cursor string `json:"cursor"`
+}
+
+type OrderAdviserModifyPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderAdviserModifyPreviousValuesExec) Exec(ctx context.Context) (*OrderAdviserModifyPreviousValues, error) {
+	var v OrderAdviserModifyPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance OrderAdviserModifyPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type OrderAdviserModifyPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderAdviserModifyPreviousValuesExecArray) Exec(ctx context.Context) ([]OrderAdviserModifyPreviousValues, error) {
+	var v []OrderAdviserModifyPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type OrderAdviserModifyPreviousValues struct {
+	ID        string `json:"id"`
+	Revision  int32  `json:"revision"`
+	TimeStamp int32  `json:"timeStamp"`
+	IsFloat   *int32 `json:"isFloat,omitempty"`
+	Count     *int32 `json:"count,omitempty"`
+	CountMale *int32 `json:"countMale,omitempty"`
+}
+
+type OrderAdviserModifySubscriptionPayloadExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *OrderAdviserModifySubscriptionPayloadExec) Node() *OrderAdviserModifyExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "OrderAdviserModify"},
+		"node",
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
+
+	return &OrderAdviserModifyExec{ret}
+}
+
+func (instance *OrderAdviserModifySubscriptionPayloadExec) PreviousValues() *OrderAdviserModifyPreviousValuesExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "OrderAdviserModifyPreviousValues"},
+		"previousValues",
+		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale"})
+
+	return &OrderAdviserModifyPreviousValuesExec{ret}
+}
+
+func (instance OrderAdviserModifySubscriptionPayloadExec) Exec(ctx context.Context) (*OrderAdviserModifySubscriptionPayload, error) {
+	var v OrderAdviserModifySubscriptionPayload
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance OrderAdviserModifySubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type OrderAdviserModifySubscriptionPayloadExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderAdviserModifySubscriptionPayloadExecArray) Exec(ctx context.Context) ([]OrderAdviserModifySubscriptionPayload, error) {
+	var v []OrderAdviserModifySubscriptionPayload
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type OrderAdviserModifySubscriptionPayload struct {
+	Mutation      MutationType `json:"mutation"`
+	UpdatedFields []string     `json:"updatedFields,omitempty"`
+}
+
+type OrderHotelModifyExec struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderHotelModifyExec) Exec(ctx context.Context) (*OrderHotelModify, error) {
+	var v OrderHotelModify
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance OrderHotelModifyExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type OrderHotelModifyExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderHotelModifyExecArray) Exec(ctx context.Context) ([]OrderHotelModify, error) {
+	var v []OrderHotelModify
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type OrderHotelModify struct {
+	ID           string `json:"id"`
+	Revision     int32  `json:"revision"`
+	Timestamp    int32  `json:"timestamp"`
+	Count        *int32 `json:"count,omitempty"`
+	CountMale    *int32 `json:"countMale,omitempty"`
+	CountYet     *int32 `json:"countYet,omitempty"`
+	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
+	StartTime    *int32 `json:"startTime,omitempty"`
+	Duration     *int32 `json:"duration,omitempty"`
+	Mode         *int32 `json:"mode,omitempty"`
+}
+
+type OrderHotelModifyPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderHotelModifyPreviousValuesExec) Exec(ctx context.Context) (*OrderHotelModifyPreviousValues, error) {
+	var v OrderHotelModifyPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance OrderHotelModifyPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type OrderHotelModifyPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderHotelModifyPreviousValuesExecArray) Exec(ctx context.Context) ([]OrderHotelModifyPreviousValues, error) {
+	var v []OrderHotelModifyPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type OrderHotelModifyPreviousValues struct {
+	ID           string `json:"id"`
+	Revision     int32  `json:"revision"`
+	Timestamp    int32  `json:"timestamp"`
+	Count        *int32 `json:"count,omitempty"`
+	CountMale    *int32 `json:"countMale,omitempty"`
+	CountYet     *int32 `json:"countYet,omitempty"`
+	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
+	StartTime    *int32 `json:"startTime,omitempty"`
+	Duration     *int32 `json:"duration,omitempty"`
+	Mode         *int32 `json:"mode,omitempty"`
+}
+
+type OrderOriginEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *OrderOriginEdgeExec) Node() *OrderOriginExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "OrderOrigin"},
+		"node",
+		[]string{"id", "hotelId", "hrId", "adviserId", "datetime", "duration", "mode", "count", "countMale", "status"})
+
+	return &OrderOriginExec{ret}
+}
+
+func (instance OrderOriginEdgeExec) Exec(ctx context.Context) (*OrderOriginEdge, error) {
+	var v OrderOriginEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance OrderOriginEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type OrderOriginEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance OrderOriginEdgeExecArray) Exec(ctx context.Context) ([]OrderOriginEdge, error) {
+	var v []OrderOriginEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type OrderOriginEdge struct {
+	Cursor string `json:"cursor"`
 }

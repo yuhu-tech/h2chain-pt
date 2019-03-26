@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+service Query {
+
+     rpc QueryOrder (QueryRequest) returns (QueryReply) {}
+
+}
+
+message QueryRequest {
+
+    string order_id = 1;
+    message Identity {
+        string hotel  = 1;
+        string adviser = 2;
+        string pt = 3;
+    }
+    Identity who  = 2;
+}
+
+message QueryReply {
+    message OrderOrigin {
+        string id = 1;
+        string hotel_id = 2;
+        string hr_id = 3;
+        string adviser_id = 4;
+        string date = 5;
+        int32 duration = 6;
+        int32 mode = 7;
+        int32 count = 8;
+        int32 count_male = 9;
+        int32 status = 10;
+    }
+    message OrderHotelModify {
+        string id = 1;
+        int32 revision = 2;
+        string time_stamp = 3;
+        int32 count = 4;
+        int32 count_male = 5;
+        int32 count_yet = 6;
+        int32 count_male_yet = 7;
+        int32 start_time = 8;
+        int32 duration = 9;
+        int32 mode = 10;
+    }
+    message OrderAdviserModify {
+        string id = 1;
+        int32 revision = 2;
+        string time_stamp =3;
+        int32 is_float = 4;
+        int32 count = 5;
+        int32 count_male = 6;
+    }
+    OrderOrigin order_origin = 1;
+    repeated OrderHotelModify order_hotel_modify = 2;
+    repeated OrderAdviserModify order_adviser_modify =3;
+}
