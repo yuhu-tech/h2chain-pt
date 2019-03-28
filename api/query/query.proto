@@ -11,22 +11,23 @@ service QueryOrder {
 
 }
 
+message QueryWhat {
+    string orderId = 1;
+    string hotelId = 2;
+    string adviseId = 3;
+    int32 data = 4;
+    int32 duration = 5;
+    int32 count = 6;
+    int32 countMale = 7;
+    int32 countFemale = 8;
+    int32 status = 9;
+    int32 isFloat = 10;
+    int32 hourlySalary = 11;
+    string workContent = 12;
+    string attention = 13;
+}
+
 message QueryRequest {
-    message QueryWhat {
-        string orderId = 1;
-        string hotelId = 2;
-        string adviseId = 3;
-        int32 data = 4;
-        int32 duration = 5;
-        int32 count = 6;
-        int32 countMale = 7;
-        int32 countFemale = 8;
-        int32 status = 9;
-        int32 isFloat = 10;
-        int32 hourlySalary = 11;
-        string workContent = 12;
-        string attention = 13;
-    }
     string orderId = 1;
     int32 date = 2;
     int32 status = 3;
@@ -34,56 +35,64 @@ message QueryRequest {
     string queryKey = 5;
 }
 
+
+message Order {
+    string orderId = 1;
+    string hotelId = 2;
+    string adviserId = 3;
+    string date = 4;
+    int32 duration = 5;
+    int32 count = 6;
+    int32 countMale = 7;
+    int32 countFemale = 8;
+    int32 status = 9;
+    int32 isFloat = 10;
+    int32 hourlySalary = 11;
+    string workContent = 12;
+    string attention = 13;
+    string job = 14;
+    int32 mode = 15;
+}
+
+message OrderHotelModify {
+    string id = 1;
+    int32 revision = 2;
+    string timeStamp = 3;
+    int32 count = 4;
+    int32 countMale = 5;
+    int32 countYet = 6;
+    int32 countMale_yet = 7;
+    string date = 8;
+    int32 duration = 9;
+    int32 mode = 10;
+}
+
+message OrderAdviserModify {
+    string id = 1;
+    int32 revision = 2;
+    string timeStamp =3;
+    int32 isFloat = 4;
+    int32 count = 5;
+    int32 countMale = 6;
+    int32 hourlySalary = 7;
+    string workContent = 8;
+    string attention = 9;
+}
+
+message OrderCandidate {
+    string id = 1;
+    string adviserId = 2;
+    string agentId = 3;
+    string ptId = 4;
+    string applyTime = 5;
+    string signInTime = 6;
+    int32 ptStatus = 7;
+    int32 ptPerformance = 8;
+    int32 objectReason = 9;
+    string registrationChannel = 10;
+}
 message QueryReply {
-    message OrderOrigin {
-        string id = 1;
-        string hotelId = 2;
-        string hrId = 3;
-        string adviserId = 4;
-        string date = 5;
-        int32 duration = 6;
-        int32 mode = 7;
-        int32 count = 8;
-        int32 countMale = 9;
-        int32 status = 10;
-        string job = 11;
-    }
-    message OrderHotelModify {
-        string id = 1;
-        int32 revision = 2;
-        string timeStamp = 3;
-        int32 count = 4;
-        int32 countMale = 5;
-        int32 countYet = 6;
-        int32 countMale_yet = 7;
-        int32 startTime = 8;
-        int32 duration = 9;
-        int32 mode = 10;
-    }
-    message OrderAdviserModify {
-        string id = 1;
-        int32 revision = 2;
-        string timeStamp =3;
-        int32 isFloat = 4;
-        int32 count = 5;
-        int32 countMale = 6;
-        int32 hourlySalary = 7;
-        string workCount = 8;
-        string attention = 9;
-    }
-   message OrderCandidate {
-        string id = 1;
-        string adviserId = 2;
-        string agentId = 3;
-        string ptId = 4;
-        int32 applyTime = 5;
-        int32 signInTime = 6;
-        int32 ptStatus = 7;
-        int32 ptPerformance = 8;
-        int32 objectReason = 9;
-        string registrationChannel = 10;
-   }
-    OrderOrigin  orderOrigin = 1;
+    Order  order = 1;
     repeated OrderHotelModify orderHotelModifies = 2;
     repeated OrderAdviserModify orderAdviserModifies = 3;
     repeated OrderCandidate orderCandidates = 4;
@@ -97,14 +106,15 @@ message QueryPTRequest {
     int32 ptStatus = 4;
 }
 
-message QueryPTReply {
-    message PT {
+message PT {
         string ptId = 1;
         string adviserId = 2;
         string agentId = 3;
-        int32 applyTime = 4;
-        int32 signTime = 5;
-        int32 orderId = 6;
-    }
+        string applyTime = 4;
+        string signTime = 5;
+        string orderId = 6;
+}
+
+message QueryPTReply {
     repeated PT orderPts = 1;
 }

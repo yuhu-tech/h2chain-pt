@@ -10,7 +10,7 @@ service Mutation {
     rpc PostOrder (PostRequest) returns (PostReply) {}
 
     // register order
-    rpc RegisterOrder (RegisterRequest) returns (RegisterReply) {}
+    rpc RegistryOrder (RegistryRequest) returns (RegistryReply) {}
 
     // modify order
     rpc ModifyOrder (ModifyRequest) returns (ModifyReply) {}
@@ -55,7 +55,7 @@ message PostReply {
 }
 
 
-message RegisterRequest {
+message RegistryRequest {
     string orderId = 1;
     string ptId = 2;
     string adviserId = 3;
@@ -64,7 +64,7 @@ message RegisterRequest {
     int32 ptStatus = 6;
 }
 
-message RegisterReply {
+message RegistryReply {
     string registryResult = 1;
 }
 

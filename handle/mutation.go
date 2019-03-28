@@ -21,59 +21,85 @@ type MutationServer struct {
 
 func (s *MutationServer) CreateOrder(ctx context.Context, in *pb.CreateRequest) (*pb.CreateReply, error) {
 	// check the create order request date
-	log.Println(in.HotelId, in.AdviserId, in.Job, in.Date, in.Date, in.Duration, in.Count, in.CountMale, in.CountFemale)
+	log.Println(in.HotelId, in.AdviserId, in.Job, in.Date, in.Date, in.Duration, in.Count, in.CountMale, in.CountFemale, in.Mode)
 
-	//TODO
+	// TODO
 
 	// make dead data and return
 	var createReply pb.CreateReply
 	createReply.OrderId = "10010"
-	createReply.CreateResult = "Create Order Successful!"
+	createReply.CreateResult = " Create Order Successful! "
 
 	// return the result
-	return &pb.CreateReply{OrderId: "10010",}, nil
+	return &createReply, nil
 }
 
 func (s *MutationServer) PostOrder(ctx context.Context, in *pb.PostRequest) (*pb.PostReply, error) {
-	// check the create order request date
+	// check the post order request date
 	log.Println(in.OrderId, in.IsFloat, in.HourlySalary, in.WorkContent, in.Attention)
 
-	//TODO
+	// TODO
 
 	// make dead data and return
-	var postOrder pb.PostReply
-	postOrder.PostResult = " Post Order Successful "
+	var postReply pb.PostReply
+	postReply.PostResult = " Post Order Successful "
 
 	// return the result
-	return &pb.PostReply{}, nil
+	return &postReply, nil
 }
 
-func (s *MutationServer) RegisterOrder(ctx context.Context, in *pb.RegisterRequest) (*pb.RegisterReply, error) {
-	// get create order request
-	log.Printf("request:%v", in)
+func (s *MutationServer) RegisterOrder(ctx context.Context, in *pb.RegistryRequest) (*pb.RegistryReply, error) {
+	// get the registry order request
+	log.Println(in.OrderId, in.AdviserId, in.PtId, in.ApplyTime, in.SignInTime, in.PtStatus)
 
-	//TODO
+	// TODO
+
+	// make dead data and return
+	var registryReply pb.RegistryReply
+	registryReply.RegistryResult = " registry order successful "
 
 	// return the result
-	return &pb.RegisterReply{}, nil
+	return &registryReply, nil
 }
 
 func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) (*pb.ModifyReply, error) {
-	// get create order request
-	log.Printf("request:%v", in)
+	// get the modify order request
+	log.Println(in.OrderId, in.DateChanged, in.DurationChanged, in.CountChanged, in.CountMaleChanged, in.Mode)
 
-	//TODO
+	// TODO
+
+	// make dead data and  return
+	var modifyReply pb.ModifyReply
+	modifyReply.ModifyResult = " modify order successful "
 
 	// return the result
-	return &pb.ModifyReply{}, nil
+	return &modifyReply, nil
+}
+
+func (s *MutationServer) ModifyOrderPT(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
+	// check the modify order's pt request date
+	log.Println(in.OrderId, in.PtId, in.TargetStatus, in.SourceStatus, in.PtPerformance, in.ObjectReason)
+
+	// TODO
+
+	// make dead data and return
+	var modifyPtReply pb.ModifyPtReply
+	modifyPtReply.ModifyResult = " modify order's pt successful "
+
+	// return the result
+	return &modifyPtReply, nil
 }
 
 func (s *MutationServer) CloseOrder(ctx context.Context, in *pb.CloseRequest) (*pb.CloseReply, error) {
-	// get create order request
-	log.Printf("request:%v", in)
+	// check the close order request date
+	log.Println(in.OrderId)
 
-	//TODO
+	// TODO
+
+	// make dead data and return
+	var closeReply pb.CloseReply
+	closeReply.CloseResult = " close order successful "
 
 	// return the result
-	return &pb.CloseReply{}, nil
+	return &closeReply, nil
 }
