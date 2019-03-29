@@ -1,8 +1,7 @@
-package handle
+package handle_test
 
 import (
 	pb "../api/query"
-	"../prisma"
 	"golang.org/x/net/context"
 	"log"
 	"strings"
@@ -23,13 +22,13 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	// make dead data and return
 	return &pb.QueryReply{
 		Order: &pb.Order{OrderId: "10010", HotelId: "001", AdviserId: "003", Date: "201903281300", Duration: 2, Mode: 0, Count: 10, CountMale: 5, CountFemale: 5, Job: "cleaning", Status: 1, IsFloat: 0, HourlySalary: 10, WorkContent: "cleanRoom", Attention: "careful"},
-		OrderHotelModifies: []*pb.OrderHotelModify{
+		OrderHotelModifies:[]*pb.OrderHotelModify{
 			{Id: "001", Revision: 001, TimeStamp: "201903281400", Date: "201903281300", Duration: 2, Mode: 1, Count: 15, CountMale: 10},
 		},
-		OrderAdviserModifies: []*pb.OrderAdviserModify{
+		OrderAdviserModifies:[]*pb.OrderAdviserModify{
 			{Id: "001", Revision: 001, TimeStamp: "201903281500", IsFloat: 0, Count: 10, CountMale: 5, HourlySalary: 20, WorkContent: "cleanRoom", Attention: "careful"},
 		},
-		OrderCandidates: []*pb.OrderCandidate{
+		OrderCandidates:[]*pb.OrderCandidate{
 			{Id: "001", AdviserId: "003", PtId: "9527", ApplyTime: "2019032800", PtStatus: 1, RegistrationChannel: "WeChat"},
 			{Id: "002", AdviserId: "003", PtId: "8527", ApplyTime: "2019032811", PtStatus: 1, RegistrationChannel: "WeChat"},
 		},
@@ -37,34 +36,16 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 }
 
 func (s *QueryServer) QueryOrderPT(ctx context.Context, in *pb.QueryPTRequest) (*pb.QueryPTReply, error) {
+	// check the query order's pt request
+	log.Println(in.PtId, in.OrderId, in.RegistrationChannel, in.PtStatus)
 
-	client := prisma.New(nil)
-	ctx = context.TODO()
+	//TODO
 
-
-	where := &prisma.OrderCandidateWhereInput{}
-	where.OrderOrigin = &prisma.OrderOriginWhereInput{ID: &in.OrderId}
-	where.PtStatus = &in.PtStatus
-	where.PtId = &in.PtId
-	where.RegistrationChannel = &in.RegistrationChannel
-	//where.And = []prisma.OrderCandidateWhereInput{}
-
-	queryRes, err := client.OrderCandidates(&prisma.OrderCandidatesParams{Where: where}).Exec(ctx)
-	if err != nil {
-		log.Printf(" query order's pt filed %v ", err)
-		return nil, err
-	}
-
-	var result []*pb.PT
-	for i := 0; i < len(queryRes); i++ {
-		var pt pb.PT
-		pt.OrderId = in.OrderId
-		pt.PtId = queryRes[i].PtId
-		pt.AdviserId = queryRes[i].AdviserId
-		pt.ApplyTime = queryRes[i].ApplyTime
-		pt.SignTime = queryRes[i].SignInTime
-		result = append(result, &pt)
-	}
-
-	return &pb.QueryPTReply{OrderPts: result}, nil
+	// make dead data and return
+	return &pb.QueryPTReply{
+		OrderPts:[]*pb.PT{
+			{PtId: "001", AdviserId: "003", ApplyTime: "2019032800", OrderId: "10010"},
+			{PtId: "002", AdviserId: "003", ApplyTime: "2019032811", OrderId: "10010"},
+		},
+	},nil
 }

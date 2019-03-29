@@ -1818,15 +1818,19 @@ type OrderOriginExec struct {
 }
 
 func (instance OrderOriginExec) Exec(ctx context.Context) (*OrderOrigin, error) {
-	var v OrderOrigin
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
+	return &OrderOrigin{
+		ID:"orderId",
+		HotelId:"01",
+		HrId:"02",
+		AdviserId:"03",
+		Datetime:"2019032900",
+		Duration:7200,
+		Job:"cleaning",
+		Mode:0,
+		Count:10,
+		CountMale:5,
+		Status:1,
+	}, nil
 }
 
 func (instance OrderOriginExec) Exists(ctx context.Context) (bool, error) {
@@ -2108,15 +2112,18 @@ func (instance *OrderHotelModifyExec) OrderOrigin() *OrderOriginExec {
 }
 
 func (instance OrderHotelModifyExec) Exec(ctx context.Context) (*OrderHotelModify, error) {
-	var v OrderHotelModify
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
+	return &OrderHotelModify{
+		ID:"orderHotelModify",
+		Revision:01,
+		Timestamp:"2019032944",
+		Count:20,
+		CountMale:10,
+		CountYet:10,
+		CountMaleYet:5,
+		DateTime:"2019032955",
+		Duration:7200,
+		Mode:1,
+	}, nil
 }
 
 func (instance OrderHotelModifyExec) Exists(ctx context.Context) (bool, error) {
@@ -2305,15 +2312,17 @@ func (instance *OrderAdviserModifyExec) OrderOrigin() *OrderOriginExec {
 }
 
 func (instance OrderAdviserModifyExec) Exec(ctx context.Context) (*OrderAdviserModify, error) {
-	var v OrderAdviserModify
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
+	return &OrderAdviserModify{
+		ID:"orderAdviserModifyId",
+		Revision:01,
+		TimeStamp:"2019032911",
+		IsFloat:0,
+		Count:10,
+		CountMale:5,
+		HourlySalary:20,
+		WorkCount:"cleanTheHouse",
+		Attention:"carefully",
+	}, nil
 }
 
 func (instance OrderAdviserModifyExec) Exists(ctx context.Context) (bool, error) {
@@ -2460,15 +2469,18 @@ func (instance *OrderCandidateExec) OrderOrigin() *OrderOriginExec {
 }
 
 func (instance OrderCandidateExec) Exec(ctx context.Context) (*OrderCandidate, error) {
-	var v OrderCandidate
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
+	return &OrderCandidate{
+		ID:"orderCandidate",
+		AdviserId:"02",
+		AgentId:"00",
+		PtId:"04",
+		ApplyTime:"2019032922",
+		SignInTime:"2019032933",
+		PtStatus:1,
+		PtPerformance:666,
+		ObjectReason:222,
+		RegistrationChannel:"WeChat",
+	}, nil
 }
 
 func (instance OrderCandidateExec) Exists(ctx context.Context) (bool, error) {

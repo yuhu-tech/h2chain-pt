@@ -28,7 +28,7 @@ message CreateRequest {
     string hotelId  = 1;
     string adviserId = 2;
     string job = 3;
-    int32 date = 4;
+    string date = 4;
     int32 duration = 5;
     int32 count = 6;
     int32 countMale = 7;
@@ -38,7 +38,7 @@ message CreateRequest {
 
 message CreateReply {
     string orderId = 1;
-    string createResult = 2;
+    int32 createResult = 2;
 }
 
 
@@ -51,7 +51,7 @@ message PostRequest {
 }
 
 message PostReply {
-    string postResult = 1;
+    int32 postResult = 1;
 }
 
 
@@ -59,19 +59,20 @@ message RegistryRequest {
     string orderId = 1;
     string ptId = 2;
     string adviserId = 3;
-    int32 applyTime = 4;
-    int32 signInTime = 5;
+    string applyTime = 4;
+    string signInTime = 5;
     int32 ptStatus = 6;
+    string registrationChannel = 7;
 }
 
 message RegistryReply {
-    string registryResult = 1;
+    int32 registryResult = 1;
 }
 
 
 message ModifyRequest {
     string orderId = 1;
-    int32 dateChanged = 2;
+    string dateChanged = 2;
     int32 durationChanged = 3;
     int32 countChanged = 4;
     int32 countMaleChanged = 5;
@@ -79,7 +80,7 @@ message ModifyRequest {
 }
 
 message ModifyReply {
-    string modifyResult = 1;
+    int32 modifyResult = 1;
 }
 
 
@@ -93,7 +94,7 @@ message ModifyPtRequest {
 }
 
 message ModifyPtReply {
-    string modifyResult = 1;
+    int32 modifyResult = 1;
 }
 
 
@@ -102,6 +103,6 @@ message CloseRequest {
 }
 
 message CloseReply {
-    string closeResult = 2;
+    int32 closeResult = 1;
 }
 

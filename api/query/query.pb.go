@@ -1034,9 +1034,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryOrderClient interface {
-	// hotel adviser pt query order
+	// hotel/adviser/pt query order
 	QueryOrder(ctx context.Context, in *QueryRequest, opts ...grpc.CallOption) (*QueryReply, error)
-	// hotel adviser query order's pt
+	// hotel/adviser query order's pt
 	QueryOrderPT(ctx context.Context, in *QueryPTRequest, opts ...grpc.CallOption) (*QueryPTReply, error)
 }
 
@@ -1068,9 +1068,9 @@ func (c *queryOrderClient) QueryOrderPT(ctx context.Context, in *QueryPTRequest,
 
 // QueryOrderServer is the server API for QueryOrder service.
 type QueryOrderServer interface {
-	// hotel adviser pt query order
+	// hotel/adviser/pt query order
 	QueryOrder(context.Context, *QueryRequest) (*QueryReply, error)
-	// hotel adviser query order's pt
+	// hotel/adviser query order's pt
 	QueryOrderPT(context.Context, *QueryPTRequest) (*QueryPTReply, error)
 }
 

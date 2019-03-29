@@ -2,8 +2,10 @@ package handle
 
 import (
 	pb "../api/mutation"
+	"../prisma"
 	"golang.org/x/net/context"
 	"log"
+	"time"
 )
 
 type MutationServer struct {
@@ -20,74 +22,102 @@ type MutationServer struct {
  */
 
 func (s *MutationServer) CreateOrder(ctx context.Context, in *pb.CreateRequest) (*pb.CreateReply, error) {
-	// check the create order request date
-	log.Println(in.HotelId, in.AdviserId, in.Job, in.Date, in.Date, in.Duration, in.Count, in.CountMale, in.CountFemale, in.Mode)
 
-	// TODO
+	client := prisma.New(nil)
+	ctx = context.TODO()
 
-	// make dead data and return
-	var createReply pb.CreateReply
-	createReply.OrderId = "10010"
-	createReply.CreateResult = " Create Order Successful! "
+	createResult, err := client.CreateOrderOrigin(prisma.OrderOriginCreateInput{HotelId: in.HotelId, AdviserId: in.AdviserId, Datetime: in.Date, Duration: in.Duration * 3600, Job: in.Job, Mode: in.Mode, Count: in.Count, CountMale: in.CountMale, Status: 0}).Exec(ctx)
+	if err != nil {
+		log.Fatalf(" create order err: %v", err)
+		return &pb.CreateReply{CreateResult: 0}, err
+	}
 
-	// return the result
-	return &createReply, nil
+	return &pb.CreateReply{OrderId: createResult.ID, CreateResult: 1}, nil
 }
 
 func (s *MutationServer) PostOrder(ctx context.Context, in *pb.PostRequest) (*pb.PostReply, error) {
-	// check the post order request date
-	log.Println(in.OrderId, in.IsFloat, in.HourlySalary, in.WorkContent, in.Attention)
 
-	// TODO
+	client := prisma.New(nil)
+	ctx = context.TODO()
 
-	// make dead data and return
-	var postReply pb.PostReply
-	postReply.PostResult = " Post Order Successful "
+	// TODO how to achieve revision
 
-	// return the result
-	return &postReply, nil
+	// create orderAdviserModify
+	_, err := client.CreateOrderAdviserModify(prisma.OrderAdviserModifyCreateInput{
+		Revision:     01,
+		TimeStamp:    string(time.Now().Unix()),
+		IsFloat:      &in.IsFloat,
+		HourlySalary: &in.HourlySalary,
+		WorkCount:    &in.WorkContent,
+		Attention:    &in.Attention,
+		OrderOrigin:  prisma.OrderOriginCreateOneInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
+	}).Exec(ctx)
+	if err != nil {
+		log.Printf("post order filed %v", err)
+		return &pb.PostReply{PostResult: 0}, err
+	}
+
+	return &pb.PostReply{PostResult: 1}, nil
 }
 
-func (s *MutationServer) RegisterOrder(ctx context.Context, in *pb.RegistryRequest) (*pb.RegistryReply, error) {
-	// get the registry order request
-	log.Println(in.OrderId, in.AdviserId, in.PtId, in.ApplyTime, in.SignInTime, in.PtStatus)
+func (s *MutationServer) RegistryOrder(ctx context.Context, in *pb.RegistryRequest) (*pb.RegistryReply, error) {
 
-	// TODO
+	client := prisma.New(nil)
+	ctx = context.TODO()
 
-	// make dead data and return
-	var registryReply pb.RegistryReply
-	registryReply.RegistryResult = " registry order successful "
+	// TODO how to achieve revision
 
-	// return the result
-	return &registryReply, nil
+	_, err := client.CreateOrderCandidate(prisma.OrderCandidateCreateInput{
+		AdviserId:           in.AdviserId,
+		PtId:                in.PtId,
+		ApplyTime:           in.ApplyTime,
+		SignInTime:          in.SignInTime,
+		PtStatus:            1,
+		RegistrationChannel: in.RegistrationChannel,
+		OrderOrigin:         prisma.OrderOriginCreateOneInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
+	}).Exec(ctx)
+	if err != nil {
+		log.Printf("create order candidate failed %v ", err)
+		return &pb.RegistryReply{RegistryResult: 0}, nil
+	}
+
+	return &pb.RegistryReply{RegistryResult: 1}, nil
 }
 
 func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) (*pb.ModifyReply, error) {
-	// get the modify order request
-	log.Println(in.OrderId, in.DateChanged, in.DurationChanged, in.CountChanged, in.CountMaleChanged, in.Mode)
+	client := prisma.New(nil)
+	ctx = context.TODO()
 
 	// TODO
+	var durationChanged = in.DurationChanged * 3600
 
-	// make dead data and  return
-	var modifyReply pb.ModifyReply
-	modifyReply.ModifyResult = " modify order successful "
+	_, err := client.CreateOrderHotelModify(prisma.OrderHotelModifyCreateInput{
+		Revision:    01,
+		Timestamp:   string(time.Now().Unix()),
+		Count:       &in.CountChanged,
+		CountMale:   &in.CountMaleChanged,
+		DateTime:    &in.DateChanged,
+		Duration:    &durationChanged,
+		OrderOrigin: prisma.OrderOriginCreateOneInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
+	}).Exec(ctx)
+	if err != nil {
+		log.Printf("create order candidate failed %v ", err)
+		return &pb.ModifyReply{ModifyResult: 0}, nil
+	}
 
-	// return the result
-	return &modifyReply, nil
+	return &pb.ModifyReply{ModifyResult: 1}, nil
 }
 
 func (s *MutationServer) ModifyOrderPT(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
-	// check the modify order's pt request date
-	log.Println(in.OrderId, in.PtId, in.TargetStatus, in.SourceStatus, in.PtPerformance, in.ObjectReason)
+
+	// client:=prisma.New(nil)
+	// ctx=context.TODO()
 
 	// TODO
 
-	// make dead data and return
-	var modifyPtReply pb.ModifyPtReply
-	modifyPtReply.ModifyResult = " modify order's pt successful "
 
-	// return the result
-	return &modifyPtReply, nil
+
+	return &pb.ModifyPtReply{ModifyResult: 1}, nil
 }
 
 func (s *MutationServer) CloseOrder(ctx context.Context, in *pb.CloseRequest) (*pb.CloseReply, error) {
@@ -97,9 +127,5 @@ func (s *MutationServer) CloseOrder(ctx context.Context, in *pb.CloseRequest) (*
 	// TODO
 
 	// make dead data and return
-	var closeReply pb.CloseReply
-	closeReply.CloseResult = " close order successful "
-
-	// return the result
-	return &closeReply, nil
+	return &pb.CloseReply{CloseResult: 1}, nil
 }

@@ -3,10 +3,10 @@ syntax = "proto3";
 
 service QueryOrder {
 
-    // hotel adviser pt query order
+    // hotel/adviser/pt query order
     rpc QueryOrder (QueryRequest) returns (QueryReply) {}
 
-    // hotel adviser query order's pt
+    // hotel/adviser query order's pt
     rpc QueryOrderPT (QueryPTRequest) returns (QueryPTReply) {}
 
 }
