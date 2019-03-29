@@ -28,7 +28,7 @@ message CreateRequest {
     string hotelId  = 1;
     string adviserId = 2;
     string job = 3;
-    string date = 4;
+    int32 date = 4;
     int32 duration = 5;
     int32 count = 6;
     int32 countMale = 7;
@@ -59,8 +59,8 @@ message RegistryRequest {
     string orderId = 1;
     string ptId = 2;
     string adviserId = 3;
-    string applyTime = 4;
-    string signInTime = 5;
+    int32 applyTime = 4;
+    int32 signInTime = 5;
     int32 ptStatus = 6;
     string registrationChannel = 7;
 }
@@ -72,7 +72,7 @@ message RegistryReply {
 
 message ModifyRequest {
     string orderId = 1;
-    string dateChanged = 2;
+    int32 dateChanged = 2;
     int32 durationChanged = 3;
     int32 countChanged = 4;
     int32 countMaleChanged = 5;

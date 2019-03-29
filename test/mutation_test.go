@@ -5,6 +5,7 @@ import (
 	"testing"
 	"../handle"
 	pb "../api/mutation"
+	"time"
 )
 
 func TestCreateOrder(t *testing.T) {
@@ -13,6 +14,16 @@ func TestCreateOrder(t *testing.T) {
 	ctx := context.TODO()
 
 	obj:=&handle.MutationServer{}
-	ret,_:=obj.CreateOrder(ctx,&pb.CreateRequest{})
+	ret,_:=obj.CreateOrder(ctx,&pb.CreateRequest{
+		HotelId:"001",
+		AdviserId:"002",
+		Job:"cleaning",
+		Date:int32(time.Now().Unix()),
+		Duration:2,
+		Count:10,
+		CountMale:5,
+		CountFemale:5,
+		Mode:0,
+	})
 	t.Log(ret)
 }

@@ -3,7 +3,7 @@ type OrderOrigin {
     hotelId: String!
     hrId: String!
     adviserId: String!
-    datetime: String!
+    datetime: Int!
     duration: Int!
     job: String!
     mode: Int!
@@ -16,12 +16,12 @@ type OrderOrigin {
 type OrderHotelModify {
     id: ID! @unique
     revision: Int!
-    timestamp: String!
+    timestamp: Int!
     count: Int
     countMale: Int
     countYet: Int
     countMaleYet: Int
-    dateTime: String
+    dateTime: Int
     duration: Int
     mode: Int
     orderOrigin: OrderOrigin!
@@ -30,7 +30,7 @@ type OrderHotelModify {
 type OrderAdviserModify{
     id: ID! @unique
     revision: Int!
-    timeStamp: String!
+    timeStamp: Int!
     isFloat: Int
     count:Int
     countMale: Int
@@ -45,8 +45,8 @@ type OrderCandidate {
     adviserId: String!
     agentId: String!
     ptId: String!
-    applyTime: String!
-    signInTime: String!
+    applyTime: Int!
+    signInTime: Int!
     ptStatus: Int!
     ptPerformance: Int!
     objectReason: Int!

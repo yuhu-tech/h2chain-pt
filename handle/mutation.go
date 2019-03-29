@@ -26,7 +26,17 @@ func (s *MutationServer) CreateOrder(ctx context.Context, in *pb.CreateRequest) 
 	client := prisma.New(nil)
 	ctx = context.TODO()
 
-	createResult, err := client.CreateOrderOrigin(prisma.OrderOriginCreateInput{HotelId: in.HotelId, AdviserId: in.AdviserId, Datetime: in.Date, Duration: in.Duration * 3600, Job: in.Job, Mode: in.Mode, Count: in.Count, CountMale: in.CountMale, Status: 0}).Exec(ctx)
+	createResult, err := client.CreateOrderOrigin(
+		prisma.OrderOriginCreateInput{
+			HotelId:   in.HotelId,
+			AdviserId: in.AdviserId,
+			Datetime:  in.Date,
+			Duration:  in.Duration * 3600,
+			Job:       in.Job, Mode: in.Mode,
+			Count:     in.Count,
+			CountMale: in.CountMale,
+			Status:    1,
+		}).Exec(ctx)
 	if err != nil {
 		log.Fatalf(" create order err: %v", err)
 		return &pb.CreateReply{CreateResult: 0}, err
@@ -45,7 +55,7 @@ func (s *MutationServer) PostOrder(ctx context.Context, in *pb.PostRequest) (*pb
 	// create orderAdviserModify
 	_, err := client.CreateOrderAdviserModify(prisma.OrderAdviserModifyCreateInput{
 		Revision:     01,
-		TimeStamp:    string(time.Now().Unix()),
+		TimeStamp:    int32(time.Now().Unix()),
 		IsFloat:      &in.IsFloat,
 		HourlySalary: &in.HourlySalary,
 		WorkCount:    &in.WorkContent,
@@ -93,7 +103,7 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 
 	_, err := client.CreateOrderHotelModify(prisma.OrderHotelModifyCreateInput{
 		Revision:    01,
-		Timestamp:   string(time.Now().Unix()),
+		Timestamp:   int32(time.Now().Unix()),
 		Count:       &in.CountChanged,
 		CountMale:   &in.CountMaleChanged,
 		DateTime:    &in.DateChanged,
@@ -114,8 +124,6 @@ func (s *MutationServer) ModifyOrderPT(ctx context.Context, in *pb.ModifyPtReque
 	// ctx=context.TODO()
 
 	// TODO
-
-
 
 	return &pb.ModifyPtReply{ModifyResult: 1}, nil
 }
