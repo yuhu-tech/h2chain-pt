@@ -7,7 +7,7 @@ service QueryOrder {
     rpc QueryOrder (QueryRequest) returns (QueryReply) {}
 
     // hotel/adviser query order's pt
-    rpc QueryOrderPT (QueryPTRequest) returns (QueryPTReply) {}
+    rpc QueryPTOfOrder (QueryPTRequest) returns (QueryPTReply) {}
 
 }
 
@@ -113,6 +113,7 @@ message PT {
         int32 applyTime = 4;
         int32 signTime = 5;
         string orderId = 6;
+        string id = 7;
 }
 
 message QueryPTReply {
