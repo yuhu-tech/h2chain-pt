@@ -49,7 +49,7 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 	return &pb.ModifyReply{ModifyResult:1},nil
 }
 
-func (s *MutationServer) ModifyOrderPT(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
+func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
 	// check the modify order's pt request date
 	log.Println(in.OrderId, in.PtId, in.TargetStatus, in.SourceStatus, in.PtPerformance, in.ObjectReason)
 

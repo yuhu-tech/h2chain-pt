@@ -35,7 +35,7 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	}, nil
 }
 
-func (s *QueryServer) QueryOrderPT(ctx context.Context, in *pb.QueryPTRequest) (*pb.QueryPTReply, error) {
+func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest) (*pb.QueryPTReply, error) {
 	// check the query order's pt request
 	log.Println(in.PtId, in.OrderId, in.RegistrationChannel, in.PtStatus)
 

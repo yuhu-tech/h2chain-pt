@@ -11,16 +11,6 @@ import (
 type MutationServer struct {
 }
 
-/*
-	client:=prisma.New(nil)
-	ctx=context.TODO()
-	//3 insert data into prisma-mysql
-	newOrder,err:=client.CreateOrderOrigin(prisma.OrderOriginCreateInput{}).Exec(ctx)
-	if err!=nil{
-		panic(err)
-	}
- */
-
 func (s *MutationServer) CreateOrder(ctx context.Context, in *pb.CreateRequest) (*pb.CreateReply, error) {
 
 	client := prisma.New(nil)
@@ -48,8 +38,6 @@ func (s *MutationServer) CreateOrder(ctx context.Context, in *pb.CreateRequest) 
 func (s *MutationServer) PostOrder(ctx context.Context, in *pb.PostRequest) (*pb.PostReply, error) {
 
 	client := prisma.New(nil)
-	ctx = context.TODO()
-
 	// TODO how to achieve revision
 
 	// create orderAdviserModify
@@ -73,32 +61,27 @@ func (s *MutationServer) PostOrder(ctx context.Context, in *pb.PostRequest) (*pb
 func (s *MutationServer) RegistryOrder(ctx context.Context, in *pb.RegistryRequest) (*pb.RegistryReply, error) {
 
 	client := prisma.New(nil)
-	ctx = context.TODO()
-
-	// TODO how to achieve revision
 
 	_, err := client.CreateOrderCandidate(prisma.OrderCandidateCreateInput{
 		AdviserId:           in.AdviserId,
 		PtId:                in.PtId,
 		ApplyTime:           in.ApplyTime,
 		SignInTime:          in.SignInTime,
-		PtStatus:            1,
+		PtStatus:            in.PtStatus,
 		RegistrationChannel: in.RegistrationChannel,
 		OrderOrigin:         prisma.OrderOriginCreateOneInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("create order candidate failed %v ", err)
-		return &pb.RegistryReply{RegistryResult: 0}, nil
+		return &pb.RegistryReply{RegistryResult: 0}, err
 	}
 
 	return &pb.RegistryReply{RegistryResult: 1}, nil
 }
 
 func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) (*pb.ModifyReply, error) {
-	client := prisma.New(nil)
-	ctx = context.TODO()
 
-	// TODO
+	client := prisma.New(nil)
 	var durationChanged = in.DurationChanged * 3600
 
 	_, err := client.CreateOrderHotelModify(prisma.OrderHotelModifyCreateInput{
@@ -112,28 +95,51 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("create order candidate failed %v ", err)
-		return &pb.ModifyReply{ModifyResult: 0}, nil
+		return &pb.ModifyReply{ModifyResult: 0}, err
 	}
 
 	return &pb.ModifyReply{ModifyResult: 1}, nil
 }
 
-func (s *MutationServer) ModifyOrderPT(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
+func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
 
-	// client:=prisma.New(nil)
-	// ctx=context.TODO()
+	client := prisma.New(nil)
 
-	// TODO
+	data := prisma.OrderCandidateUpdateInput{}
+	if in.TargetStatus != -1 {
+		data.PtStatus = &in.TargetStatus
+	}
+	if in.PtPerformance != -1 {
+		data.PtPerformance = &in.PtPerformance
+	}
+	if in.ObjectReason != -1 {
+		data.ObjectReason = &in.ObjectReason
+	}
+	_, err := client.UpdateOrderCandidate(prisma.OrderCandidateUpdateParams{
+		Data:  data,
+		Where: prisma.OrderCandidateWhereUniqueInput{ID: &in.Id},
+	}).Exec(ctx)
+	if err != nil {
+		log.Printf("create order candidate failed %v ", err)
+		return &pb.ModifyPtReply{ModifyResult: 0}, err
+	}
 
 	return &pb.ModifyPtReply{ModifyResult: 1}, nil
 }
 
 func (s *MutationServer) CloseOrder(ctx context.Context, in *pb.CloseRequest) (*pb.CloseReply, error) {
-	// check the close order request date
-	log.Println(in.OrderId)
 
-	// TODO
+	client := prisma.New(nil)
+	var closeStatus int32 = 0
 
-	// make dead data and return
+	_, err := client.UpdateOrderOrigin(prisma.OrderOriginUpdateParams{
+		Data:  prisma.OrderOriginUpdateInput{Status: &closeStatus},
+		Where: prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId},
+	}).Exec(ctx)
+	if err != nil {
+		log.Printf("close order failed err : %v", err)
+		return &pb.CloseReply{CloseResult: 0}, err
+	}
+
 	return &pb.CloseReply{CloseResult: 1}, nil
 }
