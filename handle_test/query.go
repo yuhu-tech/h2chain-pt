@@ -21,7 +21,7 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 
 	// make dead data and return
 	return &pb.QueryReply{
-		Order: &pb.Order{OrderId: "10010", HotelId: "001", AdviserId: "003", Date: 20190328, Duration: 2, Mode: 0, Count: 10, CountMale: 5, CountFemale: 5, Job: "cleaning", Status: 1, IsFloat: 0, HourlySalary: 10, WorkContent: "cleanRoom", Attention: "careful"},
+		Orders: []*pb.Order{{OrderId: "10010", HotelId: "001", AdviserId: "003", Date: 20190328, Duration: 2, Mode: 0, Count: 10, CountMale: 5, CountFemale: 5, Job: "cleaning", Status: 1, IsFloat: 0, HourlySalary: 10, WorkContent: "cleanRoom", Attention: "careful"}},
 		OrderHotelModifies:[]*pb.OrderHotelModify{
 			{Id: "001", Revision: 001, TimeStamp: 20190328, Date: 20190328, Duration: 2, Mode: 1, Count: 15, CountMale: 10},
 		},
