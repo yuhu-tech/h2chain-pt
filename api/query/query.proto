@@ -92,7 +92,7 @@ message OrderCandidate {
     string registrationChannel = 10;
 }
 message QueryReply {
-    Order  order = 1;
+    repeated Order  orders = 1;
     repeated OrderHotelModify orderHotelModifies = 2;
     repeated OrderAdviserModify orderAdviserModifies = 3;
     repeated OrderCandidate orderCandidates = 4;
