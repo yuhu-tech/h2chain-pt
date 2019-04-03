@@ -60,11 +60,13 @@ message OrderHotelModify {
     int32 timeStamp = 3;
     int32 count = 4;
     int32 countMale = 5;
-    int32 countYet = 6;
-    int32 countMale_yet = 7;
-    int32 date = 8;
-    int32 duration = 9;
-    int32 mode = 10;
+    int32 date = 6;
+    int32 duration = 7;
+    int32 mode = 8;
+}
+
+message OrderHotelModifies {
+    repeated OrderHotelModify orderHotelModifies = 1;
 }
 
 message OrderAdviserModify {
@@ -72,11 +74,13 @@ message OrderAdviserModify {
     int32 revision = 2;
     int32 timeStamp =3;
     int32 isFloat = 4;
-    int32 count = 5;
-    int32 countMale = 6;
-    int32 hourlySalary = 7;
-    string workContent = 8;
-    string attention = 9;
+    int32 hourlySalary = 5;
+    string workContent = 6;
+    string attention = 7;
+}
+
+message OrderAdviserModifies {
+    repeated OrderAdviserModify orderAdviserModifies = 1;
 }
 
 message OrderCandidate {
@@ -91,11 +95,16 @@ message OrderCandidate {
     int32 objectReason = 9;
     string registrationChannel = 10;
 }
+
+message OrderCandidates {
+    repeated OrderCandidate orderCandidates = 1;
+}
+
 message QueryReply {
     repeated Order  orders = 1;
-    repeated OrderHotelModify orderHotelModifies = 2;
-    repeated OrderAdviserModify orderAdviserModifies = 3;
-    repeated OrderCandidate orderCandidates = 4;
+    repeated OrderHotelModifies ordersHotelModifies = 2;
+    repeated OrderAdviserModifies ordersAdviserModifies = 3;
+    repeated OrderCandidates ordersCandidates = 4;
 }
 
 
