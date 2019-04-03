@@ -27,8 +27,6 @@ func QueryHMOfOrder(ctx context.Context, orderId string) ([]*pb.OrderHotelModify
 		oHM.TimeStamp = queryHMRes[i].Timestamp
 		oHM.Count = *queryHMRes[i].Count
 		oHM.CountMale = *queryHMRes[i].CountMale
-		oHM.CountYet = *queryHMRes[i].CountYet
-		oHM.CountMaleYet = *queryHMRes[i].CountMaleYet
 		oHM.Date = *queryHMRes[i].DateTime
 		oHM.Duration = *queryHMRes[i].Duration
 		oHM.Mode = *queryHMRes[i].Mode
@@ -52,8 +50,6 @@ func QueryAMOfOrder(ctx context.Context, orderId string) ([]*pb.OrderAdviserModi
 		oAM.Revision = queryAMRes[i].Revision
 		oAM.TimeStamp = queryAMRes[i].TimeStamp
 		oAM.IsFloat = *queryAMRes[i].IsFloat
-		oAM.Count = *queryAMRes[i].Count
-		oAM.CountMale = *queryAMRes[i].CountMale
 		oAM.HourlySalary = *queryAMRes[i].HourlySalary
 		oAM.WorkContent = *queryAMRes[i].WorkCount
 		oAM.Attention = *queryAMRes[i].Attention
@@ -91,7 +87,9 @@ func QueryCOfOrder(ctx context.Context, orderId string) ([]*pb.OrderCandidate, e
 func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.QueryReply, error) {
 	client := prisma.New(nil)
 	orderOrigins := []*pb.Order{}
-
+	ordersHotelModifies := []*pb.OrderHotelModifies{}
+	ordersAdviserModifies := []*pb.OrderAdviserModifies{}
+	ordersCandidates := []*pb.OrderCandidates{}
 
 	where := &prisma.OrderOriginWhereInput{}
 	if in.OrderId != "" {
@@ -100,13 +98,12 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	if in.Date != -1 {
 		dateMin := in.Date
 		dateMax := in.Date + 86399
-		where.DatetimeLte = &dateMin
-		where.DatetimeGte = &dateMax
+		where.DatetimeLte = &dateMax
+		where.DatetimeGte = &dateMin
 	}
 	if in.Status != -1 {
 		where.Status = &in.Status
 	}
-
 	queryRes, err := client.OrderOrigins(&prisma.OrderOriginsParams{
 		Where: where,
 	}).Exec(ctx)
@@ -127,18 +124,20 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 		orderOrigin.Job = queryRes[i].Job
 		orderOrigin.Mode = queryRes[i].Mode
 		orderOrigins = append(orderOrigins, &orderOrigin)
+
+		orderHotelModifies, _ := QueryHMOfOrder(ctx, queryRes[i].ID)
+		orderAdviserModifies, _ := QueryAMOfOrder(ctx, queryRes[i].ID)
+		orderCandidates, _ := QueryCOfOrder(ctx, queryRes[i].ID)
+		ordersHotelModifies = append(ordersHotelModifies, &pb.OrderHotelModifies{OrderHotelModifies: orderHotelModifies})
+		ordersAdviserModifies = append(ordersAdviserModifies, &pb.OrderAdviserModifies{OrderAdviserModifies: orderAdviserModifies})
+		ordersCandidates = append(ordersCandidates, &pb.OrderCandidates{OrderCandidates: orderCandidates})
 	}
 
-	// get the orderHotelModify orderAdviserMOdify candidate of order by orderId
-	orderHotelModifies, _ := QueryHMOfOrder(ctx, orderOrigins[0].OrderId)
-	orderAdviserModifies, _ := QueryAMOfOrder(ctx, orderOrigins[0].OrderId)
-	orderCandidates, _ := QueryCOfOrder(ctx, orderOrigins[0].OrderId)
-
 	return &pb.QueryReply{
-		Orders: orderOrigins,
-		OrderHotelModifies:   orderHotelModifies,
-		OrderAdviserModifies: orderAdviserModifies,
-		OrderCandidates:      orderCandidates,
+		Orders:                orderOrigins,
+		OrdersHotelModifies:   ordersHotelModifies,
+		OrdersAdviserModifies: ordersAdviserModifies,
+		OrdersCandidates:      ordersCandidates,
 	}, nil
 }
 

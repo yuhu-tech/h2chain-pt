@@ -20,10 +20,10 @@ func TestCreateOrder(t *testing.T) {
 		AdviserId:   "002",
 		Job:         "cleaning",
 		Date:        int32(time.Now().Unix()),
-		Duration:    2,
-		Count:       10,
-		CountMale:   5,
-		CountFemale: 5,
+		Duration:    4,
+		Count:       20,
+		CountMale:   10,
+		CountFemale: 10,
 		Mode:        0,
 	})
 	t.Log(ret)

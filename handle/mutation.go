@@ -22,10 +22,11 @@ func (s *MutationServer) CreateOrder(ctx context.Context, in *pb.CreateRequest) 
 			AdviserId: in.AdviserId,
 			Datetime:  in.Date,
 			Duration:  in.Duration * 3600,
-			Job:       in.Job, Mode: in.Mode,
+			Job:       in.Job,
 			Count:     in.Count,
 			CountMale: in.CountMale,
 			Status:    1,
+			Mode:      in.Mode,
 		}).Exec(ctx)
 	if err != nil {
 		log.Fatalf(" create order err: %v", err)
@@ -91,6 +92,7 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 		CountMale:   &in.CountMaleChanged,
 		DateTime:    &in.DateChanged,
 		Duration:    &durationChanged,
+		Mode:        &in.Mode,
 		OrderOrigin: prisma.OrderOriginCreateOneInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
@@ -130,7 +132,7 @@ func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtReq
 func (s *MutationServer) CloseOrder(ctx context.Context, in *pb.CloseRequest) (*pb.CloseReply, error) {
 
 	client := prisma.New(nil)
-	var closeStatus int32 = 0
+	var closeStatus int32 = 2
 
 	_, err := client.UpdateOrderOrigin(prisma.OrderOriginUpdateParams{
 		Data:  prisma.OrderOriginUpdateInput{Status: &closeStatus},

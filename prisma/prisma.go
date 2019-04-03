@@ -68,7 +68,7 @@ func (client *Client) OrderAdviserModify(params OrderAdviserModifyWhereUniqueInp
 		params,
 		[2]string{"OrderAdviserModifyWhereUniqueInput!", "OrderAdviserModify"},
 		"orderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale", "hourlySalary", "workCount", "attention"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "hourlySalary", "workCount", "attention"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -102,7 +102,7 @@ func (client *Client) OrderAdviserModifies(params *OrderAdviserModifiesParams) *
 		wparams,
 		[3]string{"OrderAdviserModifyWhereInput", "OrderAdviserModifyOrderByInput", "OrderAdviserModify"},
 		"orderAdviserModifies",
-		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale", "hourlySalary", "workCount", "attention"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "hourlySalary", "workCount", "attention"})
 
 	return &OrderAdviserModifyExecArray{ret}
 }
@@ -186,7 +186,7 @@ func (client *Client) OrderHotelModify(params OrderHotelModifyWhereUniqueInput) 
 		params,
 		[2]string{"OrderHotelModifyWhereUniqueInput!", "OrderHotelModify"},
 		"orderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "dateTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "dateTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -220,7 +220,7 @@ func (client *Client) OrderHotelModifies(params *OrderHotelModifiesParams) *Orde
 		wparams,
 		[3]string{"OrderHotelModifyWhereInput", "OrderHotelModifyOrderByInput", "OrderHotelModify"},
 		"orderHotelModifies",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "dateTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "dateTime", "duration", "mode"})
 
 	return &OrderHotelModifyExecArray{ret}
 }
@@ -303,7 +303,7 @@ func (client *Client) CreateOrderAdviserModify(params OrderAdviserModifyCreateIn
 		params,
 		[2]string{"OrderAdviserModifyCreateInput!", "OrderAdviserModify"},
 		"createOrderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale", "hourlySalary", "workCount", "attention"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "hourlySalary", "workCount", "attention"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -321,7 +321,7 @@ func (client *Client) UpdateOrderAdviserModify(params OrderAdviserModifyUpdatePa
 		},
 		[3]string{"OrderAdviserModifyUpdateInput!", "OrderAdviserModifyWhereUniqueInput!", "OrderAdviserModify"},
 		"updateOrderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale", "hourlySalary", "workCount", "attention"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "hourlySalary", "workCount", "attention"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -358,7 +358,7 @@ func (client *Client) UpsertOrderAdviserModify(params OrderAdviserModifyUpsertPa
 		uparams,
 		[4]string{"OrderAdviserModifyWhereUniqueInput!", "OrderAdviserModifyCreateInput!", "OrderAdviserModifyUpdateInput!", "OrderAdviserModify"},
 		"upsertOrderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale", "hourlySalary", "workCount", "attention"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "hourlySalary", "workCount", "attention"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -368,7 +368,7 @@ func (client *Client) DeleteOrderAdviserModify(params OrderAdviserModifyWhereUni
 		params,
 		[2]string{"OrderAdviserModifyWhereUniqueInput!", "OrderAdviserModify"},
 		"deleteOrderAdviserModify",
-		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale", "hourlySalary", "workCount", "attention"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "hourlySalary", "workCount", "attention"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -463,7 +463,7 @@ func (client *Client) CreateOrderHotelModify(params OrderHotelModifyCreateInput)
 		params,
 		[2]string{"OrderHotelModifyCreateInput!", "OrderHotelModify"},
 		"createOrderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "dateTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "dateTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -481,7 +481,7 @@ func (client *Client) UpdateOrderHotelModify(params OrderHotelModifyUpdateParams
 		},
 		[3]string{"OrderHotelModifyUpdateInput!", "OrderHotelModifyWhereUniqueInput!", "OrderHotelModify"},
 		"updateOrderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "dateTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "dateTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -518,7 +518,7 @@ func (client *Client) UpsertOrderHotelModify(params OrderHotelModifyUpsertParams
 		uparams,
 		[4]string{"OrderHotelModifyWhereUniqueInput!", "OrderHotelModifyCreateInput!", "OrderHotelModifyUpdateInput!", "OrderHotelModify"},
 		"upsertOrderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "dateTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "dateTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -528,7 +528,7 @@ func (client *Client) DeleteOrderHotelModify(params OrderHotelModifyWhereUniqueI
 		params,
 		[2]string{"OrderHotelModifyWhereUniqueInput!", "OrderHotelModify"},
 		"deleteOrderHotelModify",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "dateTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "dateTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -629,10 +629,6 @@ const (
 	OrderAdviserModifyOrderByInputTimeStampDesc    OrderAdviserModifyOrderByInput = "timeStamp_DESC"
 	OrderAdviserModifyOrderByInputIsFloatAsc       OrderAdviserModifyOrderByInput = "isFloat_ASC"
 	OrderAdviserModifyOrderByInputIsFloatDesc      OrderAdviserModifyOrderByInput = "isFloat_DESC"
-	OrderAdviserModifyOrderByInputCountAsc         OrderAdviserModifyOrderByInput = "count_ASC"
-	OrderAdviserModifyOrderByInputCountDesc        OrderAdviserModifyOrderByInput = "count_DESC"
-	OrderAdviserModifyOrderByInputCountMaleAsc     OrderAdviserModifyOrderByInput = "countMale_ASC"
-	OrderAdviserModifyOrderByInputCountMaleDesc    OrderAdviserModifyOrderByInput = "countMale_DESC"
 	OrderAdviserModifyOrderByInputHourlySalaryAsc  OrderAdviserModifyOrderByInput = "hourlySalary_ASC"
 	OrderAdviserModifyOrderByInputHourlySalaryDesc OrderAdviserModifyOrderByInput = "hourlySalary_DESC"
 	OrderAdviserModifyOrderByInputWorkCountAsc     OrderAdviserModifyOrderByInput = "workCount_ASC"
@@ -685,30 +681,26 @@ const (
 type OrderHotelModifyOrderByInput string
 
 const (
-	OrderHotelModifyOrderByInputIDAsc            OrderHotelModifyOrderByInput = "id_ASC"
-	OrderHotelModifyOrderByInputIDDesc           OrderHotelModifyOrderByInput = "id_DESC"
-	OrderHotelModifyOrderByInputRevisionAsc      OrderHotelModifyOrderByInput = "revision_ASC"
-	OrderHotelModifyOrderByInputRevisionDesc     OrderHotelModifyOrderByInput = "revision_DESC"
-	OrderHotelModifyOrderByInputTimestampAsc     OrderHotelModifyOrderByInput = "timestamp_ASC"
-	OrderHotelModifyOrderByInputTimestampDesc    OrderHotelModifyOrderByInput = "timestamp_DESC"
-	OrderHotelModifyOrderByInputCountAsc         OrderHotelModifyOrderByInput = "count_ASC"
-	OrderHotelModifyOrderByInputCountDesc        OrderHotelModifyOrderByInput = "count_DESC"
-	OrderHotelModifyOrderByInputCountMaleAsc     OrderHotelModifyOrderByInput = "countMale_ASC"
-	OrderHotelModifyOrderByInputCountMaleDesc    OrderHotelModifyOrderByInput = "countMale_DESC"
-	OrderHotelModifyOrderByInputCountYetAsc      OrderHotelModifyOrderByInput = "countYet_ASC"
-	OrderHotelModifyOrderByInputCountYetDesc     OrderHotelModifyOrderByInput = "countYet_DESC"
-	OrderHotelModifyOrderByInputCountMaleYetAsc  OrderHotelModifyOrderByInput = "countMaleYet_ASC"
-	OrderHotelModifyOrderByInputCountMaleYetDesc OrderHotelModifyOrderByInput = "countMaleYet_DESC"
-	OrderHotelModifyOrderByInputDateTimeAsc      OrderHotelModifyOrderByInput = "dateTime_ASC"
-	OrderHotelModifyOrderByInputDateTimeDesc     OrderHotelModifyOrderByInput = "dateTime_DESC"
-	OrderHotelModifyOrderByInputDurationAsc      OrderHotelModifyOrderByInput = "duration_ASC"
-	OrderHotelModifyOrderByInputDurationDesc     OrderHotelModifyOrderByInput = "duration_DESC"
-	OrderHotelModifyOrderByInputModeAsc          OrderHotelModifyOrderByInput = "mode_ASC"
-	OrderHotelModifyOrderByInputModeDesc         OrderHotelModifyOrderByInput = "mode_DESC"
-	OrderHotelModifyOrderByInputCreatedAtAsc     OrderHotelModifyOrderByInput = "createdAt_ASC"
-	OrderHotelModifyOrderByInputCreatedAtDesc    OrderHotelModifyOrderByInput = "createdAt_DESC"
-	OrderHotelModifyOrderByInputUpdatedAtAsc     OrderHotelModifyOrderByInput = "updatedAt_ASC"
-	OrderHotelModifyOrderByInputUpdatedAtDesc    OrderHotelModifyOrderByInput = "updatedAt_DESC"
+	OrderHotelModifyOrderByInputIDAsc         OrderHotelModifyOrderByInput = "id_ASC"
+	OrderHotelModifyOrderByInputIDDesc        OrderHotelModifyOrderByInput = "id_DESC"
+	OrderHotelModifyOrderByInputRevisionAsc   OrderHotelModifyOrderByInput = "revision_ASC"
+	OrderHotelModifyOrderByInputRevisionDesc  OrderHotelModifyOrderByInput = "revision_DESC"
+	OrderHotelModifyOrderByInputTimestampAsc  OrderHotelModifyOrderByInput = "timestamp_ASC"
+	OrderHotelModifyOrderByInputTimestampDesc OrderHotelModifyOrderByInput = "timestamp_DESC"
+	OrderHotelModifyOrderByInputCountAsc      OrderHotelModifyOrderByInput = "count_ASC"
+	OrderHotelModifyOrderByInputCountDesc     OrderHotelModifyOrderByInput = "count_DESC"
+	OrderHotelModifyOrderByInputCountMaleAsc  OrderHotelModifyOrderByInput = "countMale_ASC"
+	OrderHotelModifyOrderByInputCountMaleDesc OrderHotelModifyOrderByInput = "countMale_DESC"
+	OrderHotelModifyOrderByInputDateTimeAsc   OrderHotelModifyOrderByInput = "dateTime_ASC"
+	OrderHotelModifyOrderByInputDateTimeDesc  OrderHotelModifyOrderByInput = "dateTime_DESC"
+	OrderHotelModifyOrderByInputDurationAsc   OrderHotelModifyOrderByInput = "duration_ASC"
+	OrderHotelModifyOrderByInputDurationDesc  OrderHotelModifyOrderByInput = "duration_DESC"
+	OrderHotelModifyOrderByInputModeAsc       OrderHotelModifyOrderByInput = "mode_ASC"
+	OrderHotelModifyOrderByInputModeDesc      OrderHotelModifyOrderByInput = "mode_DESC"
+	OrderHotelModifyOrderByInputCreatedAtAsc  OrderHotelModifyOrderByInput = "createdAt_ASC"
+	OrderHotelModifyOrderByInputCreatedAtDesc OrderHotelModifyOrderByInput = "createdAt_DESC"
+	OrderHotelModifyOrderByInputUpdatedAtAsc  OrderHotelModifyOrderByInput = "updatedAt_ASC"
+	OrderHotelModifyOrderByInputUpdatedAtDesc OrderHotelModifyOrderByInput = "updatedAt_DESC"
 )
 
 type OrderOriginOrderByInput string
@@ -758,8 +750,6 @@ type OrderAdviserModifyCreateInput struct {
 	Revision     int32                     `json:"revision"`
 	TimeStamp    int32                     `json:"timeStamp"`
 	IsFloat      *int32                    `json:"isFloat,omitempty"`
-	Count        *int32                    `json:"count,omitempty"`
-	CountMale    *int32                    `json:"countMale,omitempty"`
 	HourlySalary *int32                    `json:"hourlySalary,omitempty"`
 	WorkCount    *string                   `json:"workCount,omitempty"`
 	Attention    *string                   `json:"attention,omitempty"`
@@ -778,8 +768,6 @@ type OrderAdviserModifyUpdateManyMutationInput struct {
 	Revision     *int32  `json:"revision,omitempty"`
 	TimeStamp    *int32  `json:"timeStamp,omitempty"`
 	IsFloat      *int32  `json:"isFloat,omitempty"`
-	Count        *int32  `json:"count,omitempty"`
-	CountMale    *int32  `json:"countMale,omitempty"`
 	HourlySalary *int32  `json:"hourlySalary,omitempty"`
 	WorkCount    *string `json:"workCount,omitempty"`
 	Attention    *string `json:"attention,omitempty"`
@@ -910,96 +898,80 @@ type OrderOriginWhereInput struct {
 }
 
 type OrderHotelModifyWhereInput struct {
-	ID                *string                      `json:"id,omitempty"`
-	IDNot             *string                      `json:"id_not,omitempty"`
-	IDIn              []string                     `json:"id_in,omitempty"`
-	IDNotIn           []string                     `json:"id_not_in,omitempty"`
-	IDLt              *string                      `json:"id_lt,omitempty"`
-	IDLte             *string                      `json:"id_lte,omitempty"`
-	IDGt              *string                      `json:"id_gt,omitempty"`
-	IDGte             *string                      `json:"id_gte,omitempty"`
-	IDContains        *string                      `json:"id_contains,omitempty"`
-	IDNotContains     *string                      `json:"id_not_contains,omitempty"`
-	IDStartsWith      *string                      `json:"id_starts_with,omitempty"`
-	IDNotStartsWith   *string                      `json:"id_not_starts_with,omitempty"`
-	IDEndsWith        *string                      `json:"id_ends_with,omitempty"`
-	IDNotEndsWith     *string                      `json:"id_not_ends_with,omitempty"`
-	Revision          *int32                       `json:"revision,omitempty"`
-	RevisionNot       *int32                       `json:"revision_not,omitempty"`
-	RevisionIn        []int32                      `json:"revision_in,omitempty"`
-	RevisionNotIn     []int32                      `json:"revision_not_in,omitempty"`
-	RevisionLt        *int32                       `json:"revision_lt,omitempty"`
-	RevisionLte       *int32                       `json:"revision_lte,omitempty"`
-	RevisionGt        *int32                       `json:"revision_gt,omitempty"`
-	RevisionGte       *int32                       `json:"revision_gte,omitempty"`
-	Timestamp         *int32                       `json:"timestamp,omitempty"`
-	TimestampNot      *int32                       `json:"timestamp_not,omitempty"`
-	TimestampIn       []int32                      `json:"timestamp_in,omitempty"`
-	TimestampNotIn    []int32                      `json:"timestamp_not_in,omitempty"`
-	TimestampLt       *int32                       `json:"timestamp_lt,omitempty"`
-	TimestampLte      *int32                       `json:"timestamp_lte,omitempty"`
-	TimestampGt       *int32                       `json:"timestamp_gt,omitempty"`
-	TimestampGte      *int32                       `json:"timestamp_gte,omitempty"`
-	Count             *int32                       `json:"count,omitempty"`
-	CountNot          *int32                       `json:"count_not,omitempty"`
-	CountIn           []int32                      `json:"count_in,omitempty"`
-	CountNotIn        []int32                      `json:"count_not_in,omitempty"`
-	CountLt           *int32                       `json:"count_lt,omitempty"`
-	CountLte          *int32                       `json:"count_lte,omitempty"`
-	CountGt           *int32                       `json:"count_gt,omitempty"`
-	CountGte          *int32                       `json:"count_gte,omitempty"`
-	CountMale         *int32                       `json:"countMale,omitempty"`
-	CountMaleNot      *int32                       `json:"countMale_not,omitempty"`
-	CountMaleIn       []int32                      `json:"countMale_in,omitempty"`
-	CountMaleNotIn    []int32                      `json:"countMale_not_in,omitempty"`
-	CountMaleLt       *int32                       `json:"countMale_lt,omitempty"`
-	CountMaleLte      *int32                       `json:"countMale_lte,omitempty"`
-	CountMaleGt       *int32                       `json:"countMale_gt,omitempty"`
-	CountMaleGte      *int32                       `json:"countMale_gte,omitempty"`
-	CountYet          *int32                       `json:"countYet,omitempty"`
-	CountYetNot       *int32                       `json:"countYet_not,omitempty"`
-	CountYetIn        []int32                      `json:"countYet_in,omitempty"`
-	CountYetNotIn     []int32                      `json:"countYet_not_in,omitempty"`
-	CountYetLt        *int32                       `json:"countYet_lt,omitempty"`
-	CountYetLte       *int32                       `json:"countYet_lte,omitempty"`
-	CountYetGt        *int32                       `json:"countYet_gt,omitempty"`
-	CountYetGte       *int32                       `json:"countYet_gte,omitempty"`
-	CountMaleYet      *int32                       `json:"countMaleYet,omitempty"`
-	CountMaleYetNot   *int32                       `json:"countMaleYet_not,omitempty"`
-	CountMaleYetIn    []int32                      `json:"countMaleYet_in,omitempty"`
-	CountMaleYetNotIn []int32                      `json:"countMaleYet_not_in,omitempty"`
-	CountMaleYetLt    *int32                       `json:"countMaleYet_lt,omitempty"`
-	CountMaleYetLte   *int32                       `json:"countMaleYet_lte,omitempty"`
-	CountMaleYetGt    *int32                       `json:"countMaleYet_gt,omitempty"`
-	CountMaleYetGte   *int32                       `json:"countMaleYet_gte,omitempty"`
-	DateTime          *int32                       `json:"dateTime,omitempty"`
-	DateTimeNot       *int32                       `json:"dateTime_not,omitempty"`
-	DateTimeIn        []int32                      `json:"dateTime_in,omitempty"`
-	DateTimeNotIn     []int32                      `json:"dateTime_not_in,omitempty"`
-	DateTimeLt        *int32                       `json:"dateTime_lt,omitempty"`
-	DateTimeLte       *int32                       `json:"dateTime_lte,omitempty"`
-	DateTimeGt        *int32                       `json:"dateTime_gt,omitempty"`
-	DateTimeGte       *int32                       `json:"dateTime_gte,omitempty"`
-	Duration          *int32                       `json:"duration,omitempty"`
-	DurationNot       *int32                       `json:"duration_not,omitempty"`
-	DurationIn        []int32                      `json:"duration_in,omitempty"`
-	DurationNotIn     []int32                      `json:"duration_not_in,omitempty"`
-	DurationLt        *int32                       `json:"duration_lt,omitempty"`
-	DurationLte       *int32                       `json:"duration_lte,omitempty"`
-	DurationGt        *int32                       `json:"duration_gt,omitempty"`
-	DurationGte       *int32                       `json:"duration_gte,omitempty"`
-	Mode              *int32                       `json:"mode,omitempty"`
-	ModeNot           *int32                       `json:"mode_not,omitempty"`
-	ModeIn            []int32                      `json:"mode_in,omitempty"`
-	ModeNotIn         []int32                      `json:"mode_not_in,omitempty"`
-	ModeLt            *int32                       `json:"mode_lt,omitempty"`
-	ModeLte           *int32                       `json:"mode_lte,omitempty"`
-	ModeGt            *int32                       `json:"mode_gt,omitempty"`
-	ModeGte           *int32                       `json:"mode_gte,omitempty"`
-	OrderOrigin       *OrderOriginWhereInput       `json:"orderOrigin,omitempty"`
-	And               []OrderHotelModifyWhereInput `json:"AND,omitempty"`
-	Or                []OrderHotelModifyWhereInput `json:"OR,omitempty"`
-	Not               []OrderHotelModifyWhereInput `json:"NOT,omitempty"`
+	ID              *string                      `json:"id,omitempty"`
+	IDNot           *string                      `json:"id_not,omitempty"`
+	IDIn            []string                     `json:"id_in,omitempty"`
+	IDNotIn         []string                     `json:"id_not_in,omitempty"`
+	IDLt            *string                      `json:"id_lt,omitempty"`
+	IDLte           *string                      `json:"id_lte,omitempty"`
+	IDGt            *string                      `json:"id_gt,omitempty"`
+	IDGte           *string                      `json:"id_gte,omitempty"`
+	IDContains      *string                      `json:"id_contains,omitempty"`
+	IDNotContains   *string                      `json:"id_not_contains,omitempty"`
+	IDStartsWith    *string                      `json:"id_starts_with,omitempty"`
+	IDNotStartsWith *string                      `json:"id_not_starts_with,omitempty"`
+	IDEndsWith      *string                      `json:"id_ends_with,omitempty"`
+	IDNotEndsWith   *string                      `json:"id_not_ends_with,omitempty"`
+	Revision        *int32                       `json:"revision,omitempty"`
+	RevisionNot     *int32                       `json:"revision_not,omitempty"`
+	RevisionIn      []int32                      `json:"revision_in,omitempty"`
+	RevisionNotIn   []int32                      `json:"revision_not_in,omitempty"`
+	RevisionLt      *int32                       `json:"revision_lt,omitempty"`
+	RevisionLte     *int32                       `json:"revision_lte,omitempty"`
+	RevisionGt      *int32                       `json:"revision_gt,omitempty"`
+	RevisionGte     *int32                       `json:"revision_gte,omitempty"`
+	Timestamp       *int32                       `json:"timestamp,omitempty"`
+	TimestampNot    *int32                       `json:"timestamp_not,omitempty"`
+	TimestampIn     []int32                      `json:"timestamp_in,omitempty"`
+	TimestampNotIn  []int32                      `json:"timestamp_not_in,omitempty"`
+	TimestampLt     *int32                       `json:"timestamp_lt,omitempty"`
+	TimestampLte    *int32                       `json:"timestamp_lte,omitempty"`
+	TimestampGt     *int32                       `json:"timestamp_gt,omitempty"`
+	TimestampGte    *int32                       `json:"timestamp_gte,omitempty"`
+	Count           *int32                       `json:"count,omitempty"`
+	CountNot        *int32                       `json:"count_not,omitempty"`
+	CountIn         []int32                      `json:"count_in,omitempty"`
+	CountNotIn      []int32                      `json:"count_not_in,omitempty"`
+	CountLt         *int32                       `json:"count_lt,omitempty"`
+	CountLte        *int32                       `json:"count_lte,omitempty"`
+	CountGt         *int32                       `json:"count_gt,omitempty"`
+	CountGte        *int32                       `json:"count_gte,omitempty"`
+	CountMale       *int32                       `json:"countMale,omitempty"`
+	CountMaleNot    *int32                       `json:"countMale_not,omitempty"`
+	CountMaleIn     []int32                      `json:"countMale_in,omitempty"`
+	CountMaleNotIn  []int32                      `json:"countMale_not_in,omitempty"`
+	CountMaleLt     *int32                       `json:"countMale_lt,omitempty"`
+	CountMaleLte    *int32                       `json:"countMale_lte,omitempty"`
+	CountMaleGt     *int32                       `json:"countMale_gt,omitempty"`
+	CountMaleGte    *int32                       `json:"countMale_gte,omitempty"`
+	DateTime        *int32                       `json:"dateTime,omitempty"`
+	DateTimeNot     *int32                       `json:"dateTime_not,omitempty"`
+	DateTimeIn      []int32                      `json:"dateTime_in,omitempty"`
+	DateTimeNotIn   []int32                      `json:"dateTime_not_in,omitempty"`
+	DateTimeLt      *int32                       `json:"dateTime_lt,omitempty"`
+	DateTimeLte     *int32                       `json:"dateTime_lte,omitempty"`
+	DateTimeGt      *int32                       `json:"dateTime_gt,omitempty"`
+	DateTimeGte     *int32                       `json:"dateTime_gte,omitempty"`
+	Duration        *int32                       `json:"duration,omitempty"`
+	DurationNot     *int32                       `json:"duration_not,omitempty"`
+	DurationIn      []int32                      `json:"duration_in,omitempty"`
+	DurationNotIn   []int32                      `json:"duration_not_in,omitempty"`
+	DurationLt      *int32                       `json:"duration_lt,omitempty"`
+	DurationLte     *int32                       `json:"duration_lte,omitempty"`
+	DurationGt      *int32                       `json:"duration_gt,omitempty"`
+	DurationGte     *int32                       `json:"duration_gte,omitempty"`
+	Mode            *int32                       `json:"mode,omitempty"`
+	ModeNot         *int32                       `json:"mode_not,omitempty"`
+	ModeIn          []int32                      `json:"mode_in,omitempty"`
+	ModeNotIn       []int32                      `json:"mode_not_in,omitempty"`
+	ModeLt          *int32                       `json:"mode_lt,omitempty"`
+	ModeLte         *int32                       `json:"mode_lte,omitempty"`
+	ModeGt          *int32                       `json:"mode_gt,omitempty"`
+	ModeGte         *int32                       `json:"mode_gte,omitempty"`
+	OrderOrigin     *OrderOriginWhereInput       `json:"orderOrigin,omitempty"`
+	And             []OrderHotelModifyWhereInput `json:"AND,omitempty"`
+	Or              []OrderHotelModifyWhereInput `json:"OR,omitempty"`
+	Not             []OrderHotelModifyWhereInput `json:"NOT,omitempty"`
 }
 
 type OrderOriginUpdateManyMutationInput struct {
@@ -1027,15 +999,13 @@ type OrderCandidateSubscriptionWhereInput struct {
 }
 
 type OrderHotelModifyUpdateManyMutationInput struct {
-	Revision     *int32 `json:"revision,omitempty"`
-	Timestamp    *int32 `json:"timestamp,omitempty"`
-	Count        *int32 `json:"count,omitempty"`
-	CountMale    *int32 `json:"countMale,omitempty"`
-	CountYet     *int32 `json:"countYet,omitempty"`
-	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
-	DateTime     *int32 `json:"dateTime,omitempty"`
-	Duration     *int32 `json:"duration,omitempty"`
-	Mode         *int32 `json:"mode,omitempty"`
+	Revision  *int32 `json:"revision,omitempty"`
+	Timestamp *int32 `json:"timestamp,omitempty"`
+	Count     *int32 `json:"count,omitempty"`
+	CountMale *int32 `json:"countMale,omitempty"`
+	DateTime  *int32 `json:"dateTime,omitempty"`
+	Duration  *int32 `json:"duration,omitempty"`
+	Mode      *int32 `json:"mode,omitempty"`
 }
 
 type OrderOriginUpsertNestedInput struct {
@@ -1237,16 +1207,14 @@ type OrderOriginUpdateInput struct {
 }
 
 type OrderHotelModifyCreateInput struct {
-	Revision     int32                     `json:"revision"`
-	Timestamp    int32                     `json:"timestamp"`
-	Count        *int32                    `json:"count,omitempty"`
-	CountMale    *int32                    `json:"countMale,omitempty"`
-	CountYet     *int32                    `json:"countYet,omitempty"`
-	CountMaleYet *int32                    `json:"countMaleYet,omitempty"`
-	DateTime     *int32                    `json:"dateTime,omitempty"`
-	Duration     *int32                    `json:"duration,omitempty"`
-	Mode         *int32                    `json:"mode,omitempty"`
-	OrderOrigin  OrderOriginCreateOneInput `json:"orderOrigin"`
+	Revision    int32                     `json:"revision"`
+	Timestamp   int32                     `json:"timestamp"`
+	Count       *int32                    `json:"count,omitempty"`
+	CountMale   *int32                    `json:"countMale,omitempty"`
+	DateTime    *int32                    `json:"dateTime,omitempty"`
+	Duration    *int32                    `json:"duration,omitempty"`
+	Mode        *int32                    `json:"mode,omitempty"`
+	OrderOrigin OrderOriginCreateOneInput `json:"orderOrigin"`
 }
 
 type OrderOriginCreateOneInput struct {
@@ -1271,8 +1239,6 @@ type OrderAdviserModifyUpdateInput struct {
 	Revision     *int32                             `json:"revision,omitempty"`
 	TimeStamp    *int32                             `json:"timeStamp,omitempty"`
 	IsFloat      *int32                             `json:"isFloat,omitempty"`
-	Count        *int32                             `json:"count,omitempty"`
-	CountMale    *int32                             `json:"countMale,omitempty"`
 	HourlySalary *int32                             `json:"hourlySalary,omitempty"`
 	WorkCount    *string                            `json:"workCount,omitempty"`
 	Attention    *string                            `json:"attention,omitempty"`
@@ -1318,22 +1284,6 @@ type OrderAdviserModifyWhereInput struct {
 	IsFloatLte             *int32                         `json:"isFloat_lte,omitempty"`
 	IsFloatGt              *int32                         `json:"isFloat_gt,omitempty"`
 	IsFloatGte             *int32                         `json:"isFloat_gte,omitempty"`
-	Count                  *int32                         `json:"count,omitempty"`
-	CountNot               *int32                         `json:"count_not,omitempty"`
-	CountIn                []int32                        `json:"count_in,omitempty"`
-	CountNotIn             []int32                        `json:"count_not_in,omitempty"`
-	CountLt                *int32                         `json:"count_lt,omitempty"`
-	CountLte               *int32                         `json:"count_lte,omitempty"`
-	CountGt                *int32                         `json:"count_gt,omitempty"`
-	CountGte               *int32                         `json:"count_gte,omitempty"`
-	CountMale              *int32                         `json:"countMale,omitempty"`
-	CountMaleNot           *int32                         `json:"countMale_not,omitempty"`
-	CountMaleIn            []int32                        `json:"countMale_in,omitempty"`
-	CountMaleNotIn         []int32                        `json:"countMale_not_in,omitempty"`
-	CountMaleLt            *int32                         `json:"countMale_lt,omitempty"`
-	CountMaleLte           *int32                         `json:"countMale_lte,omitempty"`
-	CountMaleGt            *int32                         `json:"countMale_gt,omitempty"`
-	CountMaleGte           *int32                         `json:"countMale_gte,omitempty"`
 	HourlySalary           *int32                         `json:"hourlySalary,omitempty"`
 	HourlySalaryNot        *int32                         `json:"hourlySalary_not,omitempty"`
 	HourlySalaryIn         []int32                        `json:"hourlySalary_in,omitempty"`
@@ -1377,16 +1327,14 @@ type OrderAdviserModifyWhereInput struct {
 }
 
 type OrderHotelModifyUpdateInput struct {
-	Revision     *int32                             `json:"revision,omitempty"`
-	Timestamp    *int32                             `json:"timestamp,omitempty"`
-	Count        *int32                             `json:"count,omitempty"`
-	CountMale    *int32                             `json:"countMale,omitempty"`
-	CountYet     *int32                             `json:"countYet,omitempty"`
-	CountMaleYet *int32                             `json:"countMaleYet,omitempty"`
-	DateTime     *int32                             `json:"dateTime,omitempty"`
-	Duration     *int32                             `json:"duration,omitempty"`
-	Mode         *int32                             `json:"mode,omitempty"`
-	OrderOrigin  *OrderOriginUpdateOneRequiredInput `json:"orderOrigin,omitempty"`
+	Revision    *int32                             `json:"revision,omitempty"`
+	Timestamp   *int32                             `json:"timestamp,omitempty"`
+	Count       *int32                             `json:"count,omitempty"`
+	CountMale   *int32                             `json:"countMale,omitempty"`
+	DateTime    *int32                             `json:"dateTime,omitempty"`
+	Duration    *int32                             `json:"duration,omitempty"`
+	Mode        *int32                             `json:"mode,omitempty"`
+	OrderOrigin *OrderOriginUpdateOneRequiredInput `json:"orderOrigin,omitempty"`
 }
 
 type OrderAdviserModifySubscriptionWhereInput struct {
@@ -1423,7 +1371,7 @@ func (instance *OrderHotelModifySubscriptionPayloadExec) Node() *OrderHotelModif
 		nil,
 		[2]string{"", "OrderHotelModify"},
 		"node",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "dateTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "dateTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
@@ -1434,7 +1382,7 @@ func (instance *OrderHotelModifySubscriptionPayloadExec) PreviousValues() *Order
 		nil,
 		[2]string{"", "OrderHotelModifyPreviousValues"},
 		"previousValues",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "dateTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "dateTime", "duration", "mode"})
 
 	return &OrderHotelModifyPreviousValuesExec{ret}
 }
@@ -1480,7 +1428,7 @@ func (instance *OrderAdviserModifyEdgeExec) Node() *OrderAdviserModifyExec {
 		nil,
 		[2]string{"", "OrderAdviserModify"},
 		"node",
-		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale", "hourlySalary", "workCount", "attention"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "hourlySalary", "workCount", "attention"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -1831,7 +1779,7 @@ func (instance *OrderAdviserModifySubscriptionPayloadExec) Node() *OrderAdviserM
 		nil,
 		[2]string{"", "OrderAdviserModify"},
 		"node",
-		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale", "hourlySalary", "workCount", "attention"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "hourlySalary", "workCount", "attention"})
 
 	return &OrderAdviserModifyExec{ret}
 }
@@ -1842,7 +1790,7 @@ func (instance *OrderAdviserModifySubscriptionPayloadExec) PreviousValues() *Ord
 		nil,
 		[2]string{"", "OrderAdviserModifyPreviousValues"},
 		"previousValues",
-		[]string{"id", "revision", "timeStamp", "isFloat", "count", "countMale", "hourlySalary", "workCount", "attention"})
+		[]string{"id", "revision", "timeStamp", "isFloat", "hourlySalary", "workCount", "attention"})
 
 	return &OrderAdviserModifyPreviousValuesExec{ret}
 }
@@ -1981,8 +1929,6 @@ type OrderAdviserModifyPreviousValues struct {
 	Revision     int32   `json:"revision"`
 	TimeStamp    int32   `json:"timeStamp"`
 	IsFloat      *int32  `json:"isFloat,omitempty"`
-	Count        *int32  `json:"count,omitempty"`
-	CountMale    *int32  `json:"countMale,omitempty"`
 	HourlySalary *int32  `json:"hourlySalary,omitempty"`
 	WorkCount    *string `json:"workCount,omitempty"`
 	Attention    *string `json:"attention,omitempty"`
@@ -2098,16 +2044,14 @@ func (instance OrderHotelModifyExecArray) Exec(ctx context.Context) ([]OrderHote
 }
 
 type OrderHotelModify struct {
-	ID           string `json:"id"`
-	Revision     int32  `json:"revision"`
-	Timestamp    int32  `json:"timestamp"`
-	Count        *int32 `json:"count,omitempty"`
-	CountMale    *int32 `json:"countMale,omitempty"`
-	CountYet     *int32 `json:"countYet,omitempty"`
-	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
-	DateTime     *int32 `json:"dateTime,omitempty"`
-	Duration     *int32 `json:"duration,omitempty"`
-	Mode         *int32 `json:"mode,omitempty"`
+	ID        string `json:"id"`
+	Revision  int32  `json:"revision"`
+	Timestamp int32  `json:"timestamp"`
+	Count     *int32 `json:"count,omitempty"`
+	CountMale *int32 `json:"countMale,omitempty"`
+	DateTime  *int32 `json:"dateTime,omitempty"`
+	Duration  *int32 `json:"duration,omitempty"`
+	Mode      *int32 `json:"mode,omitempty"`
 }
 
 type OrderHotelModifyPreviousValuesExec struct {
@@ -2141,16 +2085,14 @@ func (instance OrderHotelModifyPreviousValuesExecArray) Exec(ctx context.Context
 }
 
 type OrderHotelModifyPreviousValues struct {
-	ID           string `json:"id"`
-	Revision     int32  `json:"revision"`
-	Timestamp    int32  `json:"timestamp"`
-	Count        *int32 `json:"count,omitempty"`
-	CountMale    *int32 `json:"countMale,omitempty"`
-	CountYet     *int32 `json:"countYet,omitempty"`
-	CountMaleYet *int32 `json:"countMaleYet,omitempty"`
-	DateTime     *int32 `json:"dateTime,omitempty"`
-	Duration     *int32 `json:"duration,omitempty"`
-	Mode         *int32 `json:"mode,omitempty"`
+	ID        string `json:"id"`
+	Revision  int32  `json:"revision"`
+	Timestamp int32  `json:"timestamp"`
+	Count     *int32 `json:"count,omitempty"`
+	CountMale *int32 `json:"countMale,omitempty"`
+	DateTime  *int32 `json:"dateTime,omitempty"`
+	Duration  *int32 `json:"duration,omitempty"`
+	Mode      *int32 `json:"mode,omitempty"`
 }
 
 type OrderCandidatePreviousValuesExec struct {
@@ -2299,8 +2241,6 @@ type OrderAdviserModify struct {
 	Revision     int32   `json:"revision"`
 	TimeStamp    int32   `json:"timeStamp"`
 	IsFloat      *int32  `json:"isFloat,omitempty"`
-	Count        *int32  `json:"count,omitempty"`
-	CountMale    *int32  `json:"countMale,omitempty"`
 	HourlySalary *int32  `json:"hourlySalary,omitempty"`
 	WorkCount    *string `json:"workCount,omitempty"`
 	Attention    *string `json:"attention,omitempty"`
@@ -2373,7 +2313,7 @@ func (instance *OrderHotelModifyEdgeExec) Node() *OrderHotelModifyExec {
 		nil,
 		[2]string{"", "OrderHotelModify"},
 		"node",
-		[]string{"id", "revision", "timestamp", "count", "countMale", "countYet", "countMaleYet", "dateTime", "duration", "mode"})
+		[]string{"id", "revision", "timestamp", "count", "countMale", "dateTime", "duration", "mode"})
 
 	return &OrderHotelModifyExec{ret}
 }
