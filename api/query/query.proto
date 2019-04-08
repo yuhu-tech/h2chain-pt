@@ -46,13 +46,14 @@ message Order {
     int32 countMale = 7;
     int32 countFemale = 8;
     int32 status = 9;
-    int32 isFloat = 10;
-    int32 hourlySalary = 11;
-    string workContent = 12;
-    string attention = 13;
-    string job = 14;
-    int32 mode = 15;
+    string job = 10;
+    int32 mode = 11;
+
+    repeated OrderHotelModify orderHotelModifies = 12;
+    repeated OrderAdviserModify orderAdviserModifies = 13;
+    repeated OrderCandidate orderCandidates = 14;
 }
+
 
 message OrderHotelModify {
     string id = 1;
@@ -65,10 +66,6 @@ message OrderHotelModify {
     int32 mode = 8;
 }
 
-message OrderHotelModifies {
-    repeated OrderHotelModify orderHotelModifies = 1;
-}
-
 message OrderAdviserModify {
     string id = 1;
     int32 revision = 2;
@@ -77,10 +74,6 @@ message OrderAdviserModify {
     int32 hourlySalary = 5;
     string workContent = 6;
     string attention = 7;
-}
-
-message OrderAdviserModifies {
-    repeated OrderAdviserModify orderAdviserModifies = 1;
 }
 
 message OrderCandidate {
@@ -96,15 +89,8 @@ message OrderCandidate {
     string registrationChannel = 10;
 }
 
-message OrderCandidates {
-    repeated OrderCandidate orderCandidates = 1;
-}
-
 message QueryReply {
-    repeated Order  orders = 1;
-    repeated OrderHotelModifies ordersHotelModifies = 2;
-    repeated OrderAdviserModifies ordersAdviserModifies = 3;
-    repeated OrderCandidates ordersCandidates = 4;
+    repeated Order orders = 1;
 }
 
 

@@ -87,9 +87,6 @@ func QueryCOfOrder(ctx context.Context, orderId string) ([]*pb.OrderCandidate, e
 func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.QueryReply, error) {
 	client := prisma.New(nil)
 	orderOrigins := []*pb.Order{}
-	ordersHotelModifies := []*pb.OrderHotelModifies{}
-	ordersAdviserModifies := []*pb.OrderAdviserModifies{}
-	ordersCandidates := []*pb.OrderCandidates{}
 
 	where := &prisma.OrderOriginWhereInput{}
 	if in.OrderId != "" {
@@ -111,6 +108,10 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 		return &pb.QueryReply{}, err
 	}
 	for i := 0; i < len(queryRes); i++ {
+		orderHotelModifies, _ := QueryHMOfOrder(ctx, queryRes[i].ID)
+		orderAdviserModifies, _ := QueryAMOfOrder(ctx, queryRes[i].ID)
+		orderCandidates, _ := QueryCOfOrder(ctx, queryRes[i].ID)
+
 		var orderOrigin pb.Order
 		orderOrigin.OrderId = queryRes[i].ID
 		orderOrigin.HotelId = queryRes[i].HotelId
@@ -123,21 +124,15 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 		orderOrigin.Status = queryRes[i].Status
 		orderOrigin.Job = queryRes[i].Job
 		orderOrigin.Mode = queryRes[i].Mode
-		orderOrigins = append(orderOrigins, &orderOrigin)
+		orderOrigin.OrderHotelModifies = orderHotelModifies
+		orderOrigin.OrderAdviserModifies = orderAdviserModifies
+		orderOrigin.OrderCandidates = orderCandidates
 
-		orderHotelModifies, _ := QueryHMOfOrder(ctx, queryRes[i].ID)
-		orderAdviserModifies, _ := QueryAMOfOrder(ctx, queryRes[i].ID)
-		orderCandidates, _ := QueryCOfOrder(ctx, queryRes[i].ID)
-		ordersHotelModifies = append(ordersHotelModifies, &pb.OrderHotelModifies{OrderHotelModifies: orderHotelModifies})
-		ordersAdviserModifies = append(ordersAdviserModifies, &pb.OrderAdviserModifies{OrderAdviserModifies: orderAdviserModifies})
-		ordersCandidates = append(ordersCandidates, &pb.OrderCandidates{OrderCandidates: orderCandidates})
+		orderOrigins = append(orderOrigins, &orderOrigin)
 	}
 
 	return &pb.QueryReply{
 		Orders:                orderOrigins,
-		OrdersHotelModifies:   ordersHotelModifies,
-		OrdersAdviserModifies: ordersAdviserModifies,
-		OrdersCandidates:      ordersCandidates,
 	}, nil
 }
 
