@@ -13,8 +13,10 @@ func TestModifyOrderPT(t *testing.T) {
 
 	obj := &handle.MutationServer{}
 	ret, err := obj.ModifyPTOfOrder(ctx, &pb.ModifyPtRequest{
-		Id:            "cju0tmh6400400976c26d5eet",
-		TargetStatus:  2,
+		OrderId:       "cju0sz0v2000v0976zgqtqrv3",
+		PtId:          "",
+		SourceStatus:  0,
+		TargetStatus:  1,
 		PtPerformance: -1,
 		ObjectReason:  -1,
 	})

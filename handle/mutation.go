@@ -106,9 +106,12 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
 
 	client := prisma.New(nil)
+	if in.OrderId ==""{
+		return nil,nil
+	}
 
-	data := prisma.OrderCandidateUpdateInput{}
-	if in.TargetStatus != -1 {
+	data := prisma.OrderCandidateUpdateManyMutationInput{}
+	if in.TargetStatus != -1{
 		data.PtStatus = &in.TargetStatus
 	}
 	if in.PtPerformance != -1 {
@@ -117,9 +120,20 @@ func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtReq
 	if in.ObjectReason != -1 {
 		data.ObjectReason = &in.ObjectReason
 	}
-	_, err := client.UpdateOrderCandidate(prisma.OrderCandidateUpdateParams{
-		Data:  data,
-		Where: prisma.OrderCandidateWhereUniqueInput{ID: &in.Id},
+
+	where := &prisma.OrderCandidateWhereInput{}
+	where.OrderOrigin = &prisma.OrderOriginWhereInput{ID:&in.OrderId}
+	if in.PtId !=""{
+		where.PtId = &in.PtId
+	}
+	if in.SourceStatus != -1{
+		where.PtStatus = &in.SourceStatus
+	}
+
+
+	_,err:=client.UpdateManyOrderCandidates(prisma.OrderCandidateUpdateManyParams{
+		Data:data,
+		Where:where,
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("create order candidate failed %v ", err)

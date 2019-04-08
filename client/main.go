@@ -29,7 +29,7 @@ func main() {
 
 	// create order
 	//
-	createOrderRes, err := mc.CreateOrder(ctx, &mpb.CreateRequest{HotelId:"01",AdviserId:"9527",Job:"cleaning",Date:201903271300,Duration:2,Count:9,CountMale:6,CountFemale:3,Mode:1})
+	createOrderRes, err := mc.CreateOrder(ctx, &mpb.CreateRequest{HotelId:"01",AdviserId:"9527",Job:"cleaning",Date:int32(time.Now().Unix()),Duration:2,Count:9,CountMale:6,CountFemale:3,Mode:1})
 	if err != nil {
 		log.Fatalf("could not create order: %v", err)
 	}
@@ -37,11 +37,11 @@ func main() {
 
 
 	//query order
-	//queryOrderRes,err:=qc.QueryOrder(ctx,&qpb.QueryRequest{OrderId:"10010",Date:nil,Status:nil,QueryFields:&qpb.QueryRequest_QueryWhat{HotelId:1,AdviseId:1}})
-	//if err != nil {
-	//	log.Fatalf("could not query order: %v", err)
-	//}
-	//log.Printf("%v,%v/n",queryOrderRes.QueryResults[0].HotelId,queryOrderRes.QueryResults[0].AdviseId)
+	queryOrderRes,err:=qc.QueryOrder(ctx,&qpb.QueryRequest{OrderId:"10010",Date:-1,Status:-1,QueryValue:&qpb.QueryWhat{},QueryKey:""})
+	if err != nil {
+		log.Fatalf("could not query order: %v", err)
+	}
+	log.Printf("%v",queryOrderRes.OrdersCandidates)
 }
 
 

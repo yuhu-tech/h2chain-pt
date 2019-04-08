@@ -31,8 +31,8 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 		OrdersCandidates:[]*pb.OrderCandidates{
 			{OrderCandidates:[]*pb.OrderCandidate{
 				{Id: "001", AdviserId: "003", PtId: "9527", ApplyTime: 2019032800, PtStatus: 1, RegistrationChannel: "WeChat"},
-				{Id: "002", AdviserId: "003", PtId: "8527", ApplyTime: 2019032811, PtStatus: 1, RegistrationChannel: "WeChat"},
-			}},
+			},
+	},
 		},
 	}, nil
 }

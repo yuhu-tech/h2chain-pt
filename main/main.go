@@ -7,7 +7,7 @@ import (
 	"log"
 	mpb "../api/mutation"
 	qpb "../api/query"
-	"../handle_test"
+	"../handle"
 )
 
 const (
@@ -22,8 +22,8 @@ func main()  {
 	//TODO 是否需要注册两个grpc服务
 	s:=grpc.NewServer()
 
-	mpb.RegisterMutationServer(s,&handle_test.MutationServer{})
-	qpb.RegisterQueryOrderServer(s,&handle_test.QueryServer{})
+	mpb.RegisterMutationServer(s,&handle.MutationServer{})
+	qpb.RegisterQueryOrderServer(s,&handle.QueryServer{})
 
 	reflection.Register(s)
 	if err:=s.Serve(lis);err!=nil{

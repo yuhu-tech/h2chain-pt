@@ -91,7 +91,6 @@ message ModifyPtRequest {
     int32 sourceStatus = 4;
     int32 ptPerformance = 5;
     int32 objectReason = 6;
-    string id = 7;
 }
 
 message ModifyPtReply {
