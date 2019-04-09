@@ -49,7 +49,7 @@ func (s *MutationServer) PostOrder(ctx context.Context, in *pb.PostRequest) (*pb
 		HourlySalary: &in.HourlySalary,
 		WorkCount:    &in.WorkContent,
 		Attention:    &in.Attention,
-		OrderOrigin:  prisma.OrderOriginCreateOneInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
+		OrderOrigin:  prisma.OrderOriginCreateOneWithoutOrderAdviserModifiesInput{Connect:&prisma.OrderOriginWhereUniqueInput{ID:&in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("post order filed %v", err)
@@ -70,7 +70,7 @@ func (s *MutationServer) RegistryOrder(ctx context.Context, in *pb.RegistryReque
 		SignInTime:          in.SignInTime,
 		PtStatus:            in.PtStatus,
 		RegistrationChannel: in.RegistrationChannel,
-		OrderOrigin:         prisma.OrderOriginCreateOneInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
+		OrderOrigin:         prisma.OrderOriginCreateOneWithoutOrderCandidatesInput{Connect:&prisma.OrderOriginWhereUniqueInput{ID:&in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("create order candidate failed %v ", err)
@@ -93,7 +93,7 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 		DateTime:    &in.DateChanged,
 		Duration:    &durationChanged,
 		Mode:        &in.Mode,
-		OrderOrigin: prisma.OrderOriginCreateOneInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
+		OrderOrigin: prisma.OrderOriginCreateOneWithoutOrderHotelModifiesInput{Connect:&prisma.OrderOriginWhereUniqueInput{ID:&in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("create order candidate failed %v ", err)

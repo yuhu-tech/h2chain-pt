@@ -14,9 +14,9 @@ func TestPostOrder(t *testing.T) {
 
 	obj := &handle.MutationServer{}
 	ret, err := obj.PostOrder(ctx, &pb.PostRequest{
-		OrderId:      "cju0sz0v2000v0976zgqtqrv3",
-		IsFloat:      1, // 0 represent don't float
-		HourlySalary: 18,
+		OrderId:      "cju9jjub0000g0a10levs5wqa",
+		IsFloat:      0, // 0 represent don't float
+		HourlySalary: 20,
 		WorkContent:  "cleaningHotel",
 		Attention:    "patience",
 	})

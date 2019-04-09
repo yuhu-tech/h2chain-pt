@@ -21,9 +21,9 @@ func TestCreateOrder(t *testing.T) {
 		Job:         "cleaning",
 		Date:        int32(time.Now().Unix()),
 		Duration:    4,
-		Count:       20,
-		CountMale:   10,
-		CountFemale: 10,
+		Count:       12,
+		CountMale:   8,
+		CountFemale: 4,
 		Mode:        0,
 	})
 	t.Log(ret)

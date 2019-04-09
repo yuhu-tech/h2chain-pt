@@ -13,13 +13,13 @@ func TestRegistryOrder(t *testing.T) {
 	ctx := context.TODO()
 	obj := &handle.MutationServer{}
 	ret, err := obj.RegistryOrder(ctx, &pb.RegistryRequest{
-		OrderId:             "cju0sz0v2000v0976zgqtqrv3",
-		PtId:                "008",
+		OrderId:             "cju9jk6de000l0a10kmuubt7l",
+		PtId:                "001",
 		AdviserId:           "002",
 		ApplyTime:           int32(time.Now().Unix()),
 		SignInTime:          int32(time.Now().Unix() + 100),
 		PtStatus:            1,
-		RegistrationChannel: "QQ",
+		RegistrationChannel: "WeChat",
 	})
 	if err != nil {
 		t.Error(err)

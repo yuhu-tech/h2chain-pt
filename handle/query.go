@@ -101,6 +101,18 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	if in.Status != -1 {
 		where.Status = &in.Status
 	}
+
+	if in.HotelId != "" {
+		where.HotelId = &in.HotelId
+	}
+	if in.Adviser != "" {
+		where.AdviserId = &in.Adviser
+	}
+
+	if in.PtId != "" {
+		where.OrderCandidatesEvery = &prisma.OrderCandidateWhereInput{PtId:&in.PtId}
+	}
+
 	queryRes, err := client.OrderOrigins(&prisma.OrderOriginsParams{
 		Where: where,
 	}).Exec(ctx)
@@ -132,7 +144,7 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	}
 
 	return &pb.QueryReply{
-		Orders:                orderOrigins,
+		Orders: orderOrigins,
 	}, nil
 }
 

@@ -10,6 +10,9 @@ type OrderOrigin {
     count: Int!
     countMale: Int!
     status: Int!
+    orderHotelModifies: [OrderHotelModify]
+    orderAdviserModifies: [OrderAdviserModify]
+    orderCandidates: [OrderCandidate]
 }
 
 

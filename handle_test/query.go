@@ -4,7 +4,6 @@ import (
 	pb "../api/query"
 	"golang.org/x/net/context"
 	"log"
-	"strings"
 )
 
 type QueryServer struct {
@@ -12,10 +11,7 @@ type QueryServer struct {
 
 func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.QueryReply, error) {
 	// check the query order request date
-	log.Println(in.OrderId, in.Date, in.Status, in.QueryKey, in.QueryValue)
-
-	queryKeys := strings.Split(in.QueryKey, ",")
-	log.Println(queryKeys)
+	log.Println(in.OrderId, in.Date, in.Status,in.HotelId,in.Adviser,in.HrId,in.PtId )
 
 	//TODO
 
