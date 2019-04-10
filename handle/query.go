@@ -3,149 +3,138 @@ package handle
 import (
 	pb "../api/query"
 	"../prisma"
+	"encoding/json"
+	"fmt"
 	"golang.org/x/net/context"
 	"log"
+	"reflect"
+	"strconv"
 )
 
 type QueryServer struct {
 }
 
-func QueryHMOfOrder(ctx context.Context, orderId string) ([]*pb.OrderHotelModify, error) {
-	client := prisma.New(nil)
-	orderHotelModifies := []*pb.OrderHotelModify{}
-
-	queryHMRes, err := client.OrderHotelModifies(&prisma.OrderHotelModifiesParams{
-		Where: &prisma.OrderHotelModifyWhereInput{OrderOrigin: &prisma.OrderOriginWhereInput{ID: &orderId}},
-	}).Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-	for i := 0; i < len(queryHMRes); i++ {
-		var oHM pb.OrderHotelModify
-		oHM.Id = queryHMRes[i].ID
-		oHM.Revision = queryHMRes[i].Revision
-		oHM.TimeStamp = queryHMRes[i].Timestamp
-		oHM.Count = *queryHMRes[i].Count
-		oHM.CountMale = *queryHMRes[i].CountMale
-		oHM.Date = *queryHMRes[i].DateTime
-		oHM.Duration = *queryHMRes[i].Duration
-		oHM.Mode = *queryHMRes[i].Mode
-		orderHotelModifies = append(orderHotelModifies, &oHM)
-	}
-	return orderHotelModifies, nil
-}
-
-func QueryAMOfOrder(ctx context.Context, orderId string) ([]*pb.OrderAdviserModify, error) {
-	client := prisma.New(nil)
-	orderAdviserModifies := []*pb.OrderAdviserModify{}
-	queryAMRes, err := client.OrderAdviserModifies(&prisma.OrderAdviserModifiesParams{
-		Where: &prisma.OrderAdviserModifyWhereInput{OrderOrigin: &prisma.OrderOriginWhereInput{ID: &orderId}},
-	}).Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-	for i := 0; i < len(queryAMRes); i++ {
-		var oAM pb.OrderAdviserModify
-		oAM.Id = queryAMRes[i].ID
-		oAM.Revision = queryAMRes[i].Revision
-		oAM.TimeStamp = queryAMRes[i].TimeStamp
-		oAM.IsFloat = *queryAMRes[i].IsFloat
-		oAM.HourlySalary = *queryAMRes[i].HourlySalary
-		oAM.WorkContent = *queryAMRes[i].WorkCount
-		oAM.Attention = *queryAMRes[i].Attention
-		orderAdviserModifies = append(orderAdviserModifies, &oAM)
-	}
-	return orderAdviserModifies, nil
-}
-
-func QueryCOfOrder(ctx context.Context, orderId string) ([]*pb.OrderCandidate, error) {
-	client := prisma.New(nil)
-	orderCandidates := []*pb.OrderCandidate{}
-	queryOCRes, err := client.OrderCandidates(&prisma.OrderCandidatesParams{
-		Where: &prisma.OrderCandidateWhereInput{OrderOrigin: &prisma.OrderOriginWhereInput{ID: &orderId}},
-	}).Exec(ctx)
-	if err != nil {
-		return nil, err
-	}
-	for i := 0; i < len(queryOCRes); i++ {
-		var oC pb.OrderCandidate
-		oC.Id = queryOCRes[i].ID
-		oC.AdviserId = queryOCRes[i].AdviserId
-		oC.AgentId = queryOCRes[i].AgentId
-		oC.PtId = queryOCRes[i].PtId
-		oC.ApplyTime = queryOCRes[i].ApplyTime
-		oC.SignInTime = queryOCRes[i].SignInTime
-		oC.PtStatus = queryOCRes[i].PtStatus
-		oC.PtPerformance = queryOCRes[i].PtPerformance
-		oC.ObjectReason = queryOCRes[i].ObjectReason
-		oC.RegistrationChannel = queryOCRes[i].RegistrationChannel
-		orderCandidates = append(orderCandidates, &oC)
-	}
-	return orderCandidates, nil
-}
-
 func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.QueryReply, error) {
+
 	client := prisma.New(nil)
-	orderOrigins := []*pb.Order{}
+	where := ``
+	isQuery := true
 
-	where := &prisma.OrderOriginWhereInput{}
-	if in.OrderId != "" {
-		where.ID = &in.OrderId
-	}
-	if in.Date != -1 {
-		dateMin := in.Date
-		dateMax := in.Date + 86399
-		where.DatetimeLte = &dateMax
-		where.DatetimeGte = &dateMin
-	}
-	if in.Status != -1 {
-		where.Status = &in.Status
+	// query by orderId
+	orderId := reflect.ValueOf(in.OrderId)
+	fmt.Println(orderId.Interface().(string))
+	if orderId.Interface().(string) != "" {
+		where = `id:"` + in.OrderId + `"`
+		isQuery = false
 	}
 
-	if in.HotelId != "" {
-		where.HotelId = &in.HotelId
-	}
-	if in.Adviser != "" {
-		where.AdviserId = &in.Adviser
-	}
-
-	if in.PtId != "" {
-		where.OrderCandidatesEvery = &prisma.OrderCandidateWhereInput{PtId:&in.PtId}
+	// query by status
+	if in.Status == 1 || in.Status == 2 || in.Status == 3 {
+		where = `status:` + strconv.Itoa(int(in.Status))
+		isQuery = false
 	}
 
-	queryRes, err := client.OrderOrigins(&prisma.OrderOriginsParams{
-		Where: where,
-	}).Exec(ctx)
+	// query by date
+	date := reflect.ValueOf(in.Date)
+	if date.Interface().(int32) != 0 {
+		var date int32
+		// check the date is day
+		if (in.Date+28800)%86400 == 0 {
+			date = in.Date
+		} else {
+			in.Date -= (in.Date + 28800)%86400
+			date = in.Date
+		}
+		dateMin := date
+		dateMax := date + 86399
+		where = `datetime_gte:` + strconv.Itoa(int(dateMin)) + `datetime_lte:` + strconv.Itoa(int(dateMax))
+		isQuery = false
+	}
+
+	// query by hotelId
+	hotelId := reflect.ValueOf(in.HotelId)
+	if hotelId.Interface().(string) != "" {
+		where = `hotelId:"` + in.HotelId + `"`
+		isQuery = false
+	}
+
+	// query by adviserId
+	adviserId := reflect.ValueOf(in.Adviser)
+	if adviserId.Interface().(string) != "" {
+		where = `adviserId:"` + in.Adviser + `"`
+		isQuery = false
+	}
+
+	// query by ptId
+	ptId := reflect.ValueOf(in.PtId)
+	if ptId.Interface().(string) != "" {
+		where = `orderCandidates_some:{ptId:"` + in.PtId + `"}`
+		isQuery = false
+	}
+
+	// check the query
+	if isQuery {
+		return &pb.QueryReply{OrderOrigins: ""}, nil
+	}
+
+	query := `
+	  query{
+		orderOrigins(where:{` + where + `}){
+	    id
+	    hotelId
+	    hrId
+	    adviserId
+	    datetime
+	    duration
+	    job
+	    mode
+	    count
+	  	countMale
+	    status
+	    orderHotelModifies{
+	      id
+	      revision
+	      timestamp
+	      count
+	      countMale
+	      dateTime
+	      duration
+	      mode
+	    }
+	    orderAdviserModifies{
+	      id
+	      revision
+	      timeStamp
+	      isFloat
+	      hourlySalary
+	      workCount
+	      attention
+	    }
+	    orderCandidates{
+	      id
+	      adviserId
+	      agentId
+	      ptId
+	      applyTime
+	      signInTime
+	      ptStatus
+	      ptPerformance
+	      objectReason
+	      registrationChannel
+	    }
+	  }
+	}
+ `
+	variables := make(map[string]interface{})
+	res, err := client.GraphQL(ctx, query, variables)
 	if err != nil {
-		return &pb.QueryReply{}, err
+		return nil, err
 	}
-	for i := 0; i < len(queryRes); i++ {
-		orderHotelModifies, _ := QueryHMOfOrder(ctx, queryRes[i].ID)
-		orderAdviserModifies, _ := QueryAMOfOrder(ctx, queryRes[i].ID)
-		orderCandidates, _ := QueryCOfOrder(ctx, queryRes[i].ID)
-
-		var orderOrigin pb.Order
-		orderOrigin.OrderId = queryRes[i].ID
-		orderOrigin.HotelId = queryRes[i].HotelId
-		orderOrigin.AdviserId = queryRes[i].AdviserId
-		orderOrigin.Date = queryRes[i].Datetime
-		orderOrigin.Duration = queryRes[i].Duration
-		orderOrigin.Count = queryRes[i].Count
-		orderOrigin.CountMale = queryRes[i].CountMale
-		orderOrigin.CountFemale = queryRes[i].Count - queryRes[i].CountMale
-		orderOrigin.Status = queryRes[i].Status
-		orderOrigin.Job = queryRes[i].Job
-		orderOrigin.Mode = queryRes[i].Mode
-		orderOrigin.OrderHotelModifies = orderHotelModifies
-		orderOrigin.OrderAdviserModifies = orderAdviserModifies
-		orderOrigin.OrderCandidates = orderCandidates
-
-		orderOrigins = append(orderOrigins, &orderOrigin)
+	resByte, err := json.Marshal(res)
+	if err != nil {
+		return nil, err
 	}
-
-	return &pb.QueryReply{
-		Orders: orderOrigins,
-	}, nil
+	return &pb.QueryReply{OrderOrigins: string(resByte)}, nil
 }
 
 func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest) (*pb.QueryPTReply, error) {
@@ -188,21 +177,4 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	}
 
 	return &pb.QueryPTReply{OrderPts: result}, nil
-}
-
-func NativeGrapgql() map[string]interface{} {
-	client := prisma.New(nil)
-	ctx := context.TODO()
-	query := `
-	  query{
-		orderOrigins(where:{status:1}){
-    	  id
-    	  hotelId
-    	  adviserId
-      }
-    }
-  `
-	variables := make(map[string]interface{})
-	res, _ := client.GraphQL(ctx, query, variables)
-	return res
 }

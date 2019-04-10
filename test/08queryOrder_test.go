@@ -12,10 +12,10 @@ func TestQueryOrder(t *testing.T)  {
 	ctx := context.TODO()
 
 	obj:=&handle.QueryServer{}
-	ret,err:=obj.QueryOrder(ctx,&pb.QueryRequest{OrderId:"",Status:-1,Date:-1,HotelId:"001",Adviser:"",PtId:""})		// 1554220800
+	//ret,err:=obj.QueryOrder(ctx,&pb.QueryRequest{Status:-1,Date:-1,HotelId:"",Adviser:"",PtId:"001"})
+	ret,err:=obj.QueryOrder(ctx,&pb.QueryRequest{PtId:"001"})		// 1554220800
 	if err!=nil{
 		t.Error(err)
 	}
-	t.Log(ret.Orders)
-	t.Log(len(ret.Orders))
+	t.Log(ret.OrderOrigins)
 }

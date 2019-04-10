@@ -16,25 +16,7 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	//TODO
 
 	// make dead data and return
-	return &pb.QueryReply{
-		Orders: []*pb.Order{
-			{OrderId: "10010",
-				HotelId:              "001",
-				AdviserId:            "003",
-				Date:                 20190328,
-				Duration:             2,
-				Mode:                 0,
-				Count:                10,
-				CountMale:            5,
-				CountFemale:          5,
-				Job:                  "cleaning",
-				Status:               1,
-				OrderHotelModifies:   []*pb.OrderHotelModify{{Id: "001", Revision: 001, TimeStamp: 20190328, Date: 20190328, Duration: 2, Mode: 1, Count: 15, CountMale: 10}},
-				OrderAdviserModifies: []*pb.OrderAdviserModify{{Id: "001", Revision: 001, TimeStamp: 20190328, IsFloat: 0, HourlySalary: 20, WorkContent: "cleanRoom", Attention: "careful"}},
-				OrderCandidates:      []*pb.OrderCandidate{{Id: "001", AdviserId: "003", PtId: "9527", ApplyTime: 2019032800, PtStatus: 1, RegistrationChannel: "WeChat"}},
-			},
-		},
-	}, nil
+	return &pb.QueryReply{OrderOrigins:"HelloWorld"}, nil
 }
 
 func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest) (*pb.QueryPTReply, error) {

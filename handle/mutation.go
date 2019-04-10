@@ -25,7 +25,7 @@ func (s *MutationServer) CreateOrder(ctx context.Context, in *pb.CreateRequest) 
 			Job:       in.Job,
 			Count:     in.Count,
 			CountMale: in.CountMale,
-			Status:    1,
+			Status:    0,
 			Mode:      in.Mode,
 		}).Exec(ctx)
 	if err != nil {

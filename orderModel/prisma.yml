@@ -1,5 +1,5 @@
 endpoint: http://localhost:4466
-datamodel: ./database/datamodel.graphql
+datamodel: ./database/datamodel.orderModel
 
 generate:
   - generator: go-client
