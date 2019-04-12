@@ -84,9 +84,9 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	query := `
 	  query{
 		orderOrigins(where:{` + where + `}orderBy:status_ASC){
-	    id
-	    hotelId
-	    hrId
+		id
+		hotelId
+		hrId
 		adviserId
 		datetime
 		duration
@@ -94,7 +94,7 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 		mode
 		count
 		countMale
-	    status
+		status
 	    orderHotelModifies{
 	      id
 	      revision
