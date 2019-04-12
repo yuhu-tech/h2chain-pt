@@ -42,6 +42,7 @@ message PT {
         int32 signTime = 5;
         string orderId = 6;
         string id = 7;
+        int32 ptStatus = 8;
 }
 
 message QueryPTReply {

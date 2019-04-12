@@ -1,17 +1,18 @@
 package test
 
 import (
-	pb "../api/mutation"
-	"../handle"
 	"context"
 	"testing"
+
+	pb "../api/mutation"
+	"../handle"
 )
 
 func TestCloseOrder(t *testing.T) {
 	t.Log("test close order")
 	ctx := context.TODO()
 	obj := &handle.MutationServer{}
-	ret, err := obj.CloseOrder(ctx, &pb.CloseRequest{OrderId:"cju0szhh1001009767nik93ry"})
+	ret, err := obj.CloseOrder(ctx, &pb.CloseRequest{OrderId:"cjuc3dxhn007a0a10dct4o4kn"})
 	if err != nil {
 		t.Error(err)
 	}

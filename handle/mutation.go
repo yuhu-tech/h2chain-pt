@@ -1,11 +1,14 @@
 package handle
 
 import (
+	"log"
+	"reflect"
+	"time"
+
+	"golang.org/x/net/context"
+
 	pb "../api/mutation"
 	"../prisma"
-	"golang.org/x/net/context"
-	"log"
-	"time"
 )
 
 type MutationServer struct {
@@ -25,7 +28,7 @@ func (s *MutationServer) CreateOrder(ctx context.Context, in *pb.CreateRequest) 
 			Job:       in.Job,
 			Count:     in.Count,
 			CountMale: in.CountMale,
-			Status:    0,
+			Status:    1,
 			Mode:      in.Mode,
 		}).Exec(ctx)
 	if err != nil {
@@ -40,21 +43,29 @@ func (s *MutationServer) PostOrder(ctx context.Context, in *pb.PostRequest) (*pb
 
 	client := prisma.New(nil)
 	// TODO how to achieve revision
+	// TODO add transaction to bind create and update
 
 	// create orderAdviserModify
 	_, err := client.CreateOrderAdviserModify(prisma.OrderAdviserModifyCreateInput{
-		Revision:     01,
+		Revision:     int32(time.Now().Unix()),
 		TimeStamp:    int32(time.Now().Unix()),
 		IsFloat:      &in.IsFloat,
 		HourlySalary: &in.HourlySalary,
 		WorkCount:    &in.WorkContent,
 		Attention:    &in.Attention,
-		OrderOrigin:  prisma.OrderOriginCreateOneWithoutOrderAdviserModifiesInput{Connect:&prisma.OrderOriginWhereUniqueInput{ID:&in.OrderId}},
+		OrderOrigin:  prisma.OrderOriginCreateOneWithoutOrderAdviserModifiesInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("post order filed %v", err)
 		return &pb.PostReply{PostResult: 0}, err
 	}
+
+	// modify orderOrigin status
+	var status int32 = 2
+	_, err = client.UpdateOrderOrigin(prisma.OrderOriginUpdateParams{
+		Data:  prisma.OrderOriginUpdateInput{Status: &status},
+		Where: prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId},
+	}).Exec(ctx)
 
 	return &pb.PostReply{PostResult: 1}, nil
 }
@@ -70,7 +81,7 @@ func (s *MutationServer) RegistryOrder(ctx context.Context, in *pb.RegistryReque
 		SignInTime:          in.SignInTime,
 		PtStatus:            in.PtStatus,
 		RegistrationChannel: in.RegistrationChannel,
-		OrderOrigin:         prisma.OrderOriginCreateOneWithoutOrderCandidatesInput{Connect:&prisma.OrderOriginWhereUniqueInput{ID:&in.OrderId}},
+		OrderOrigin:         prisma.OrderOriginCreateOneWithoutOrderCandidatesInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("create order candidate failed %v ", err)
@@ -86,14 +97,14 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 	var durationChanged = in.DurationChanged * 3600
 
 	_, err := client.CreateOrderHotelModify(prisma.OrderHotelModifyCreateInput{
-		Revision:    01,
+		Revision:    int32(time.Now().Unix()),
 		Timestamp:   int32(time.Now().Unix()),
 		Count:       &in.CountChanged,
 		CountMale:   &in.CountMaleChanged,
 		DateTime:    &in.DateChanged,
 		Duration:    &durationChanged,
 		Mode:        &in.Mode,
-		OrderOrigin: prisma.OrderOriginCreateOneWithoutOrderHotelModifiesInput{Connect:&prisma.OrderOriginWhereUniqueInput{ID:&in.OrderId}},
+		OrderOrigin: prisma.OrderOriginCreateOneWithoutOrderHotelModifiesInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("create order candidate failed %v ", err)
@@ -104,36 +115,45 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 }
 
 func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
-
 	client := prisma.New(nil)
-	if in.OrderId ==""{
-		return nil,nil
+
+	orderId := reflect.ValueOf(in.OrderId)
+	if orderId.Interface().(string) == "" {
+		return nil, nil
 	}
 
 	data := prisma.OrderCandidateUpdateManyMutationInput{}
-	if in.TargetStatus != -1{
+	targetStatus := reflect.ValueOf(in.TargetStatus)
+	if targetStatus.Interface().(int32) != 0 {
 		data.PtStatus = &in.TargetStatus
 	}
-	if in.PtPerformance != -1 {
+
+	ptPerformance := reflect.ValueOf(in.PtPerformance)
+	if ptPerformance.Interface().(int32) != 0 {
 		data.PtPerformance = &in.PtPerformance
 	}
-	if in.ObjectReason != -1 {
+
+	objectReason := reflect.ValueOf(in.ObjectReason)
+	if objectReason.Interface().(int32) != -1 {
 		data.ObjectReason = &in.ObjectReason
 	}
 
 	where := &prisma.OrderCandidateWhereInput{}
-	where.OrderOrigin = &prisma.OrderOriginWhereInput{ID:&in.OrderId}
-	if in.PtId !=""{
+	where.OrderOrigin = &prisma.OrderOriginWhereInput{ID: &in.OrderId}
+
+	ptId := reflect.ValueOf(in.PtId)
+	if ptId.Interface().(string) != "" {
 		where.PtId = &in.PtId
 	}
-	if in.SourceStatus != -1{
+
+	sourceStatus := reflect.ValueOf(in.SourceStatus)
+	if sourceStatus.Interface().(int32) != -1 {
 		where.PtStatus = &in.SourceStatus
 	}
 
-
-	_,err:=client.UpdateManyOrderCandidates(prisma.OrderCandidateUpdateManyParams{
-		Data:data,
-		Where:where,
+	_, err := client.UpdateManyOrderCandidates(prisma.OrderCandidateUpdateManyParams{
+		Data:  data,
+		Where: where,
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("create order candidate failed %v ", err)

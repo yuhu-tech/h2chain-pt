@@ -1,14 +1,15 @@
 package handle
 
 import (
-	pb "../api/query"
-	"../prisma"
-	"encoding/json"
-	"fmt"
-	"golang.org/x/net/context"
 	"log"
 	"reflect"
 	"strconv"
+
+	"encoding/json"
+	"golang.org/x/net/context"
+
+	pb "../api/query"
+	"../prisma"
 )
 
 type QueryServer struct {
@@ -19,37 +20,6 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	client := prisma.New(nil)
 	where := ``
 	isQuery := true
-
-	// query by orderId
-	orderId := reflect.ValueOf(in.OrderId)
-	fmt.Println(orderId.Interface().(string))
-	if orderId.Interface().(string) != "" {
-		where = `id:"` + in.OrderId + `"`
-		isQuery = false
-	}
-
-	// query by status
-	if in.Status == 1 || in.Status == 2 || in.Status == 3 {
-		where = `status:` + strconv.Itoa(int(in.Status))
-		isQuery = false
-	}
-
-	// query by date
-	date := reflect.ValueOf(in.Date)
-	if date.Interface().(int32) != 0 {
-		var date int32
-		// check the date is day
-		if (in.Date+28800)%86400 == 0 {
-			date = in.Date
-		} else {
-			in.Date -= (in.Date + 28800)%86400
-			date = in.Date
-		}
-		dateMin := date
-		dateMax := date + 86399
-		where = `datetime_gte:` + strconv.Itoa(int(dateMin)) + `datetime_lte:` + strconv.Itoa(int(dateMax))
-		isQuery = false
-	}
 
 	// query by hotelId
 	hotelId := reflect.ValueOf(in.HotelId)
@@ -72,6 +42,40 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 		isQuery = false
 	}
 
+	// query by orderId
+	orderId := reflect.ValueOf(in.OrderId)
+	if orderId.Interface().(string) != "" {
+		where = `id:"` + in.OrderId + `"`
+		isQuery = false
+	}
+
+	// query by status
+	if in.Status == 12 || in.Status == 1 || in.Status == 2 || in.Status == 3 {
+		if in.Status == 12 {
+			where = where + `status_not:3`
+		} else {
+			where = where + `status:` + strconv.Itoa(int(in.Status))
+			isQuery = false
+		}
+	}
+
+	// query by date
+	date := reflect.ValueOf(in.Date)
+	if date.Interface().(int32) != 0 {
+		var date int32
+		// check the date is day
+		if (in.Date+28800)%86400 == 0 {
+			date = in.Date
+		} else {
+			in.Date -= (in.Date + 28800) % 86400
+			date = in.Date
+		}
+		dateMin := date
+		dateMax := date + 86399
+		where = where + `datetime_gte:` + strconv.Itoa(int(dateMin)) + `datetime_lte:` + strconv.Itoa(int(dateMax))
+		isQuery = false
+	}
+
 	// check the query
 	if isQuery {
 		return &pb.QueryReply{OrderOrigins: ""}, nil
@@ -79,17 +83,17 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 
 	query := `
 	  query{
-		orderOrigins(where:{` + where + `}){
+		orderOrigins(where:{` + where + `}orderBy:status_ASC){
 	    id
 	    hotelId
 	    hrId
-	    adviserId
-	    datetime
-	    duration
-	    job
-	    mode
-	    count
-	  	countMale
+		adviserId
+		datetime
+		duration
+		job
+		mode
+		count
+		countMale
 	    status
 	    orderHotelModifies{
 	      id
@@ -141,20 +145,32 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 
 	client := prisma.New(nil)
 
-	if in.OrderId == "" {
+	// check the orderId
+	orderId := reflect.ValueOf(in.OrderId)
+	if orderId.Interface().(string) == "" {
 		return nil, nil
 	}
 
 	where := &prisma.OrderCandidateWhereInput{}
+
+	// query pts of order by orderId
 	where.OrderOrigin = &prisma.OrderOriginWhereInput{ID: &in.OrderId}
 
-	if in.PtId != "" {
+	// query pts of order by ptId
+	ptId := reflect.ValueOf(in.PtId)
+	if ptId.Interface().(string) != "" {
 		where.PtId = &in.PtId
 	}
-	if in.PtStatus != -1 {
+
+	// query pts of order by ptStatus
+	ptStatus := reflect.ValueOf(in.PtStatus)
+	if ptStatus.Interface().(int32) != 0 {
 		where.PtStatus = &in.PtStatus
 	}
-	if in.RegistrationChannel != "" {
+
+	// query pts of order by registrationChannel
+	registrationChannel := reflect.ValueOf(in.RegistrationChannel)
+	if registrationChannel.Interface().(string) != "" {
 		where.RegistrationChannel = &in.RegistrationChannel
 	}
 
@@ -173,6 +189,7 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 		pt.ApplyTime = queryRes[i].ApplyTime
 		pt.SignTime = queryRes[i].SignInTime
 		pt.Id = queryRes[i].ID
+		pt.PtStatus = queryRes[i].PtStatus
 		result = append(result, &pt)
 	}
 

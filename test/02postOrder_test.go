@@ -1,17 +1,16 @@
 package test
 
 import (
-	pb "../api/mutation"
-	"../handle"
 	"context"
 	"testing"
+
+	pb "../api/mutation"
+	"../handle"
 )
 
 func TestPostOrder(t *testing.T) {
 	t.Log("test post order ")
-
 	ctx := context.TODO()
-
 	obj := &handle.MutationServer{}
 	ret, err := obj.PostOrder(ctx, &pb.PostRequest{
 		OrderId:      "cju9jjub0000g0a10levs5wqa",

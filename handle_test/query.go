@@ -1,9 +1,11 @@
 package handle_test
 
 import (
-	pb "../api/query"
-	"golang.org/x/net/context"
 	"log"
+
+	"golang.org/x/net/context"
+
+	pb "../api/query"
 )
 
 type QueryServer struct {

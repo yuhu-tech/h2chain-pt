@@ -1,11 +1,12 @@
 package test
 
 import (
-	pb "../api/mutation"
-	"../handle"
 	"context"
 	"testing"
 	"time"
+
+	pb "../api/mutation"
+	"../handle"
 )
 
 func TestRegistryOrder(t *testing.T) {
