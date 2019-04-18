@@ -13,12 +13,9 @@ func TestModifyOrderPT(t *testing.T) {
 	ctx := context.TODO()
 	obj := &handle.MutationServer{}
 	ret, err := obj.ModifyPTOfOrder(ctx, &pb.ModifyPtRequest{
-		OrderId:       "cju0sz0v2000v0976zgqtqrv3",
-		PtId:          "",
-		SourceStatus:  0,
-		TargetStatus:  1,
-		PtPerformance: -1,
-		ObjectReason:  -1,
+		OrderId:       "cju9jjub0000g0a10levs5wqa",
+		SourceStatus:  1,
+		TargetStatus:  2,
 	})
 	if err != nil {
 		t.Error(err)

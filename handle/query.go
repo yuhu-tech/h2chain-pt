@@ -4,6 +4,7 @@ import (
 	"log"
 	"reflect"
 	"strconv"
+	"strings"
 
 	"encoding/json"
 	"golang.org/x/net/context"
@@ -38,7 +39,12 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	// query by ptId
 	ptId := reflect.ValueOf(in.PtId)
 	if ptId.Interface().(string) != "" {
-		where = `orderCandidates_some:{ptId:"` + in.PtId + `"}`
+		arr := strings.Split(in.PtId, ",")
+		if arr[0] == "none" {
+			where = `orderCandidates_none:{ptId:"` + arr[1] + `"}`
+		} else {
+			where = `orderCandidates_some:{ptId:"` + arr[1] + `"}`
+		}
 		isQuery = false
 	}
 

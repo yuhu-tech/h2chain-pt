@@ -134,7 +134,7 @@ func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtReq
 	}
 
 	objectReason := reflect.ValueOf(in.ObjectReason)
-	if objectReason.Interface().(int32) != -1 {
+	if objectReason.Interface().(int32) != 0 {
 		data.ObjectReason = &in.ObjectReason
 	}
 
@@ -147,7 +147,7 @@ func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtReq
 	}
 
 	sourceStatus := reflect.ValueOf(in.SourceStatus)
-	if sourceStatus.Interface().(int32) != -1 {
+	if sourceStatus.Interface().(int32) != 0 {
 		where.PtStatus = &in.SourceStatus
 	}
 
