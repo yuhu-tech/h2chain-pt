@@ -59,6 +59,7 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	if in.Status == 12 || in.Status == 1 || in.Status == 2 || in.Status == 3 {
 		if in.Status == 12 {
 			where = where + `status_not:3`
+			isQuery = false
 		} else {
 			where = where + `status:` + strconv.Itoa(int(in.Status))
 			isQuery = false
@@ -171,6 +172,9 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	// query pts of order by ptStatus
 	ptStatus := reflect.ValueOf(in.PtStatus)
 	if ptStatus.Interface().(int32) != 0 {
+		if in.PtStatus == 13 {
+			where.PtStatusIn = []int32{1,3}
+		}
 		where.PtStatus = &in.PtStatus
 	}
 
@@ -192,8 +196,8 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 		pt.OrderId = in.OrderId
 		pt.PtId = queryRes[i].PtId
 		pt.AdviserId = queryRes[i].AdviserId
-		pt.ApplyTime = queryRes[i].ApplyTime
-		pt.SignTime = queryRes[i].SignInTime
+		pt.ApplyTime = *queryRes[i].ApplyTime
+		pt.SignTime = *queryRes[i].SignInTime
 		pt.Id = queryRes[i].ID
 		pt.PtStatus = queryRes[i].PtStatus
 		result = append(result, &pt)

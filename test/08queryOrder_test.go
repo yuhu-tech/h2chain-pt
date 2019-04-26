@@ -12,7 +12,7 @@ func TestQueryOrder(t *testing.T) {
 	t.Log("test query order by orderId date status")
 	ctx := context.TODO()
 	obj := &handle.QueryServer{}
-	ret, err := obj.QueryOrder(ctx, &pb.QueryRequest{PtId: "none,001"})
+	ret, err := obj.QueryOrder(ctx, &pb.QueryRequest{Status:12})
 	if err != nil {
 		t.Error(err)
 	}

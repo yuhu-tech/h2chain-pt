@@ -44,12 +44,24 @@ type OrderCandidate {
     adviserId: String!
     agentId: String!
     ptId: String!
-    applyTime: Int!
-    signInTime: Int!
+    applyTime: Int
+    signInTime: Int
     ptStatus: Int!
-    ptPerformance: Int!
-    objectReason: Int!
-    registrationChannel: String!
+    ptPerformance: Int
+    objectReason: Int
+    record: Record
+    registrationChannel: String
     orderOrigin: OrderOrigin!
+}
+type Record {
+    id: ID! @unique
+    startDate: Int!
+    startTime: Int!
+    endDate: Int!
+    endTime: Int!
+    orderSalary: Int!
+    relSalary: Int!
+    isWorked: Int
+    orderCcandidate: OrderCandidate!
 }
 

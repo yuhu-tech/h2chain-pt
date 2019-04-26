@@ -77,10 +77,10 @@ func (s *MutationServer) RegistryOrder(ctx context.Context, in *pb.RegistryReque
 	_, err := client.CreateOrderCandidate(prisma.OrderCandidateCreateInput{
 		AdviserId:           in.AdviserId,
 		PtId:                in.PtId,
-		ApplyTime:           in.ApplyTime,
-		SignInTime:          in.SignInTime,
+		ApplyTime:           &in.ApplyTime,
+		SignInTime:          &in.SignInTime,
 		PtStatus:            in.PtStatus,
-		RegistrationChannel: in.RegistrationChannel,
+		RegistrationChannel: &in.RegistrationChannel,
 		OrderOrigin:         prisma.OrderOriginCreateOneWithoutOrderCandidatesInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
@@ -114,7 +114,7 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 	return &pb.ModifyReply{ModifyResult: 1}, nil
 }
 
-func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
+func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) 	{
 	client := prisma.New(nil)
 
 	orderId := reflect.ValueOf(in.OrderId)
@@ -166,7 +166,7 @@ func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtReq
 func (s *MutationServer) CloseOrder(ctx context.Context, in *pb.CloseRequest) (*pb.CloseReply, error) {
 
 	client := prisma.New(nil)
-	var closeStatus int32 = 2
+	var closeStatus int32 = 3
 
 	_, err := client.UpdateOrderOrigin(prisma.OrderOriginUpdateParams{
 		Data:  prisma.OrderOriginUpdateInput{Status: &closeStatus},

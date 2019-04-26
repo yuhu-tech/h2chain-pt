@@ -23,7 +23,7 @@ func TestCreateOrder(t *testing.T) {
 		Count:       20,
 		CountMale:   16,
 		CountFemale: 4,
-		Mode:        0,
+		Mode:        3,
 	})
 	t.Log(ret)
 }
