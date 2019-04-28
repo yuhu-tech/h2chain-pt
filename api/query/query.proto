@@ -9,6 +9,8 @@ service QueryOrder {
     // hotel/adviser query order's pt
     rpc QueryPTOfOrder (QueryPTRequest) returns (QueryPTReply) {}
 
+    // adviser query pt's remark
+    rpc QueryRemark (QueryRemarkRequest) returns (QueryRemarkReply) {}
 }
 
 
@@ -47,4 +49,15 @@ message PT {
 
 message QueryPTReply {
     repeated PT orderPts = 1;
+}
+
+message QueryRemarkRequest {
+    string orderId = 1;
+    string ptId  = 2;
+}
+
+message QueryRemarkReply {
+    int32 startDate = 1;
+    int32 endDate = 2;
+    int32 realSalary = 3;
 }

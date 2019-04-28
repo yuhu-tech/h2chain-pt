@@ -298,20 +298,20 @@ func (client *Client) OrderOriginsConnection(params *OrderOriginsConnectionParam
 	panic("not implemented")
 }
 
-func (client *Client) Record(params RecordWhereUniqueInput) *RecordExec {
+func (client *Client) Remark(params RemarkWhereUniqueInput) *RemarkExec {
 	ret := client.Client.GetOne(
 		nil,
 		params,
-		[2]string{"RecordWhereUniqueInput!", "Record"},
-		"record",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[2]string{"RemarkWhereUniqueInput!", "Remark"},
+		"remark",
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordExec{ret}
+	return &RemarkExec{ret}
 }
 
-type RecordsParams struct {
-	Where   *RecordWhereInput   `json:"where,omitempty"`
-	OrderBy *RecordOrderByInput `json:"orderBy,omitempty"`
+type RemarksParams struct {
+	Where   *RemarkWhereInput   `json:"where,omitempty"`
+	OrderBy *RemarkOrderByInput `json:"orderBy,omitempty"`
 	Skip    *int32              `json:"skip,omitempty"`
 	After   *string             `json:"after,omitempty"`
 	Before  *string             `json:"before,omitempty"`
@@ -319,7 +319,7 @@ type RecordsParams struct {
 	Last    *int32              `json:"last,omitempty"`
 }
 
-func (client *Client) Records(params *RecordsParams) *RecordExecArray {
+func (client *Client) Remarks(params *RemarksParams) *RemarkExecArray {
 	var wparams *prisma.WhereParams
 	if params != nil {
 		wparams = &prisma.WhereParams{
@@ -336,16 +336,16 @@ func (client *Client) Records(params *RecordsParams) *RecordExecArray {
 	ret := client.Client.GetMany(
 		nil,
 		wparams,
-		[3]string{"RecordWhereInput", "RecordOrderByInput", "Record"},
-		"records",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[3]string{"RemarkWhereInput", "RemarkOrderByInput", "Remark"},
+		"remarks",
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordExecArray{ret}
+	return &RemarkExecArray{ret}
 }
 
-type RecordsConnectionParams struct {
-	Where   *RecordWhereInput   `json:"where,omitempty"`
-	OrderBy *RecordOrderByInput `json:"orderBy,omitempty"`
+type RemarksConnectionParams struct {
+	Where   *RemarkWhereInput   `json:"where,omitempty"`
+	OrderBy *RemarkOrderByInput `json:"orderBy,omitempty"`
 	Skip    *int32              `json:"skip,omitempty"`
 	After   *string             `json:"after,omitempty"`
 	Before  *string             `json:"before,omitempty"`
@@ -353,7 +353,7 @@ type RecordsConnectionParams struct {
 	Last    *int32              `json:"last,omitempty"`
 }
 
-func (client *Client) RecordsConnection(params *RecordsConnectionParams) RecordConnectionExec {
+func (client *Client) RemarksConnection(params *RemarksConnectionParams) RemarkConnectionExec {
 	panic("not implemented")
 }
 
@@ -677,57 +677,57 @@ func (client *Client) DeleteManyOrderOrigins(params *OrderOriginWhereInput) *Bat
 	return &BatchPayloadExec{exec}
 }
 
-func (client *Client) CreateRecord(params RecordCreateInput) *RecordExec {
+func (client *Client) CreateRemark(params RemarkCreateInput) *RemarkExec {
 	ret := client.Client.Create(
 		params,
-		[2]string{"RecordCreateInput!", "Record"},
-		"createRecord",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[2]string{"RemarkCreateInput!", "Remark"},
+		"createRemark",
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordExec{ret}
+	return &RemarkExec{ret}
 }
 
-type RecordUpdateParams struct {
-	Data  RecordUpdateInput      `json:"data"`
-	Where RecordWhereUniqueInput `json:"where"`
+type RemarkUpdateParams struct {
+	Data  RemarkUpdateInput      `json:"data"`
+	Where RemarkWhereUniqueInput `json:"where"`
 }
 
-func (client *Client) UpdateRecord(params RecordUpdateParams) *RecordExec {
+func (client *Client) UpdateRemark(params RemarkUpdateParams) *RemarkExec {
 	ret := client.Client.Update(
 		prisma.UpdateParams{
 			Data:  params.Data,
 			Where: params.Where,
 		},
-		[3]string{"RecordUpdateInput!", "RecordWhereUniqueInput!", "Record"},
-		"updateRecord",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[3]string{"RemarkUpdateInput!", "RemarkWhereUniqueInput!", "Remark"},
+		"updateRemark",
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordExec{ret}
+	return &RemarkExec{ret}
 }
 
-type RecordUpdateManyParams struct {
-	Data  RecordUpdateManyMutationInput `json:"data"`
-	Where *RecordWhereInput             `json:"where,omitempty"`
+type RemarkUpdateManyParams struct {
+	Data  RemarkUpdateManyMutationInput `json:"data"`
+	Where *RemarkWhereInput             `json:"where,omitempty"`
 }
 
-func (client *Client) UpdateManyRecords(params RecordUpdateManyParams) *BatchPayloadExec {
+func (client *Client) UpdateManyRemarks(params RemarkUpdateManyParams) *BatchPayloadExec {
 	exec := client.Client.UpdateMany(
 		prisma.UpdateParams{
 			Data:  params.Data,
 			Where: params.Where,
 		},
-		[2]string{"RecordUpdateManyMutationInput!", "RecordWhereInput"},
-		"updateManyRecords")
+		[2]string{"RemarkUpdateManyMutationInput!", "RemarkWhereInput"},
+		"updateManyRemarks")
 	return &BatchPayloadExec{exec}
 }
 
-type RecordUpsertParams struct {
-	Where  RecordWhereUniqueInput `json:"where"`
-	Create RecordCreateInput      `json:"create"`
-	Update RecordUpdateInput      `json:"update"`
+type RemarkUpsertParams struct {
+	Where  RemarkWhereUniqueInput `json:"where"`
+	Create RemarkCreateInput      `json:"create"`
+	Update RemarkUpdateInput      `json:"update"`
 }
 
-func (client *Client) UpsertRecord(params RecordUpsertParams) *RecordExec {
+func (client *Client) UpsertRemark(params RemarkUpsertParams) *RemarkExec {
 	uparams := &prisma.UpsertParams{
 		Where:  params.Where,
 		Create: params.Create,
@@ -735,25 +735,25 @@ func (client *Client) UpsertRecord(params RecordUpsertParams) *RecordExec {
 	}
 	ret := client.Client.Upsert(
 		uparams,
-		[4]string{"RecordWhereUniqueInput!", "RecordCreateInput!", "RecordUpdateInput!", "Record"},
-		"upsertRecord",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[4]string{"RemarkWhereUniqueInput!", "RemarkCreateInput!", "RemarkUpdateInput!", "Remark"},
+		"upsertRemark",
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordExec{ret}
+	return &RemarkExec{ret}
 }
 
-func (client *Client) DeleteRecord(params RecordWhereUniqueInput) *RecordExec {
+func (client *Client) DeleteRemark(params RemarkWhereUniqueInput) *RemarkExec {
 	ret := client.Client.Delete(
 		params,
-		[2]string{"RecordWhereUniqueInput!", "Record"},
-		"deleteRecord",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[2]string{"RemarkWhereUniqueInput!", "Remark"},
+		"deleteRemark",
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordExec{ret}
+	return &RemarkExec{ret}
 }
 
-func (client *Client) DeleteManyRecords(params *RecordWhereInput) *BatchPayloadExec {
-	exec := client.Client.DeleteMany(params, "RecordWhereInput", "deleteManyRecords")
+func (client *Client) DeleteManyRemarks(params *RemarkWhereInput) *BatchPayloadExec {
+	exec := client.Client.DeleteMany(params, "RemarkWhereInput", "deleteManyRemarks")
 	return &BatchPayloadExec{exec}
 }
 
@@ -865,29 +865,23 @@ const (
 	OrderOriginOrderByInputUpdatedAtDesc OrderOriginOrderByInput = "updatedAt_DESC"
 )
 
-type RecordOrderByInput string
+type RemarkOrderByInput string
 
 const (
-	RecordOrderByInputIDAsc           RecordOrderByInput = "id_ASC"
-	RecordOrderByInputIDDesc          RecordOrderByInput = "id_DESC"
-	RecordOrderByInputStartDateAsc    RecordOrderByInput = "startDate_ASC"
-	RecordOrderByInputStartDateDesc   RecordOrderByInput = "startDate_DESC"
-	RecordOrderByInputStartTimeAsc    RecordOrderByInput = "startTime_ASC"
-	RecordOrderByInputStartTimeDesc   RecordOrderByInput = "startTime_DESC"
-	RecordOrderByInputEndDateAsc      RecordOrderByInput = "endDate_ASC"
-	RecordOrderByInputEndDateDesc     RecordOrderByInput = "endDate_DESC"
-	RecordOrderByInputEndTimeAsc      RecordOrderByInput = "endTime_ASC"
-	RecordOrderByInputEndTimeDesc     RecordOrderByInput = "endTime_DESC"
-	RecordOrderByInputOrderSalaryAsc  RecordOrderByInput = "orderSalary_ASC"
-	RecordOrderByInputOrderSalaryDesc RecordOrderByInput = "orderSalary_DESC"
-	RecordOrderByInputRelSalaryAsc    RecordOrderByInput = "relSalary_ASC"
-	RecordOrderByInputRelSalaryDesc   RecordOrderByInput = "relSalary_DESC"
-	RecordOrderByInputIsWorkedAsc     RecordOrderByInput = "isWorked_ASC"
-	RecordOrderByInputIsWorkedDesc    RecordOrderByInput = "isWorked_DESC"
-	RecordOrderByInputCreatedAtAsc    RecordOrderByInput = "createdAt_ASC"
-	RecordOrderByInputCreatedAtDesc   RecordOrderByInput = "createdAt_DESC"
-	RecordOrderByInputUpdatedAtAsc    RecordOrderByInput = "updatedAt_ASC"
-	RecordOrderByInputUpdatedAtDesc   RecordOrderByInput = "updatedAt_DESC"
+	RemarkOrderByInputIDAsc          RemarkOrderByInput = "id_ASC"
+	RemarkOrderByInputIDDesc         RemarkOrderByInput = "id_DESC"
+	RemarkOrderByInputStartDateAsc   RemarkOrderByInput = "startDate_ASC"
+	RemarkOrderByInputStartDateDesc  RemarkOrderByInput = "startDate_DESC"
+	RemarkOrderByInputEndDateAsc     RemarkOrderByInput = "endDate_ASC"
+	RemarkOrderByInputEndDateDesc    RemarkOrderByInput = "endDate_DESC"
+	RemarkOrderByInputRealSalaryAsc  RemarkOrderByInput = "realSalary_ASC"
+	RemarkOrderByInputRealSalaryDesc RemarkOrderByInput = "realSalary_DESC"
+	RemarkOrderByInputIsWorkedAsc    RemarkOrderByInput = "isWorked_ASC"
+	RemarkOrderByInputIsWorkedDesc   RemarkOrderByInput = "isWorked_DESC"
+	RemarkOrderByInputCreatedAtAsc   RemarkOrderByInput = "createdAt_ASC"
+	RemarkOrderByInputCreatedAtDesc  RemarkOrderByInput = "createdAt_DESC"
+	RemarkOrderByInputUpdatedAtAsc   RemarkOrderByInput = "updatedAt_ASC"
+	RemarkOrderByInputUpdatedAtDesc  RemarkOrderByInput = "updatedAt_DESC"
 )
 
 type MutationType string
@@ -898,13 +892,13 @@ const (
 	MutationTypeDeleted MutationType = "DELETED"
 )
 
-type RecordUpdateOneWithoutOrderCcandidateInput struct {
-	Create     *RecordCreateWithoutOrderCcandidateInput     `json:"create,omitempty"`
-	Update     *RecordUpdateWithoutOrderCcandidateDataInput `json:"update,omitempty"`
-	Upsert     *RecordUpsertWithoutOrderCcandidateInput     `json:"upsert,omitempty"`
-	Delete     *bool                                        `json:"delete,omitempty"`
-	Disconnect *bool                                        `json:"disconnect,omitempty"`
-	Connect    *RecordWhereUniqueInput                      `json:"connect,omitempty"`
+type RemarkUpdateOneWithoutOrderCandidateInput struct {
+	Create     *RemarkCreateWithoutOrderCandidateInput     `json:"create,omitempty"`
+	Update     *RemarkUpdateWithoutOrderCandidateDataInput `json:"update,omitempty"`
+	Upsert     *RemarkUpsertWithoutOrderCandidateInput     `json:"upsert,omitempty"`
+	Delete     *bool                                       `json:"delete,omitempty"`
+	Disconnect *bool                                       `json:"disconnect,omitempty"`
+	Connect    *RemarkWhereUniqueInput                     `json:"connect,omitempty"`
 }
 
 type OrderAdviserModifyWhereUniqueInput struct {
@@ -1113,81 +1107,57 @@ type OrderCandidateUpdateManyWithWhereNestedInput struct {
 	Data  OrderCandidateUpdateManyDataInput `json:"data"`
 }
 
-type RecordWhereInput struct {
-	ID               *string                   `json:"id,omitempty"`
-	IDNot            *string                   `json:"id_not,omitempty"`
-	IDIn             []string                  `json:"id_in,omitempty"`
-	IDNotIn          []string                  `json:"id_not_in,omitempty"`
-	IDLt             *string                   `json:"id_lt,omitempty"`
-	IDLte            *string                   `json:"id_lte,omitempty"`
-	IDGt             *string                   `json:"id_gt,omitempty"`
-	IDGte            *string                   `json:"id_gte,omitempty"`
-	IDContains       *string                   `json:"id_contains,omitempty"`
-	IDNotContains    *string                   `json:"id_not_contains,omitempty"`
-	IDStartsWith     *string                   `json:"id_starts_with,omitempty"`
-	IDNotStartsWith  *string                   `json:"id_not_starts_with,omitempty"`
-	IDEndsWith       *string                   `json:"id_ends_with,omitempty"`
-	IDNotEndsWith    *string                   `json:"id_not_ends_with,omitempty"`
-	StartDate        *int32                    `json:"startDate,omitempty"`
-	StartDateNot     *int32                    `json:"startDate_not,omitempty"`
-	StartDateIn      []int32                   `json:"startDate_in,omitempty"`
-	StartDateNotIn   []int32                   `json:"startDate_not_in,omitempty"`
-	StartDateLt      *int32                    `json:"startDate_lt,omitempty"`
-	StartDateLte     *int32                    `json:"startDate_lte,omitempty"`
-	StartDateGt      *int32                    `json:"startDate_gt,omitempty"`
-	StartDateGte     *int32                    `json:"startDate_gte,omitempty"`
-	StartTime        *int32                    `json:"startTime,omitempty"`
-	StartTimeNot     *int32                    `json:"startTime_not,omitempty"`
-	StartTimeIn      []int32                   `json:"startTime_in,omitempty"`
-	StartTimeNotIn   []int32                   `json:"startTime_not_in,omitempty"`
-	StartTimeLt      *int32                    `json:"startTime_lt,omitempty"`
-	StartTimeLte     *int32                    `json:"startTime_lte,omitempty"`
-	StartTimeGt      *int32                    `json:"startTime_gt,omitempty"`
-	StartTimeGte     *int32                    `json:"startTime_gte,omitempty"`
-	EndDate          *int32                    `json:"endDate,omitempty"`
-	EndDateNot       *int32                    `json:"endDate_not,omitempty"`
-	EndDateIn        []int32                   `json:"endDate_in,omitempty"`
-	EndDateNotIn     []int32                   `json:"endDate_not_in,omitempty"`
-	EndDateLt        *int32                    `json:"endDate_lt,omitempty"`
-	EndDateLte       *int32                    `json:"endDate_lte,omitempty"`
-	EndDateGt        *int32                    `json:"endDate_gt,omitempty"`
-	EndDateGte       *int32                    `json:"endDate_gte,omitempty"`
-	EndTime          *int32                    `json:"endTime,omitempty"`
-	EndTimeNot       *int32                    `json:"endTime_not,omitempty"`
-	EndTimeIn        []int32                   `json:"endTime_in,omitempty"`
-	EndTimeNotIn     []int32                   `json:"endTime_not_in,omitempty"`
-	EndTimeLt        *int32                    `json:"endTime_lt,omitempty"`
-	EndTimeLte       *int32                    `json:"endTime_lte,omitempty"`
-	EndTimeGt        *int32                    `json:"endTime_gt,omitempty"`
-	EndTimeGte       *int32                    `json:"endTime_gte,omitempty"`
-	OrderSalary      *int32                    `json:"orderSalary,omitempty"`
-	OrderSalaryNot   *int32                    `json:"orderSalary_not,omitempty"`
-	OrderSalaryIn    []int32                   `json:"orderSalary_in,omitempty"`
-	OrderSalaryNotIn []int32                   `json:"orderSalary_not_in,omitempty"`
-	OrderSalaryLt    *int32                    `json:"orderSalary_lt,omitempty"`
-	OrderSalaryLte   *int32                    `json:"orderSalary_lte,omitempty"`
-	OrderSalaryGt    *int32                    `json:"orderSalary_gt,omitempty"`
-	OrderSalaryGte   *int32                    `json:"orderSalary_gte,omitempty"`
-	RelSalary        *int32                    `json:"relSalary,omitempty"`
-	RelSalaryNot     *int32                    `json:"relSalary_not,omitempty"`
-	RelSalaryIn      []int32                   `json:"relSalary_in,omitempty"`
-	RelSalaryNotIn   []int32                   `json:"relSalary_not_in,omitempty"`
-	RelSalaryLt      *int32                    `json:"relSalary_lt,omitempty"`
-	RelSalaryLte     *int32                    `json:"relSalary_lte,omitempty"`
-	RelSalaryGt      *int32                    `json:"relSalary_gt,omitempty"`
-	RelSalaryGte     *int32                    `json:"relSalary_gte,omitempty"`
-	IsWorked         *int32                    `json:"isWorked,omitempty"`
-	IsWorkedNot      *int32                    `json:"isWorked_not,omitempty"`
-	IsWorkedIn       []int32                   `json:"isWorked_in,omitempty"`
-	IsWorkedNotIn    []int32                   `json:"isWorked_not_in,omitempty"`
-	IsWorkedLt       *int32                    `json:"isWorked_lt,omitempty"`
-	IsWorkedLte      *int32                    `json:"isWorked_lte,omitempty"`
-	IsWorkedGt       *int32                    `json:"isWorked_gt,omitempty"`
-	IsWorkedGte      *int32                    `json:"isWorked_gte,omitempty"`
-	OrderCcandidate  *OrderCandidateWhereInput `json:"orderCcandidate,omitempty"`
-	And              []RecordWhereInput        `json:"AND,omitempty"`
-	Or               []RecordWhereInput        `json:"OR,omitempty"`
-	Not              []RecordWhereInput        `json:"NOT,omitempty"`
+type RemarkWhereInput struct {
+	ID              *string                   `json:"id,omitempty"`
+	IDNot           *string                   `json:"id_not,omitempty"`
+	IDIn            []string                  `json:"id_in,omitempty"`
+	IDNotIn         []string                  `json:"id_not_in,omitempty"`
+	IDLt            *string                   `json:"id_lt,omitempty"`
+	IDLte           *string                   `json:"id_lte,omitempty"`
+	IDGt            *string                   `json:"id_gt,omitempty"`
+	IDGte           *string                   `json:"id_gte,omitempty"`
+	IDContains      *string                   `json:"id_contains,omitempty"`
+	IDNotContains   *string                   `json:"id_not_contains,omitempty"`
+	IDStartsWith    *string                   `json:"id_starts_with,omitempty"`
+	IDNotStartsWith *string                   `json:"id_not_starts_with,omitempty"`
+	IDEndsWith      *string                   `json:"id_ends_with,omitempty"`
+	IDNotEndsWith   *string                   `json:"id_not_ends_with,omitempty"`
+	StartDate       *int32                    `json:"startDate,omitempty"`
+	StartDateNot    *int32                    `json:"startDate_not,omitempty"`
+	StartDateIn     []int32                   `json:"startDate_in,omitempty"`
+	StartDateNotIn  []int32                   `json:"startDate_not_in,omitempty"`
+	StartDateLt     *int32                    `json:"startDate_lt,omitempty"`
+	StartDateLte    *int32                    `json:"startDate_lte,omitempty"`
+	StartDateGt     *int32                    `json:"startDate_gt,omitempty"`
+	StartDateGte    *int32                    `json:"startDate_gte,omitempty"`
+	EndDate         *int32                    `json:"endDate,omitempty"`
+	EndDateNot      *int32                    `json:"endDate_not,omitempty"`
+	EndDateIn       []int32                   `json:"endDate_in,omitempty"`
+	EndDateNotIn    []int32                   `json:"endDate_not_in,omitempty"`
+	EndDateLt       *int32                    `json:"endDate_lt,omitempty"`
+	EndDateLte      *int32                    `json:"endDate_lte,omitempty"`
+	EndDateGt       *int32                    `json:"endDate_gt,omitempty"`
+	EndDateGte      *int32                    `json:"endDate_gte,omitempty"`
+	RealSalary      *int32                    `json:"realSalary,omitempty"`
+	RealSalaryNot   *int32                    `json:"realSalary_not,omitempty"`
+	RealSalaryIn    []int32                   `json:"realSalary_in,omitempty"`
+	RealSalaryNotIn []int32                   `json:"realSalary_not_in,omitempty"`
+	RealSalaryLt    *int32                    `json:"realSalary_lt,omitempty"`
+	RealSalaryLte   *int32                    `json:"realSalary_lte,omitempty"`
+	RealSalaryGt    *int32                    `json:"realSalary_gt,omitempty"`
+	RealSalaryGte   *int32                    `json:"realSalary_gte,omitempty"`
+	IsWorked        *int32                    `json:"isWorked,omitempty"`
+	IsWorkedNot     *int32                    `json:"isWorked_not,omitempty"`
+	IsWorkedIn      []int32                   `json:"isWorked_in,omitempty"`
+	IsWorkedNotIn   []int32                   `json:"isWorked_not_in,omitempty"`
+	IsWorkedLt      *int32                    `json:"isWorked_lt,omitempty"`
+	IsWorkedLte     *int32                    `json:"isWorked_lte,omitempty"`
+	IsWorkedGt      *int32                    `json:"isWorked_gt,omitempty"`
+	IsWorkedGte     *int32                    `json:"isWorked_gte,omitempty"`
+	OrderCandidate  *OrderCandidateWhereInput `json:"orderCandidate,omitempty"`
+	And             []RemarkWhereInput        `json:"AND,omitempty"`
+	Or              []RemarkWhereInput        `json:"OR,omitempty"`
+	Not             []RemarkWhereInput        `json:"NOT,omitempty"`
 }
 
 type OrderOriginUpdateOneRequiredWithoutOrderAdviserModifiesInput struct {
@@ -1278,14 +1248,11 @@ type OrderHotelModifyUpdateWithoutOrderOriginDataInput struct {
 	Mode      *int32 `json:"mode,omitempty"`
 }
 
-type RecordUpdateManyMutationInput struct {
-	StartDate   *int32 `json:"startDate,omitempty"`
-	StartTime   *int32 `json:"startTime,omitempty"`
-	EndDate     *int32 `json:"endDate,omitempty"`
-	EndTime     *int32 `json:"endTime,omitempty"`
-	OrderSalary *int32 `json:"orderSalary,omitempty"`
-	RelSalary   *int32 `json:"relSalary,omitempty"`
-	IsWorked    *int32 `json:"isWorked,omitempty"`
+type RemarkUpdateManyMutationInput struct {
+	StartDate  *int32 `json:"startDate,omitempty"`
+	EndDate    *int32 `json:"endDate,omitempty"`
+	RealSalary *int32 `json:"realSalary,omitempty"`
+	IsWorked   *int32 `json:"isWorked,omitempty"`
 }
 
 type OrderHotelModifyUpsertWithWhereUniqueWithoutOrderOriginInput struct {
@@ -1294,7 +1261,7 @@ type OrderHotelModifyUpsertWithWhereUniqueWithoutOrderOriginInput struct {
 	Create OrderHotelModifyCreateWithoutOrderOriginInput     `json:"create"`
 }
 
-type OrderCandidateUpdateWithoutRecordDataInput struct {
+type OrderCandidateUpdateWithoutRemarkDataInput struct {
 	AdviserId           *string                                                  `json:"adviserId,omitempty"`
 	AgentId             *string                                                  `json:"agentId,omitempty"`
 	PtId                *string                                                  `json:"ptId,omitempty"`
@@ -1383,10 +1350,10 @@ type OrderHotelModifyScalarWhereInput struct {
 	Not             []OrderHotelModifyScalarWhereInput `json:"NOT,omitempty"`
 }
 
-type OrderCandidateUpdateOneRequiredWithoutRecordInput struct {
-	Create  *OrderCandidateCreateWithoutRecordInput     `json:"create,omitempty"`
-	Update  *OrderCandidateUpdateWithoutRecordDataInput `json:"update,omitempty"`
-	Upsert  *OrderCandidateUpsertWithoutRecordInput     `json:"upsert,omitempty"`
+type OrderCandidateUpdateOneRequiredWithoutRemarkInput struct {
+	Create  *OrderCandidateCreateWithoutRemarkInput     `json:"create,omitempty"`
+	Update  *OrderCandidateUpdateWithoutRemarkDataInput `json:"update,omitempty"`
+	Upsert  *OrderCandidateUpsertWithoutRemarkInput     `json:"upsert,omitempty"`
 	Connect *OrderCandidateWhereUniqueInput             `json:"connect,omitempty"`
 }
 
@@ -1395,7 +1362,7 @@ type OrderHotelModifyUpdateManyWithWhereNestedInput struct {
 	Data  OrderHotelModifyUpdateManyDataInput `json:"data"`
 }
 
-type OrderCandidateCreateWithoutRecordInput struct {
+type OrderCandidateCreateWithoutRemarkInput struct {
 	AdviserId           string                                          `json:"adviserId"`
 	AgentId             string                                          `json:"agentId"`
 	PtId                string                                          `json:"ptId"`
@@ -1418,8 +1385,8 @@ type OrderHotelModifyUpdateManyDataInput struct {
 	Mode      *int32 `json:"mode,omitempty"`
 }
 
-type OrderCandidateCreateOneWithoutRecordInput struct {
-	Create  *OrderCandidateCreateWithoutRecordInput `json:"create,omitempty"`
+type OrderCandidateCreateOneWithoutRemarkInput struct {
+	Create  *OrderCandidateCreateWithoutRemarkInput `json:"create,omitempty"`
 	Connect *OrderCandidateWhereUniqueInput         `json:"connect,omitempty"`
 }
 
@@ -1470,16 +1437,16 @@ type OrderOriginUpdateInput struct {
 }
 
 type OrderCandidateUpdateWithoutOrderOriginDataInput struct {
-	AdviserId           *string                                     `json:"adviserId,omitempty"`
-	AgentId             *string                                     `json:"agentId,omitempty"`
-	PtId                *string                                     `json:"ptId,omitempty"`
-	ApplyTime           *int32                                      `json:"applyTime,omitempty"`
-	SignInTime          *int32                                      `json:"signInTime,omitempty"`
-	PtStatus            *int32                                      `json:"ptStatus,omitempty"`
-	PtPerformance       *int32                                      `json:"ptPerformance,omitempty"`
-	ObjectReason        *int32                                      `json:"objectReason,omitempty"`
-	Record              *RecordUpdateOneWithoutOrderCcandidateInput `json:"record,omitempty"`
-	RegistrationChannel *string                                     `json:"registrationChannel,omitempty"`
+	AdviserId           *string                                    `json:"adviserId,omitempty"`
+	AgentId             *string                                    `json:"agentId,omitempty"`
+	PtId                *string                                    `json:"ptId,omitempty"`
+	ApplyTime           *int32                                     `json:"applyTime,omitempty"`
+	SignInTime          *int32                                     `json:"signInTime,omitempty"`
+	PtStatus            *int32                                     `json:"ptStatus,omitempty"`
+	PtPerformance       *int32                                     `json:"ptPerformance,omitempty"`
+	ObjectReason        *int32                                     `json:"objectReason,omitempty"`
+	Remark              *RemarkUpdateOneWithoutOrderCandidateInput `json:"remark,omitempty"`
+	RegistrationChannel *string                                    `json:"registrationChannel,omitempty"`
 }
 
 type OrderHotelModifyUpdateManyMutationInput struct {
@@ -1497,18 +1464,15 @@ type OrderOriginCreateOneWithoutOrderHotelModifiesInput struct {
 	Connect *OrderOriginWhereUniqueInput                     `json:"connect,omitempty"`
 }
 
-type RecordWhereUniqueInput struct {
+type RemarkWhereUniqueInput struct {
 	ID *string `json:"id,omitempty"`
 }
 
-type RecordUpdateWithoutOrderCcandidateDataInput struct {
-	StartDate   *int32 `json:"startDate,omitempty"`
-	StartTime   *int32 `json:"startTime,omitempty"`
-	EndDate     *int32 `json:"endDate,omitempty"`
-	EndTime     *int32 `json:"endTime,omitempty"`
-	OrderSalary *int32 `json:"orderSalary,omitempty"`
-	RelSalary   *int32 `json:"relSalary,omitempty"`
-	IsWorked    *int32 `json:"isWorked,omitempty"`
+type RemarkUpdateWithoutOrderCandidateDataInput struct {
+	StartDate  *int32 `json:"startDate,omitempty"`
+	EndDate    *int32 `json:"endDate,omitempty"`
+	RealSalary *int32 `json:"realSalary,omitempty"`
+	IsWorked   *int32 `json:"isWorked,omitempty"`
 }
 
 type OrderOriginUpdateOneRequiredWithoutOrderHotelModifiesInput struct {
@@ -1518,9 +1482,9 @@ type OrderOriginUpdateOneRequiredWithoutOrderHotelModifiesInput struct {
 	Connect *OrderOriginWhereUniqueInput                         `json:"connect,omitempty"`
 }
 
-type RecordUpsertWithoutOrderCcandidateInput struct {
-	Update RecordUpdateWithoutOrderCcandidateDataInput `json:"update"`
-	Create RecordCreateWithoutOrderCcandidateInput     `json:"create"`
+type RemarkUpsertWithoutOrderCandidateInput struct {
+	Update RemarkUpdateWithoutOrderCandidateDataInput `json:"update"`
+	Create RemarkCreateWithoutOrderCandidateInput     `json:"create"`
 }
 
 type OrderOriginCreateWithoutOrderHotelModifiesInput struct {
@@ -1651,7 +1615,7 @@ type OrderCandidateWhereInput struct {
 	ObjectReasonLte                  *int32                     `json:"objectReason_lte,omitempty"`
 	ObjectReasonGt                   *int32                     `json:"objectReason_gt,omitempty"`
 	ObjectReasonGte                  *int32                     `json:"objectReason_gte,omitempty"`
-	Record                           *RecordWhereInput          `json:"record,omitempty"`
+	Remark                           *RemarkWhereInput          `json:"remark,omitempty"`
 	RegistrationChannel              *string                    `json:"registrationChannel,omitempty"`
 	RegistrationChannelNot           *string                    `json:"registrationChannel_not,omitempty"`
 	RegistrationChannelIn            []string                   `json:"registrationChannel_in,omitempty"`
@@ -1908,16 +1872,16 @@ type OrderHotelModifyWhereInput struct {
 }
 
 type OrderCandidateCreateWithoutOrderOriginInput struct {
-	AdviserId           string                                      `json:"adviserId"`
-	AgentId             string                                      `json:"agentId"`
-	PtId                string                                      `json:"ptId"`
-	ApplyTime           *int32                                      `json:"applyTime,omitempty"`
-	SignInTime          *int32                                      `json:"signInTime,omitempty"`
-	PtStatus            int32                                       `json:"ptStatus"`
-	PtPerformance       *int32                                      `json:"ptPerformance,omitempty"`
-	ObjectReason        *int32                                      `json:"objectReason,omitempty"`
-	Record              *RecordCreateOneWithoutOrderCcandidateInput `json:"record,omitempty"`
-	RegistrationChannel *string                                     `json:"registrationChannel,omitempty"`
+	AdviserId           string                                     `json:"adviserId"`
+	AgentId             string                                     `json:"agentId"`
+	PtId                string                                     `json:"ptId"`
+	ApplyTime           *int32                                     `json:"applyTime,omitempty"`
+	SignInTime          *int32                                     `json:"signInTime,omitempty"`
+	PtStatus            int32                                      `json:"ptStatus"`
+	PtPerformance       *int32                                     `json:"ptPerformance,omitempty"`
+	ObjectReason        *int32                                     `json:"objectReason,omitempty"`
+	Remark              *RemarkCreateOneWithoutOrderCandidateInput `json:"remark,omitempty"`
+	RegistrationChannel *string                                    `json:"registrationChannel,omitempty"`
 }
 
 type OrderOriginUpsertWithoutOrderAdviserModifiesInput struct {
@@ -1925,14 +1889,11 @@ type OrderOriginUpsertWithoutOrderAdviserModifiesInput struct {
 	Create OrderOriginCreateWithoutOrderAdviserModifiesInput     `json:"create"`
 }
 
-type RecordCreateWithoutOrderCcandidateInput struct {
-	StartDate   int32  `json:"startDate"`
-	StartTime   int32  `json:"startTime"`
-	EndDate     int32  `json:"endDate"`
-	EndTime     int32  `json:"endTime"`
-	OrderSalary int32  `json:"orderSalary"`
-	RelSalary   int32  `json:"relSalary"`
-	IsWorked    *int32 `json:"isWorked,omitempty"`
+type RemarkCreateWithoutOrderCandidateInput struct {
+	StartDate  *int32 `json:"startDate,omitempty"`
+	EndDate    *int32 `json:"endDate,omitempty"`
+	RealSalary *int32 `json:"realSalary,omitempty"`
+	IsWorked   int32  `json:"isWorked"`
 }
 
 type OrderAdviserModifyUpdateManyMutationInput struct {
@@ -1944,15 +1905,15 @@ type OrderAdviserModifyUpdateManyMutationInput struct {
 	Attention    *string `json:"attention,omitempty"`
 }
 
-type RecordSubscriptionWhereInput struct {
+type RemarkSubscriptionWhereInput struct {
 	MutationIn                 []MutationType                 `json:"mutation_in,omitempty"`
 	UpdatedFieldsContains      *string                        `json:"updatedFields_contains,omitempty"`
 	UpdatedFieldsContainsEvery []string                       `json:"updatedFields_contains_every,omitempty"`
 	UpdatedFieldsContainsSome  []string                       `json:"updatedFields_contains_some,omitempty"`
-	Node                       *RecordWhereInput              `json:"node,omitempty"`
-	And                        []RecordSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []RecordSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []RecordSubscriptionWhereInput `json:"NOT,omitempty"`
+	Node                       *RemarkWhereInput              `json:"node,omitempty"`
+	And                        []RemarkSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []RemarkSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []RemarkSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
 type OrderHotelModifyCreateInput struct {
@@ -2002,7 +1963,7 @@ type OrderCandidateCreateInput struct {
 	PtStatus            int32                                           `json:"ptStatus"`
 	PtPerformance       *int32                                          `json:"ptPerformance,omitempty"`
 	ObjectReason        *int32                                          `json:"objectReason,omitempty"`
-	Record              *RecordCreateOneWithoutOrderCcandidateInput     `json:"record,omitempty"`
+	Remark              *RemarkCreateOneWithoutOrderCandidateInput      `json:"remark,omitempty"`
 	RegistrationChannel *string                                         `json:"registrationChannel,omitempty"`
 	OrderOrigin         OrderOriginCreateOneWithoutOrderCandidatesInput `json:"orderOrigin"`
 }
@@ -2079,7 +2040,7 @@ type OrderCandidateUpdateInput struct {
 	PtStatus            *int32                                                   `json:"ptStatus,omitempty"`
 	PtPerformance       *int32                                                   `json:"ptPerformance,omitempty"`
 	ObjectReason        *int32                                                   `json:"objectReason,omitempty"`
-	Record              *RecordUpdateOneWithoutOrderCcandidateInput              `json:"record,omitempty"`
+	Remark              *RemarkUpdateOneWithoutOrderCandidateInput               `json:"remark,omitempty"`
 	RegistrationChannel *string                                                  `json:"registrationChannel,omitempty"`
 	OrderOrigin         *OrderOriginUpdateOneRequiredWithoutOrderCandidatesInput `json:"orderOrigin,omitempty"`
 }
@@ -2121,9 +2082,9 @@ type OrderOriginUpdateWithoutOrderCandidatesDataInput struct {
 	OrderAdviserModifies *OrderAdviserModifyUpdateManyWithoutOrderOriginInput `json:"orderAdviserModifies,omitempty"`
 }
 
-type OrderCandidateUpsertWithoutRecordInput struct {
-	Update OrderCandidateUpdateWithoutRecordDataInput `json:"update"`
-	Create OrderCandidateCreateWithoutRecordInput     `json:"create"`
+type OrderCandidateUpsertWithoutRemarkInput struct {
+	Update OrderCandidateUpdateWithoutRemarkDataInput `json:"update"`
+	Create OrderCandidateCreateWithoutRemarkInput     `json:"create"`
 }
 
 type OrderAdviserModifyUpdateManyWithoutOrderOriginInput struct {
@@ -2138,15 +2099,12 @@ type OrderAdviserModifyUpdateManyWithoutOrderOriginInput struct {
 	UpdateMany []OrderAdviserModifyUpdateManyWithWhereNestedInput               `json:"updateMany,omitempty"`
 }
 
-type RecordCreateInput struct {
-	StartDate       int32                                     `json:"startDate"`
-	StartTime       int32                                     `json:"startTime"`
-	EndDate         int32                                     `json:"endDate"`
-	EndTime         int32                                     `json:"endTime"`
-	OrderSalary     int32                                     `json:"orderSalary"`
-	RelSalary       int32                                     `json:"relSalary"`
-	IsWorked        *int32                                    `json:"isWorked,omitempty"`
-	OrderCcandidate OrderCandidateCreateOneWithoutRecordInput `json:"orderCcandidate"`
+type RemarkCreateInput struct {
+	StartDate      *int32                                    `json:"startDate,omitempty"`
+	EndDate        *int32                                    `json:"endDate,omitempty"`
+	RealSalary     *int32                                    `json:"realSalary,omitempty"`
+	IsWorked       int32                                     `json:"isWorked"`
+	OrderCandidate OrderCandidateCreateOneWithoutRemarkInput `json:"orderCandidate"`
 }
 
 type OrderAdviserModifyUpdateWithWhereUniqueWithoutOrderOriginInput struct {
@@ -2294,20 +2252,17 @@ type OrderAdviserModifyUpsertWithWhereUniqueWithoutOrderOriginInput struct {
 	Create OrderAdviserModifyCreateWithoutOrderOriginInput     `json:"create"`
 }
 
-type RecordUpdateInput struct {
-	StartDate       *int32                                             `json:"startDate,omitempty"`
-	StartTime       *int32                                             `json:"startTime,omitempty"`
-	EndDate         *int32                                             `json:"endDate,omitempty"`
-	EndTime         *int32                                             `json:"endTime,omitempty"`
-	OrderSalary     *int32                                             `json:"orderSalary,omitempty"`
-	RelSalary       *int32                                             `json:"relSalary,omitempty"`
-	IsWorked        *int32                                             `json:"isWorked,omitempty"`
-	OrderCcandidate *OrderCandidateUpdateOneRequiredWithoutRecordInput `json:"orderCcandidate,omitempty"`
+type RemarkUpdateInput struct {
+	StartDate      *int32                                             `json:"startDate,omitempty"`
+	EndDate        *int32                                             `json:"endDate,omitempty"`
+	RealSalary     *int32                                             `json:"realSalary,omitempty"`
+	IsWorked       *int32                                             `json:"isWorked,omitempty"`
+	OrderCandidate *OrderCandidateUpdateOneRequiredWithoutRemarkInput `json:"orderCandidate,omitempty"`
 }
 
-type RecordCreateOneWithoutOrderCcandidateInput struct {
-	Create  *RecordCreateWithoutOrderCcandidateInput `json:"create,omitempty"`
-	Connect *RecordWhereUniqueInput                  `json:"connect,omitempty"`
+type RemarkCreateOneWithoutOrderCandidateInput struct {
+	Create  *RemarkCreateWithoutOrderCandidateInput `json:"create,omitempty"`
+	Connect *RemarkWhereUniqueInput                 `json:"connect,omitempty"`
 }
 
 type OrderOriginCreateInput struct {
@@ -2326,12 +2281,12 @@ type OrderOriginCreateInput struct {
 	OrderCandidates      *OrderCandidateCreateManyWithoutOrderOriginInput     `json:"orderCandidates,omitempty"`
 }
 
-type RecordPreviousValuesExec struct {
+type RemarkPreviousValuesExec struct {
 	exec *prisma.Exec
 }
 
-func (instance RecordPreviousValuesExec) Exec(ctx context.Context) (*RecordPreviousValues, error) {
-	var v RecordPreviousValues
+func (instance RemarkPreviousValuesExec) Exec(ctx context.Context) (*RemarkPreviousValues, error) {
+	var v RemarkPreviousValues
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -2342,29 +2297,26 @@ func (instance RecordPreviousValuesExec) Exec(ctx context.Context) (*RecordPrevi
 	return &v, nil
 }
 
-func (instance RecordPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+func (instance RemarkPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type RecordPreviousValuesExecArray struct {
+type RemarkPreviousValuesExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance RecordPreviousValuesExecArray) Exec(ctx context.Context) ([]RecordPreviousValues, error) {
-	var v []RecordPreviousValues
+func (instance RemarkPreviousValuesExecArray) Exec(ctx context.Context) ([]RemarkPreviousValues, error) {
+	var v []RemarkPreviousValues
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type RecordPreviousValues struct {
-	ID          string `json:"id"`
-	StartDate   int32  `json:"startDate"`
-	StartTime   int32  `json:"startTime"`
-	EndDate     int32  `json:"endDate"`
-	EndTime     int32  `json:"endTime"`
-	OrderSalary int32  `json:"orderSalary"`
-	RelSalary   int32  `json:"relSalary"`
-	IsWorked    *int32 `json:"isWorked,omitempty"`
+type RemarkPreviousValues struct {
+	ID         string `json:"id"`
+	StartDate  *int32 `json:"startDate,omitempty"`
+	EndDate    *int32 `json:"endDate,omitempty"`
+	RealSalary *int32 `json:"realSalary,omitempty"`
+	IsWorked   int32  `json:"isWorked"`
 }
 
 type OrderAdviserModifyEdgeExec struct {
@@ -2508,11 +2460,11 @@ type OrderOriginPreviousValues struct {
 	Status    int32  `json:"status"`
 }
 
-type RecordConnectionExec struct {
+type RemarkConnectionExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *RecordConnectionExec) PageInfo() *PageInfoExec {
+func (instance *RemarkConnectionExec) PageInfo() *PageInfoExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
@@ -2523,22 +2475,22 @@ func (instance *RecordConnectionExec) PageInfo() *PageInfoExec {
 	return &PageInfoExec{ret}
 }
 
-func (instance *RecordConnectionExec) Edges() *RecordEdgeExec {
+func (instance *RemarkConnectionExec) Edges() *RemarkEdgeExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "RecordEdge"},
+		[2]string{"", "RemarkEdge"},
 		"edges",
 		[]string{"cursor"})
 
-	return &RecordEdgeExec{ret}
+	return &RemarkEdgeExec{ret}
 }
 
-func (instance *RecordConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
+func (instance *RemarkConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "AggregateRecord"},
+		[2]string{"", "AggregateRemark"},
 		"aggregate",
 		[]string{"count"})
 
@@ -2547,8 +2499,8 @@ func (instance *RecordConnectionExec) Aggregate(ctx context.Context) (Aggregate,
 	return v, err
 }
 
-func (instance RecordConnectionExec) Exec(ctx context.Context) (*RecordConnection, error) {
-	var v RecordConnection
+func (instance RemarkConnectionExec) Exec(ctx context.Context) (*RemarkConnection, error) {
+	var v RemarkConnection
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -2559,21 +2511,21 @@ func (instance RecordConnectionExec) Exec(ctx context.Context) (*RecordConnectio
 	return &v, nil
 }
 
-func (instance RecordConnectionExec) Exists(ctx context.Context) (bool, error) {
+func (instance RemarkConnectionExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type RecordConnectionExecArray struct {
+type RemarkConnectionExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance RecordConnectionExecArray) Exec(ctx context.Context) ([]RecordConnection, error) {
-	var v []RecordConnection
+func (instance RemarkConnectionExecArray) Exec(ctx context.Context) ([]RemarkConnection, error) {
+	var v []RemarkConnection
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type RecordConnection struct {
+type RemarkConnection struct {
 }
 
 type PageInfoExec struct {
@@ -3110,34 +3062,34 @@ type OrderCandidatePreviousValues struct {
 	RegistrationChannel *string `json:"registrationChannel,omitempty"`
 }
 
-type RecordSubscriptionPayloadExec struct {
+type RemarkSubscriptionPayloadExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *RecordSubscriptionPayloadExec) Node() *RecordExec {
+func (instance *RemarkSubscriptionPayloadExec) Node() *RemarkExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "Record"},
+		[2]string{"", "Remark"},
 		"node",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordExec{ret}
+	return &RemarkExec{ret}
 }
 
-func (instance *RecordSubscriptionPayloadExec) PreviousValues() *RecordPreviousValuesExec {
+func (instance *RemarkSubscriptionPayloadExec) PreviousValues() *RemarkPreviousValuesExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "RecordPreviousValues"},
+		[2]string{"", "RemarkPreviousValues"},
 		"previousValues",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordPreviousValuesExec{ret}
+	return &RemarkPreviousValuesExec{ret}
 }
 
-func (instance RecordSubscriptionPayloadExec) Exec(ctx context.Context) (*RecordSubscriptionPayload, error) {
-	var v RecordSubscriptionPayload
+func (instance RemarkSubscriptionPayloadExec) Exec(ctx context.Context) (*RemarkSubscriptionPayload, error) {
+	var v RemarkSubscriptionPayload
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -3148,42 +3100,42 @@ func (instance RecordSubscriptionPayloadExec) Exec(ctx context.Context) (*Record
 	return &v, nil
 }
 
-func (instance RecordSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+func (instance RemarkSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type RecordSubscriptionPayloadExecArray struct {
+type RemarkSubscriptionPayloadExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance RecordSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]RecordSubscriptionPayload, error) {
-	var v []RecordSubscriptionPayload
+func (instance RemarkSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]RemarkSubscriptionPayload, error) {
+	var v []RemarkSubscriptionPayload
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type RecordSubscriptionPayload struct {
+type RemarkSubscriptionPayload struct {
 	Mutation      MutationType `json:"mutation"`
 	UpdatedFields []string     `json:"updatedFields,omitempty"`
 }
 
-type RecordExec struct {
+type RemarkExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *RecordExec) OrderCcandidate() *OrderCandidateExec {
+func (instance *RemarkExec) OrderCandidate() *OrderCandidateExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
 		[2]string{"", "OrderCandidate"},
-		"orderCcandidate",
+		"orderCandidate",
 		[]string{"id", "adviserId", "agentId", "ptId", "applyTime", "signInTime", "ptStatus", "ptPerformance", "objectReason", "registrationChannel"})
 
 	return &OrderCandidateExec{ret}
 }
 
-func (instance RecordExec) Exec(ctx context.Context) (*Record, error) {
-	var v Record
+func (instance RemarkExec) Exec(ctx context.Context) (*Remark, error) {
+	var v Remark
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -3194,29 +3146,26 @@ func (instance RecordExec) Exec(ctx context.Context) (*Record, error) {
 	return &v, nil
 }
 
-func (instance RecordExec) Exists(ctx context.Context) (bool, error) {
+func (instance RemarkExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type RecordExecArray struct {
+type RemarkExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance RecordExecArray) Exec(ctx context.Context) ([]Record, error) {
-	var v []Record
+func (instance RemarkExecArray) Exec(ctx context.Context) ([]Remark, error) {
+	var v []Remark
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type Record struct {
-	ID          string `json:"id"`
-	StartDate   int32  `json:"startDate"`
-	StartTime   int32  `json:"startTime"`
-	EndDate     int32  `json:"endDate"`
-	EndTime     int32  `json:"endTime"`
-	OrderSalary int32  `json:"orderSalary"`
-	RelSalary   int32  `json:"relSalary"`
-	IsWorked    *int32 `json:"isWorked,omitempty"`
+type Remark struct {
+	ID         string `json:"id"`
+	StartDate  *int32 `json:"startDate,omitempty"`
+	EndDate    *int32 `json:"endDate,omitempty"`
+	RealSalary *int32 `json:"realSalary,omitempty"`
+	IsWorked   int32  `json:"isWorked"`
 }
 
 type OrderOriginExec struct {
@@ -3426,15 +3375,15 @@ type OrderCandidateExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *OrderCandidateExec) Record() *RecordExec {
+func (instance *OrderCandidateExec) Remark() *RemarkExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "Record"},
-		"record",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[2]string{"", "Remark"},
+		"remark",
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordExec{ret}
+	return &RemarkExec{ret}
 }
 
 func (instance *OrderCandidateExec) OrderOrigin() *OrderOriginExec {
@@ -3675,23 +3624,23 @@ type OrderOriginEdge struct {
 	Cursor string `json:"cursor"`
 }
 
-type RecordEdgeExec struct {
+type RemarkEdgeExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *RecordEdgeExec) Node() *RecordExec {
+func (instance *RemarkEdgeExec) Node() *RemarkExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "Record"},
+		[2]string{"", "Remark"},
 		"node",
-		[]string{"id", "startDate", "startTime", "endDate", "endTime", "orderSalary", "relSalary", "isWorked"})
+		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
 
-	return &RecordExec{ret}
+	return &RemarkExec{ret}
 }
 
-func (instance RecordEdgeExec) Exec(ctx context.Context) (*RecordEdge, error) {
-	var v RecordEdge
+func (instance RemarkEdgeExec) Exec(ctx context.Context) (*RemarkEdge, error) {
+	var v RemarkEdge
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -3702,21 +3651,21 @@ func (instance RecordEdgeExec) Exec(ctx context.Context) (*RecordEdge, error) {
 	return &v, nil
 }
 
-func (instance RecordEdgeExec) Exists(ctx context.Context) (bool, error) {
+func (instance RemarkEdgeExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type RecordEdgeExecArray struct {
+type RemarkEdgeExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance RecordEdgeExecArray) Exec(ctx context.Context) ([]RecordEdge, error) {
-	var v []RecordEdge
+func (instance RemarkEdgeExecArray) Exec(ctx context.Context) ([]RemarkEdge, error) {
+	var v []RemarkEdge
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type RecordEdge struct {
+type RemarkEdge struct {
 	Cursor string `json:"cursor"`
 }
 

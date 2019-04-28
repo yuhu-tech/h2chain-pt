@@ -114,7 +114,7 @@ func (s *MutationServer) ModifyOrder(ctx context.Context, in *pb.ModifyRequest) 
 	return &pb.ModifyReply{ModifyResult: 1}, nil
 }
 
-func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) 	{
+func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtRequest) (*pb.ModifyPtReply, error) {
 	client := prisma.New(nil)
 
 	orderId := reflect.ValueOf(in.OrderId)
@@ -178,4 +178,38 @@ func (s *MutationServer) CloseOrder(ctx context.Context, in *pb.CloseRequest) (*
 	}
 
 	return &pb.CloseReply{CloseResult: 1}, nil
+}
+
+func (s *MutationServer) EditRemark(ctx context.Context, in *pb.EditRequest) (*pb.EditReply, error) {
+
+	client := prisma.New(nil)
+	res, err := client.OrderCandidates(&prisma.OrderCandidatesParams{
+		Where: &prisma.OrderCandidateWhereInput{
+			OrderOrigin: &prisma.OrderOriginWhereInput{ID: &in.OrderId},
+			PtId:        &in.PtId,
+		},
+	}).Exec(ctx)
+	if err != nil {
+		return &pb.EditReply{EditResult: 0}, err
+	}
+	// TODO CreateRemark || UpdateOrderCandidate 用哪个？
+	_, err = client.UpdateOrderCandidate(prisma.OrderCandidateUpdateParams{
+		Where: prisma.OrderCandidateWhereUniqueInput{ID: &res[0].ID},
+		Data: prisma.OrderCandidateUpdateInput{
+			Remark: &prisma.RemarkUpdateOneWithoutOrderCandidateInput{
+				// TODO create || update 是否有区别？
+				Create: &prisma.RemarkCreateWithoutOrderCandidateInput{
+					StartDate:  &in.StartDate,
+					EndDate:    &in.EndDate,
+					RealSalary: &in.RealSalary,
+					IsWorked:   in.IsWorked,
+				},
+			},
+		},
+	}).Exec(ctx)
+	if err != nil {
+		return &pb.EditReply{EditResult: 0}, err
+	}
+
+	return &pb.EditReply{EditResult: 1}, nil
 }

@@ -49,19 +49,16 @@ type OrderCandidate {
     ptStatus: Int!
     ptPerformance: Int
     objectReason: Int
-    record: Record
+    remark: Remark
     registrationChannel: String
     orderOrigin: OrderOrigin!
 }
-type Record {
+type Remark {
     id: ID! @unique
-    startDate: Int!
-    startTime: Int!
-    endDate: Int!
-    endTime: Int!
-    orderSalary: Int!
-    relSalary: Int!
-    isWorked: Int
-    orderCcandidate: OrderCandidate!
+    startDate: Int
+    endDate: Int
+    realSalary: Int
+    isWorked: Int!
+    orderCandidate: OrderCandidate!
 }
 
