@@ -14,7 +14,7 @@ func TestQueryExperience(t *testing.T) {
 
 	obj := handle.QueryServer{}
 	ret, err := obj.QueryExperience(ctx, &pb.QueryExperienceRequest{
-		PtId:"95527",
+		PtId:"95566",
 	})
 	if err!=nil{
 		t.Error(err)

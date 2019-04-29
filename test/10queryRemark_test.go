@@ -14,8 +14,8 @@ func TestQueryRemark(t *testing.T) {
 
 	obj := &handle.QueryServer{}
 	ret,_:=obj.QueryRemark(ctx,&pb.QueryRemarkRequest{
-		OrderId:"cjv1oyuqo000j0959wrvjh113",
-		PtId:"95527",
+		OrderId:"cjv2au7qj001x09515r1n6bam",
+		PtId:"95555",
 	})
 	t.Log(ret.Remark)
 }

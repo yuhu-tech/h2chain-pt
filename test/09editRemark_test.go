@@ -13,12 +13,12 @@ func TestEditRemark(t *testing.T) {
 	ctx := context.TODO()
 	obj := &handle.MutationServer{}
 	ret,_:=obj.EditRemark(ctx,&pb.EditRequest{
-		OrderId:"cjv1xov8x004d09596mcj5l66",
-		PtId:"95527",
+		OrderId:"cjv2au7qj001x09515r1n6bam",
+		PtId:"95566",
 		StartDate:int32(time.Now().Unix()),
 		EndDate:int32(time.Now().Unix()+7200),
-		RealSalary:350,
-		IsWorked:1,
+		RealSalary:200,
+		IsWorked:2,
 		Type:1,
 	})
 	t.Log(ret.EditResult)

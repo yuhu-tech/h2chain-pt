@@ -198,6 +198,7 @@ func (s *MutationServer) EditRemark(ctx context.Context, in *pb.EditRequest) (*p
 	if typeValue.Interface().(int32) != 0 {
 		if in.Type == 1 {
 			remark.Create = &prisma.RemarkCreateWithoutOrderCandidateInput{
+				PtId:       in.PtId,
 				StartDate:  &in.StartDate,
 				EndDate:    &in.EndDate,
 				RealSalary: &in.RealSalary,
@@ -205,6 +206,7 @@ func (s *MutationServer) EditRemark(ctx context.Context, in *pb.EditRequest) (*p
 			}
 		} else if in.Type == 2 {
 			remark.Update = &prisma.RemarkUpdateWithoutOrderCandidateDataInput{
+				PtId:       &in.PtId,
 				StartDate:  &in.StartDate,
 				EndDate:    &in.EndDate,
 				RealSalary: &in.RealSalary,

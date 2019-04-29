@@ -304,7 +304,7 @@ func (client *Client) Remark(params RemarkWhereUniqueInput) *RemarkExec {
 		params,
 		[2]string{"RemarkWhereUniqueInput!", "Remark"},
 		"remark",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkExec{ret}
 }
@@ -338,7 +338,7 @@ func (client *Client) Remarks(params *RemarksParams) *RemarkExecArray {
 		wparams,
 		[3]string{"RemarkWhereInput", "RemarkOrderByInput", "Remark"},
 		"remarks",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkExecArray{ret}
 }
@@ -682,7 +682,7 @@ func (client *Client) CreateRemark(params RemarkCreateInput) *RemarkExec {
 		params,
 		[2]string{"RemarkCreateInput!", "Remark"},
 		"createRemark",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkExec{ret}
 }
@@ -700,7 +700,7 @@ func (client *Client) UpdateRemark(params RemarkUpdateParams) *RemarkExec {
 		},
 		[3]string{"RemarkUpdateInput!", "RemarkWhereUniqueInput!", "Remark"},
 		"updateRemark",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkExec{ret}
 }
@@ -737,7 +737,7 @@ func (client *Client) UpsertRemark(params RemarkUpsertParams) *RemarkExec {
 		uparams,
 		[4]string{"RemarkWhereUniqueInput!", "RemarkCreateInput!", "RemarkUpdateInput!", "Remark"},
 		"upsertRemark",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkExec{ret}
 }
@@ -747,7 +747,7 @@ func (client *Client) DeleteRemark(params RemarkWhereUniqueInput) *RemarkExec {
 		params,
 		[2]string{"RemarkWhereUniqueInput!", "Remark"},
 		"deleteRemark",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkExec{ret}
 }
@@ -870,6 +870,8 @@ type RemarkOrderByInput string
 const (
 	RemarkOrderByInputIDAsc          RemarkOrderByInput = "id_ASC"
 	RemarkOrderByInputIDDesc         RemarkOrderByInput = "id_DESC"
+	RemarkOrderByInputPtIdAsc        RemarkOrderByInput = "ptId_ASC"
+	RemarkOrderByInputPtIdDesc       RemarkOrderByInput = "ptId_DESC"
 	RemarkOrderByInputStartDateAsc   RemarkOrderByInput = "startDate_ASC"
 	RemarkOrderByInputStartDateDesc  RemarkOrderByInput = "startDate_DESC"
 	RemarkOrderByInputEndDateAsc     RemarkOrderByInput = "endDate_ASC"
@@ -1108,56 +1110,70 @@ type OrderCandidateUpdateManyWithWhereNestedInput struct {
 }
 
 type RemarkWhereInput struct {
-	ID              *string                   `json:"id,omitempty"`
-	IDNot           *string                   `json:"id_not,omitempty"`
-	IDIn            []string                  `json:"id_in,omitempty"`
-	IDNotIn         []string                  `json:"id_not_in,omitempty"`
-	IDLt            *string                   `json:"id_lt,omitempty"`
-	IDLte           *string                   `json:"id_lte,omitempty"`
-	IDGt            *string                   `json:"id_gt,omitempty"`
-	IDGte           *string                   `json:"id_gte,omitempty"`
-	IDContains      *string                   `json:"id_contains,omitempty"`
-	IDNotContains   *string                   `json:"id_not_contains,omitempty"`
-	IDStartsWith    *string                   `json:"id_starts_with,omitempty"`
-	IDNotStartsWith *string                   `json:"id_not_starts_with,omitempty"`
-	IDEndsWith      *string                   `json:"id_ends_with,omitempty"`
-	IDNotEndsWith   *string                   `json:"id_not_ends_with,omitempty"`
-	StartDate       *int32                    `json:"startDate,omitempty"`
-	StartDateNot    *int32                    `json:"startDate_not,omitempty"`
-	StartDateIn     []int32                   `json:"startDate_in,omitempty"`
-	StartDateNotIn  []int32                   `json:"startDate_not_in,omitempty"`
-	StartDateLt     *int32                    `json:"startDate_lt,omitempty"`
-	StartDateLte    *int32                    `json:"startDate_lte,omitempty"`
-	StartDateGt     *int32                    `json:"startDate_gt,omitempty"`
-	StartDateGte    *int32                    `json:"startDate_gte,omitempty"`
-	EndDate         *int32                    `json:"endDate,omitempty"`
-	EndDateNot      *int32                    `json:"endDate_not,omitempty"`
-	EndDateIn       []int32                   `json:"endDate_in,omitempty"`
-	EndDateNotIn    []int32                   `json:"endDate_not_in,omitempty"`
-	EndDateLt       *int32                    `json:"endDate_lt,omitempty"`
-	EndDateLte      *int32                    `json:"endDate_lte,omitempty"`
-	EndDateGt       *int32                    `json:"endDate_gt,omitempty"`
-	EndDateGte      *int32                    `json:"endDate_gte,omitempty"`
-	RealSalary      *int32                    `json:"realSalary,omitempty"`
-	RealSalaryNot   *int32                    `json:"realSalary_not,omitempty"`
-	RealSalaryIn    []int32                   `json:"realSalary_in,omitempty"`
-	RealSalaryNotIn []int32                   `json:"realSalary_not_in,omitempty"`
-	RealSalaryLt    *int32                    `json:"realSalary_lt,omitempty"`
-	RealSalaryLte   *int32                    `json:"realSalary_lte,omitempty"`
-	RealSalaryGt    *int32                    `json:"realSalary_gt,omitempty"`
-	RealSalaryGte   *int32                    `json:"realSalary_gte,omitempty"`
-	IsWorked        *int32                    `json:"isWorked,omitempty"`
-	IsWorkedNot     *int32                    `json:"isWorked_not,omitempty"`
-	IsWorkedIn      []int32                   `json:"isWorked_in,omitempty"`
-	IsWorkedNotIn   []int32                   `json:"isWorked_not_in,omitempty"`
-	IsWorkedLt      *int32                    `json:"isWorked_lt,omitempty"`
-	IsWorkedLte     *int32                    `json:"isWorked_lte,omitempty"`
-	IsWorkedGt      *int32                    `json:"isWorked_gt,omitempty"`
-	IsWorkedGte     *int32                    `json:"isWorked_gte,omitempty"`
-	OrderCandidate  *OrderCandidateWhereInput `json:"orderCandidate,omitempty"`
-	And             []RemarkWhereInput        `json:"AND,omitempty"`
-	Or              []RemarkWhereInput        `json:"OR,omitempty"`
-	Not             []RemarkWhereInput        `json:"NOT,omitempty"`
+	ID                *string                   `json:"id,omitempty"`
+	IDNot             *string                   `json:"id_not,omitempty"`
+	IDIn              []string                  `json:"id_in,omitempty"`
+	IDNotIn           []string                  `json:"id_not_in,omitempty"`
+	IDLt              *string                   `json:"id_lt,omitempty"`
+	IDLte             *string                   `json:"id_lte,omitempty"`
+	IDGt              *string                   `json:"id_gt,omitempty"`
+	IDGte             *string                   `json:"id_gte,omitempty"`
+	IDContains        *string                   `json:"id_contains,omitempty"`
+	IDNotContains     *string                   `json:"id_not_contains,omitempty"`
+	IDStartsWith      *string                   `json:"id_starts_with,omitempty"`
+	IDNotStartsWith   *string                   `json:"id_not_starts_with,omitempty"`
+	IDEndsWith        *string                   `json:"id_ends_with,omitempty"`
+	IDNotEndsWith     *string                   `json:"id_not_ends_with,omitempty"`
+	PtId              *string                   `json:"ptId,omitempty"`
+	PtIdNot           *string                   `json:"ptId_not,omitempty"`
+	PtIdIn            []string                  `json:"ptId_in,omitempty"`
+	PtIdNotIn         []string                  `json:"ptId_not_in,omitempty"`
+	PtIdLt            *string                   `json:"ptId_lt,omitempty"`
+	PtIdLte           *string                   `json:"ptId_lte,omitempty"`
+	PtIdGt            *string                   `json:"ptId_gt,omitempty"`
+	PtIdGte           *string                   `json:"ptId_gte,omitempty"`
+	PtIdContains      *string                   `json:"ptId_contains,omitempty"`
+	PtIdNotContains   *string                   `json:"ptId_not_contains,omitempty"`
+	PtIdStartsWith    *string                   `json:"ptId_starts_with,omitempty"`
+	PtIdNotStartsWith *string                   `json:"ptId_not_starts_with,omitempty"`
+	PtIdEndsWith      *string                   `json:"ptId_ends_with,omitempty"`
+	PtIdNotEndsWith   *string                   `json:"ptId_not_ends_with,omitempty"`
+	StartDate         *int32                    `json:"startDate,omitempty"`
+	StartDateNot      *int32                    `json:"startDate_not,omitempty"`
+	StartDateIn       []int32                   `json:"startDate_in,omitempty"`
+	StartDateNotIn    []int32                   `json:"startDate_not_in,omitempty"`
+	StartDateLt       *int32                    `json:"startDate_lt,omitempty"`
+	StartDateLte      *int32                    `json:"startDate_lte,omitempty"`
+	StartDateGt       *int32                    `json:"startDate_gt,omitempty"`
+	StartDateGte      *int32                    `json:"startDate_gte,omitempty"`
+	EndDate           *int32                    `json:"endDate,omitempty"`
+	EndDateNot        *int32                    `json:"endDate_not,omitempty"`
+	EndDateIn         []int32                   `json:"endDate_in,omitempty"`
+	EndDateNotIn      []int32                   `json:"endDate_not_in,omitempty"`
+	EndDateLt         *int32                    `json:"endDate_lt,omitempty"`
+	EndDateLte        *int32                    `json:"endDate_lte,omitempty"`
+	EndDateGt         *int32                    `json:"endDate_gt,omitempty"`
+	EndDateGte        *int32                    `json:"endDate_gte,omitempty"`
+	RealSalary        *int32                    `json:"realSalary,omitempty"`
+	RealSalaryNot     *int32                    `json:"realSalary_not,omitempty"`
+	RealSalaryIn      []int32                   `json:"realSalary_in,omitempty"`
+	RealSalaryNotIn   []int32                   `json:"realSalary_not_in,omitempty"`
+	RealSalaryLt      *int32                    `json:"realSalary_lt,omitempty"`
+	RealSalaryLte     *int32                    `json:"realSalary_lte,omitempty"`
+	RealSalaryGt      *int32                    `json:"realSalary_gt,omitempty"`
+	RealSalaryGte     *int32                    `json:"realSalary_gte,omitempty"`
+	IsWorked          *int32                    `json:"isWorked,omitempty"`
+	IsWorkedNot       *int32                    `json:"isWorked_not,omitempty"`
+	IsWorkedIn        []int32                   `json:"isWorked_in,omitempty"`
+	IsWorkedNotIn     []int32                   `json:"isWorked_not_in,omitempty"`
+	IsWorkedLt        *int32                    `json:"isWorked_lt,omitempty"`
+	IsWorkedLte       *int32                    `json:"isWorked_lte,omitempty"`
+	IsWorkedGt        *int32                    `json:"isWorked_gt,omitempty"`
+	IsWorkedGte       *int32                    `json:"isWorked_gte,omitempty"`
+	OrderCandidate    *OrderCandidateWhereInput `json:"orderCandidate,omitempty"`
+	And               []RemarkWhereInput        `json:"AND,omitempty"`
+	Or                []RemarkWhereInput        `json:"OR,omitempty"`
+	Not               []RemarkWhereInput        `json:"NOT,omitempty"`
 }
 
 type OrderOriginUpdateOneRequiredWithoutOrderAdviserModifiesInput struct {
@@ -1249,10 +1265,11 @@ type OrderHotelModifyUpdateWithoutOrderOriginDataInput struct {
 }
 
 type RemarkUpdateManyMutationInput struct {
-	StartDate  *int32 `json:"startDate,omitempty"`
-	EndDate    *int32 `json:"endDate,omitempty"`
-	RealSalary *int32 `json:"realSalary,omitempty"`
-	IsWorked   *int32 `json:"isWorked,omitempty"`
+	PtId       *string `json:"ptId,omitempty"`
+	StartDate  *int32  `json:"startDate,omitempty"`
+	EndDate    *int32  `json:"endDate,omitempty"`
+	RealSalary *int32  `json:"realSalary,omitempty"`
+	IsWorked   *int32  `json:"isWorked,omitempty"`
 }
 
 type OrderHotelModifyUpsertWithWhereUniqueWithoutOrderOriginInput struct {
@@ -1469,10 +1486,11 @@ type RemarkWhereUniqueInput struct {
 }
 
 type RemarkUpdateWithoutOrderCandidateDataInput struct {
-	StartDate  *int32 `json:"startDate,omitempty"`
-	EndDate    *int32 `json:"endDate,omitempty"`
-	RealSalary *int32 `json:"realSalary,omitempty"`
-	IsWorked   *int32 `json:"isWorked,omitempty"`
+	PtId       *string `json:"ptId,omitempty"`
+	StartDate  *int32  `json:"startDate,omitempty"`
+	EndDate    *int32  `json:"endDate,omitempty"`
+	RealSalary *int32  `json:"realSalary,omitempty"`
+	IsWorked   *int32  `json:"isWorked,omitempty"`
 }
 
 type OrderOriginUpdateOneRequiredWithoutOrderHotelModifiesInput struct {
@@ -1890,6 +1908,7 @@ type OrderOriginUpsertWithoutOrderAdviserModifiesInput struct {
 }
 
 type RemarkCreateWithoutOrderCandidateInput struct {
+	PtId       string `json:"ptId"`
 	StartDate  *int32 `json:"startDate,omitempty"`
 	EndDate    *int32 `json:"endDate,omitempty"`
 	RealSalary *int32 `json:"realSalary,omitempty"`
@@ -2100,6 +2119,7 @@ type OrderAdviserModifyUpdateManyWithoutOrderOriginInput struct {
 }
 
 type RemarkCreateInput struct {
+	PtId           string                                    `json:"ptId"`
 	StartDate      *int32                                    `json:"startDate,omitempty"`
 	EndDate        *int32                                    `json:"endDate,omitempty"`
 	RealSalary     *int32                                    `json:"realSalary,omitempty"`
@@ -2253,6 +2273,7 @@ type OrderAdviserModifyUpsertWithWhereUniqueWithoutOrderOriginInput struct {
 }
 
 type RemarkUpdateInput struct {
+	PtId           *string                                            `json:"ptId,omitempty"`
 	StartDate      *int32                                             `json:"startDate,omitempty"`
 	EndDate        *int32                                             `json:"endDate,omitempty"`
 	RealSalary     *int32                                             `json:"realSalary,omitempty"`
@@ -2313,6 +2334,7 @@ func (instance RemarkPreviousValuesExecArray) Exec(ctx context.Context) ([]Remar
 
 type RemarkPreviousValues struct {
 	ID         string `json:"id"`
+	PtId       string `json:"ptId"`
 	StartDate  *int32 `json:"startDate,omitempty"`
 	EndDate    *int32 `json:"endDate,omitempty"`
 	RealSalary *int32 `json:"realSalary,omitempty"`
@@ -3072,7 +3094,7 @@ func (instance *RemarkSubscriptionPayloadExec) Node() *RemarkExec {
 		nil,
 		[2]string{"", "Remark"},
 		"node",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkExec{ret}
 }
@@ -3083,7 +3105,7 @@ func (instance *RemarkSubscriptionPayloadExec) PreviousValues() *RemarkPreviousV
 		nil,
 		[2]string{"", "RemarkPreviousValues"},
 		"previousValues",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkPreviousValuesExec{ret}
 }
@@ -3162,6 +3184,7 @@ func (instance RemarkExecArray) Exec(ctx context.Context) ([]Remark, error) {
 
 type Remark struct {
 	ID         string `json:"id"`
+	PtId       string `json:"ptId"`
 	StartDate  *int32 `json:"startDate,omitempty"`
 	EndDate    *int32 `json:"endDate,omitempty"`
 	RealSalary *int32 `json:"realSalary,omitempty"`
@@ -3381,7 +3404,7 @@ func (instance *OrderCandidateExec) Remark() *RemarkExec {
 		nil,
 		[2]string{"", "Remark"},
 		"remark",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkExec{ret}
 }
@@ -3634,7 +3657,7 @@ func (instance *RemarkEdgeExec) Node() *RemarkExec {
 		nil,
 		[2]string{"", "Remark"},
 		"node",
-		[]string{"id", "startDate", "endDate", "realSalary", "isWorked"})
+		[]string{"id", "ptId", "startDate", "endDate", "realSalary", "isWorked"})
 
 	return &RemarkExec{ret}
 }

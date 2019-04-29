@@ -16,11 +16,11 @@ func TestCreateOrder(t *testing.T) {
 	ret, _ := obj.CreateOrder(ctx, &pb.CreateRequest{
 		HotelId:     "001",
 		AdviserId:   "002",
-		Job:         "driver",
+		Job:         "clean",
 		Date:        int32(time.Now().Unix()),
-		Duration:    4,
-		Count:       5,
-		CountFemale: 0,
+		Duration:    3,
+		Count:       10,
+		CountFemale: 5,
 		Mode:        0,
 	})
 	t.Log(ret)

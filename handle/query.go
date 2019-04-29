@@ -262,7 +262,7 @@ func (s *QueryServer) QueryExperience(ctx context.Context, in *pb.QueryExperienc
 	    orderOrigins(
 	      where:{
 	        orderCandidates_some:{
-	          ptId:"95527"
+	          ptId:"` + in.PtId + `"
 	          remark:{isWorked:1}
 	        }
 	      }
@@ -272,6 +272,7 @@ func (s *QueryServer) QueryExperience(ctx context.Context, in *pb.QueryExperienc
 	      hotelId
 	      orderCandidates{ 
 	        remark{
+			  ptId
 	          startDate
 	          endDate
 	          isWorked

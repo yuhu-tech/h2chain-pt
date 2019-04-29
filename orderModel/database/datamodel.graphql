@@ -55,6 +55,7 @@ type OrderCandidate {
 }
 type Remark {
     id: ID! @unique
+    ptId: String!
     startDate: Int
     endDate: Int
     realSalary: Int

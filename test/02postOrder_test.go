@@ -13,10 +13,10 @@ func TestPostOrder(t *testing.T) {
 	ctx := context.TODO()
 	obj := &handle.MutationServer{}
 	ret, err := obj.PostOrder(ctx, &pb.PostRequest{
-		OrderId:      "cjv1xov8x004d09596mcj5l66",
-		IsFloat:      0, // 0 represent don't float
-		HourlySalary: 300,
-		WorkContent:  "driveCar",
+		OrderId:      "cjv2au7qj001x09515r1n6bam",
+		IsFloat:      1, // 0 represent don't float
+		HourlySalary: 200,
+		WorkContent:  "cleaning",
 		Attention:    "carefully",
 	})
 	if err != nil {
