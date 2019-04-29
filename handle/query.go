@@ -222,18 +222,18 @@ func (s *QueryServer) QueryRemark(ctx context.Context, in *pb.QueryRemarkRequest
 
 	query := `
 	  query{
-  		orderCandidates(
-		  where:{
-			orderOrigin:{id:"` + in.OrderId + `"}
-      		ptId:"` + in.PtId + `"
-		  }
-  		){
-		  remark{
-      		startDate
-      		endDate
-      		realSalary
-		  }	
-		}
+	    orderCandidates(
+	      where:{
+	        orderOrigin:{id:"` + in.OrderId + `"}
+	        ptId:"` + in.PtId + `"
+	    }  
+	    ){  
+	      remark{
+	        startDate  
+	        endDate
+	        realSalary
+	      }	
+	    }
 	  }
 	`
 	variables := make(map[string]interface{})
@@ -245,7 +245,7 @@ func (s *QueryServer) QueryRemark(ctx context.Context, in *pb.QueryRemarkRequest
 	if err != nil {
 		return nil, err
 	}
-	return &pb.QueryRemarkReply{Remark:string(resByte)}, nil
+	return &pb.QueryRemarkReply{Remark: string(resByte)}, nil
 }
 
 func (s *QueryServer) QueryExperience(ctx context.Context, in *pb.QueryExperienceRequest) (*pb.QueryExperienceReply, error) {
@@ -291,6 +291,5 @@ func (s *QueryServer) QueryExperience(ctx context.Context, in *pb.QueryExperienc
 	if err != nil {
 		return nil, err
 	}
-	return &pb.QueryExperienceReply{WorkExperience:string(resByte)}, nil
+	return &pb.QueryExperienceReply{WorkExperience: string(resByte)}, nil
 }
-
