@@ -259,29 +259,27 @@ func (s *QueryServer) QueryExperience(ctx context.Context, in *pb.QueryExperienc
 
 	query := `
 	  query{
-  		orderOrigins(
-		  where:{
-      		orderCandidates_some:{
-			  ptId:"95527"
-			  remark:{
-          		isWorked:1
-        	  }
-      		}
-    	  }
-		  orderBy:datetime_DESC
-		  ){
-		    job
-		    hotelId
-		    orderCandidates{ 
-		      remark{
-		        startDate
-		        endDate
-		        isWorked
-		      }
-		    }
-		  }
-		}
-	`
+	    orderOrigins(
+	      where:{
+	        orderCandidates_some:{
+	          ptId:"95527"
+	          remark:{isWorked:1}
+	        }
+	      }
+	      orderBy:datetime_DESC
+	      ){	  
+		  job
+	      hotelId
+	      orderCandidates{ 
+	        remark{
+	          startDate
+	          endDate
+	          isWorked
+	        }    
+	      }  
+	    }
+	  }
+	  `
 	variables := make(map[string]interface{})
 	res, err := client.GraphQL(ctx, query, variables)
 	if err != nil {
