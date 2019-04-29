@@ -173,7 +173,7 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	ptStatus := reflect.ValueOf(in.PtStatus)
 	if ptStatus.Interface().(int32) != 0 {
 		if in.PtStatus == 13 {
-			where.PtStatusIn = []int32{1,3}
+			where.PtStatusIn = []int32{1, 3}
 		}
 		where.PtStatus = &in.PtStatus
 	}
@@ -205,3 +205,92 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 
 	return &pb.QueryPTReply{OrderPts: result}, nil
 }
+
+func (s *QueryServer) QueryRemark(ctx context.Context, in *pb.QueryRemarkRequest) (*pb.QueryRemarkReply, error) {
+
+	client := prisma.New(nil)
+
+	orderId := reflect.ValueOf(in.OrderId)
+	if orderId.Interface().(string) == "" {
+		return nil, nil
+	}
+
+	ptId := reflect.ValueOf(in.PtId)
+	if ptId.Interface().(string) == "" {
+		return nil, nil
+	}
+
+	query := `
+	  query{
+  		orderCandidates(
+		  where:{
+			orderOrigin:{id:"` + in.OrderId + `"}
+      		ptId:"` + in.PtId + `"
+		  }
+  		){
+		  remark{
+      		startDate
+      		endDate
+      		realSalary
+		  }	
+		}
+	  }
+	`
+	variables := make(map[string]interface{})
+	res, err := client.GraphQL(ctx, query, variables)
+	if err != nil {
+		return nil, err
+	}
+	resByte, err := json.Marshal(res)
+	if err != nil {
+		return nil, err
+	}
+	return &pb.QueryRemarkReply{Remark:string(resByte)}, nil
+}
+
+func (s *QueryServer) QueryExperience(ctx context.Context, in *pb.QueryExperienceRequest) (*pb.QueryExperienceReply, error) {
+
+	client := prisma.New(nil)
+
+	ptId := reflect.ValueOf(in.PtId)
+	if ptId.Interface().(string) == "" {
+		return nil, nil
+	}
+
+	query := `
+	  query{
+  		orderOrigins(
+		  where:{
+      		orderCandidates_some:{
+			  ptId:"95527"
+			  remark:{
+          		isWorked:1
+        	  }
+      		}
+    	  }
+		  orderBy:datetime_DESC
+		  ){
+		    job
+		    hotelId
+		    orderCandidates{ 
+		      remark{
+		        startDate
+		        endDate
+		        isWorked
+		      }
+		    }
+		  }
+		}
+	`
+	variables := make(map[string]interface{})
+	res, err := client.GraphQL(ctx, query, variables)
+	if err != nil {
+		return nil, err
+	}
+	resByte, err := json.Marshal(res)
+	if err != nil {
+		return nil, err
+	}
+	return &pb.QueryExperienceReply{WorkExperience:string(resByte)}, nil
+}
+

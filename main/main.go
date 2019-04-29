@@ -10,6 +10,7 @@ import (
 	mpb "../api/mutation"
 	qpb "../api/query"
 	"../handle"
+	"../cleanOrder"
 )
 
 const (
@@ -21,7 +22,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	//TODO 是否需要注册两个grpc服务
+
 	s := grpc.NewServer()
 
 	mpb.RegisterMutationServer(s, &handle.MutationServer{})
@@ -32,4 +33,6 @@ func main() {
 		log.Fatalf("failed to server: %v", err)
 	}
 
+	// 启动定时清理订单服务
+	cleanOrder.StartTimer()
 }

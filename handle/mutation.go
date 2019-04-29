@@ -192,19 +192,33 @@ func (s *MutationServer) EditRemark(ctx context.Context, in *pb.EditRequest) (*p
 	if err != nil {
 		return &pb.EditReply{EditResult: 0}, err
 	}
-	// TODO CreateRemark || UpdateOrderCandidate 用哪个？
+
+	remark := &prisma.RemarkUpdateOneWithoutOrderCandidateInput{}
+	typeValue := reflect.ValueOf(in.Type)
+	if typeValue.Interface().(int32) != 0 {
+		if in.Type == 1 {
+			remark.Create = &prisma.RemarkCreateWithoutOrderCandidateInput{
+				StartDate:  &in.StartDate,
+				EndDate:    &in.EndDate,
+				RealSalary: &in.RealSalary,
+				IsWorked:   in.IsWorked,
+			}
+		} else if in.Type == 2 {
+			remark.Update = &prisma.RemarkUpdateWithoutOrderCandidateDataInput{
+				StartDate:  &in.StartDate,
+				EndDate:    &in.EndDate,
+				RealSalary: &in.RealSalary,
+				IsWorked:   &in.IsWorked,
+			}
+		} else {
+			return &pb.EditReply{EditResult: 0}, err
+		}
+	}
+
 	_, err = client.UpdateOrderCandidate(prisma.OrderCandidateUpdateParams{
 		Where: prisma.OrderCandidateWhereUniqueInput{ID: &res[0].ID},
 		Data: prisma.OrderCandidateUpdateInput{
-			Remark: &prisma.RemarkUpdateOneWithoutOrderCandidateInput{
-				// TODO create || update 是否有区别？
-				Create: &prisma.RemarkCreateWithoutOrderCandidateInput{
-					StartDate:  &in.StartDate,
-					EndDate:    &in.EndDate,
-					RealSalary: &in.RealSalary,
-					IsWorked:   in.IsWorked,
-				},
-			},
+			Remark: remark,
 		},
 	}).Exec(ctx)
 	if err != nil {

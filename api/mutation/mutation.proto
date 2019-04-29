@@ -115,6 +115,7 @@ message EditRequest {
     int32 endDate = 4;
     int32 realSalary = 5;
     int32 isWorked = 6;
+    int32 type = 7;
 }
 
 message EditReply {

@@ -9,7 +9,6 @@ import (
 	"../handle"
 )
 
-
 func TestCreateOrder(t *testing.T) {
 	t.Log("test create order ")
 	ctx := context.TODO()
@@ -17,15 +16,12 @@ func TestCreateOrder(t *testing.T) {
 	ret, _ := obj.CreateOrder(ctx, &pb.CreateRequest{
 		HotelId:     "001",
 		AdviserId:   "002",
-		Job:         "cleaning",
+		Job:         "driver",
 		Date:        int32(time.Now().Unix()),
 		Duration:    4,
-		Count:       20,
-		CountMale:   16,
-		CountFemale: 4,
-		Mode:        3,
+		Count:       5,
+		CountFemale: 0,
+		Mode:        0,
 	})
 	t.Log(ret)
 }
-
-
