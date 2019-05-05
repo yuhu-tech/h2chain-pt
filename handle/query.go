@@ -184,7 +184,11 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	if registrationChannel.Interface().(string) != "" {
 		where.RegistrationChannel = &in.RegistrationChannel
 	}
-	queryRes, err := client.OrderCandidates(&prisma.OrderCandidatesParams{Where: where}).Exec(ctx)
+	orderBy := prisma.OrderCandidateOrderByInputPtStatusAsc
+	queryRes, err := client.OrderCandidates(&prisma.OrderCandidatesParams{
+		Where: where,
+		OrderBy:&orderBy,
+	}).Exec(ctx)
 	if err != nil {
 		log.Printf(" query order's pt filed %v ", err)
 		return nil, err
