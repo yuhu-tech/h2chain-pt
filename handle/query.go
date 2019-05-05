@@ -90,7 +90,7 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 
 	query := `
 	  query{
-		orderOrigins(where:{` + where + `}orderBy:status_ASC){
+		orderOrigins(where:{` + where + `}orderBy:datetime_DESC){
 		id
 		hotelId
 		hrId
@@ -174,8 +174,9 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	if ptStatus.Interface().(int32) != 0 {
 		if in.PtStatus == 13 {
 			where.PtStatusIn = []int32{1, 3}
+		}else {
+			where.PtStatus = &in.PtStatus
 		}
-		where.PtStatus = &in.PtStatus
 	}
 
 	// query pts of order by registrationChannel
@@ -183,7 +184,6 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	if registrationChannel.Interface().(string) != "" {
 		where.RegistrationChannel = &in.RegistrationChannel
 	}
-
 	queryRes, err := client.OrderCandidates(&prisma.OrderCandidatesParams{Where: where}).Exec(ctx)
 	if err != nil {
 		log.Printf(" query order's pt filed %v ", err)

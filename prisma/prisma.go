@@ -59,7 +59,7 @@ func (client *Client) GraphQL(ctx context.Context, query string, variables map[s
 	return client.Client.GraphQL(ctx, query, variables)
 }
 
-var DefaultEndpoint = "http://localhost:4466"
+var DefaultEndpoint = "http://localhost:8866"
 var Secret = ""
 
 func (client *Client) OrderAdviserModify(params OrderAdviserModifyWhereUniqueInput) *OrderAdviserModifyExec {
