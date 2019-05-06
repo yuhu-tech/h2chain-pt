@@ -173,8 +173,8 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	ptStatus := reflect.ValueOf(in.PtStatus)
 	if ptStatus.Interface().(int32) != 0 {
 		if in.PtStatus == 13 {
-			where.PtStatusIn = []int32{1, 3}
-		}else {
+			where.PtStatusIn = []int32{1, 3, 4}
+		} else {
 			where.PtStatus = &in.PtStatus
 		}
 	}
@@ -186,8 +186,8 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	}
 	orderBy := prisma.OrderCandidateOrderByInputPtStatusAsc
 	queryRes, err := client.OrderCandidates(&prisma.OrderCandidatesParams{
-		Where: where,
-		OrderBy:&orderBy,
+		Where:   where,
+		OrderBy: &orderBy,
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf(" query order's pt filed %v ", err)
