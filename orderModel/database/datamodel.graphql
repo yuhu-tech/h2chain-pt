@@ -53,6 +53,7 @@ type OrderCandidate {
     registrationChannel: String
     orderOrigin: OrderOrigin!
 }
+
 type Remark {
     id: ID! @unique
     ptId: String!
@@ -62,4 +63,5 @@ type Remark {
     isWorked: Int!
     orderCandidate: OrderCandidate!
 }
+
 

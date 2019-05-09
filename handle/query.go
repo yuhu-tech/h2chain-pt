@@ -233,9 +233,10 @@ func (s *QueryServer) QueryRemark(ctx context.Context, in *pb.QueryRemarkRequest
 	    }  
 	    ){  
 	      remark{
-	        startDate  
-	        endDate
-	        realSalary
+			startDate  
+			endDate
+			realSalary
+			isWorked
 	      }	
 	    }
 	  }
