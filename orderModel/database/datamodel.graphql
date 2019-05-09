@@ -1,0 +1,67 @@
+type OrderOrigin {
+    id: ID! @unique
+    hotelId: String!
+    hrId: String!
+    adviserId: String!
+    datetime: Int!
+    duration: Int!
+    job: String!
+    mode: Int!
+    count: Int!
+    countMale: Int!
+    status: Int!
+    orderHotelModifies: [OrderHotelModify]
+    orderAdviserModifies: [OrderAdviserModify]
+    orderCandidates: [OrderCandidate]
+}
+
+
+type OrderHotelModify {
+    id: ID! @unique
+    revision: Int!
+    timestamp: Int!
+    count: Int
+    countMale: Int
+    dateTime: Int
+    duration: Int
+    mode: Int
+    orderOrigin: OrderOrigin!
+}
+
+type OrderAdviserModify{
+    id: ID! @unique
+    revision: Int!
+    timeStamp: Int!
+    isFloat: Int
+    hourlySalary: Int
+    workCount: String
+    attention: String
+    orderOrigin: OrderOrigin!
+}
+
+type OrderCandidate {
+    id: ID! @unique
+    adviserId: String!
+    agentId: String!
+    ptId: String!
+    applyTime: Int
+    signInTime: Int
+    ptStatus: Int!
+    ptPerformance: Int
+    objectReason: Int
+    remark: Remark
+    registrationChannel: String
+    orderOrigin: OrderOrigin!
+}
+
+type Remark {
+    id: ID! @unique
+    ptId: String!
+    startDate: Int
+    endDate: Int
+    realSalary: Int
+    isWorked: Int!
+    orderCandidate: OrderCandidate!
+}
+
+

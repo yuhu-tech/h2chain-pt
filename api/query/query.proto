@@ -1,0 +1,72 @@
+
+syntax = "proto3";
+
+service QueryOrder {
+
+    // hotel/adviser/pt query order
+    rpc QueryOrder (QueryRequest) returns (QueryReply) {}
+
+    // hotel/adviser query order's pt
+    rpc QueryPTOfOrder (QueryPTRequest) returns (QueryPTReply) {}
+
+    // adviser query pt's remark
+    rpc QueryRemark (QueryRemarkRequest) returns (QueryRemarkReply) {}
+
+    // adviser query pt' work experience
+    rpc QueryExperience (QueryExperienceRequest) returns (QueryExperienceReply) {}
+}
+
+
+message QueryRequest {
+    string orderId = 1;
+    int32 date = 2;
+    int32 status = 3;
+    string hotelId = 4;
+    string Adviser = 5;
+    string hrId = 6;
+    string ptId = 7;
+}
+
+message QueryReply {
+     string orderOrigins = 1;
+}
+
+
+message QueryPTRequest {
+    string orderId = 1;
+    string ptId = 2;
+    string registrationChannel = 3;
+    int32 ptStatus = 4;
+}
+
+message PT {
+        string ptId = 1;
+        string adviserId = 2;
+        string agentId = 3;
+        int32 applyTime = 4;
+        int32 signTime = 5;
+        string orderId = 6;
+        string id = 7;
+        int32 ptStatus = 8;
+}
+
+message QueryPTReply {
+    repeated PT orderPts = 1;
+}
+
+message QueryRemarkRequest {
+    string orderId = 1;
+    string ptId  = 2;
+}
+
+message QueryRemarkReply {
+    string remark = 1;
+}
+
+message QueryExperienceRequest {
+    string ptId = 1;
+}
+
+message QueryExperienceReply {
+    string workExperience = 1;
+}
