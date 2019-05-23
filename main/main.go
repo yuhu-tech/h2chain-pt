@@ -10,7 +10,6 @@ import (
 	mpb "../api/mutation"
 	qpb "../api/query"
 	"../handle"
-	"../cleanOrder"
 )
 
 const (
@@ -32,7 +31,4 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to server: %v", err)
 	}
-
-	// 启动定时清理订单服务
-	cleanOrder.StartTimer()
 }
