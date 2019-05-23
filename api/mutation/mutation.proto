@@ -23,6 +23,9 @@ service Mutation {
 
     // edit order's pt remark
     rpc EditRemark (EditRequest) returns (EditReply) {}
+
+    // clean order
+    rpc CleanOrder (CleanRequest) returns (CleanReply) {}
 }
 
 
@@ -120,4 +123,12 @@ message EditRequest {
 
 message EditReply {
     int32 editResult = 1;
+}
+
+message CleanRequest {
+    int32 date = 1;
+}
+
+message CleanReply {
+    string orderOrigins = 1;
 }

@@ -1,12 +1,13 @@
 package handle
 
 import (
+	"encoding/json"
+	"fmt"
 	"log"
 	"reflect"
+	"strconv"
 	"time"
-
 	"golang.org/x/net/context"
-
 	pb "../api/mutation"
 	"../prisma"
 )
@@ -228,4 +229,87 @@ func (s *MutationServer) EditRemark(ctx context.Context, in *pb.EditRequest) (*p
 	}
 
 	return &pb.EditReply{EditResult: 1}, nil
+}
+
+func (s *MutationServer) CleanOrder(ctx context.Context, in *pb.CleanRequest) (*pb.CleanReply, error) {
+	client := prisma.New(nil)
+
+	// 获取传入时间，转化为三天前时间，更新当天订单状态
+	inDate := reflect.ValueOf(in.Date)
+	if inDate.Interface().(int32) == 0 {
+		return nil, fmt.Errorf("clean order failed! the date is nil")
+	}
+	var cleanDate = int32(in.Date - 3*24*3600)
+	var date int32
+
+	if (cleanDate+28800)%86400 == 0 {
+		date = cleanDate
+	} else {
+		cleanDate -= (cleanDate + 28800) % 86400
+		date = cleanDate
+	}
+	dateMin := date
+	dateMax := date + 86399
+
+	// 将更新的订单信息返回
+	where := `status_not:3`
+	where = where + `datetime_gte:` + strconv.Itoa(int(dateMin)) + `datetime_lte:` + strconv.Itoa(int(dateMax))
+	query := `
+	  query{
+		orderOrigins(where:{` + where + `}orderBy:datetime_DESC){
+		id
+		hotelId
+		hrId
+		adviserId
+		datetime
+		duration
+		job
+		mode
+		count
+		countMale
+		status
+	    orderHotelModifies{
+	      id
+	      count
+	      countMale
+	      dateTime
+	      duration
+	      mode
+	    }
+	    orderCandidates{
+	      id
+	      ptId
+	      ptStatus
+	    }
+	  }
+	}
+ `
+
+	variables := make(map[string]interface{})
+	res, err := client.GraphQL(ctx, query, variables)
+	if err != nil {
+		return nil, fmt.Errorf("clean order failed! qeury order err: %s", err)
+	}
+
+	resByte, err := json.Marshal(res)
+	if err != nil {
+		return nil, fmt.Errorf("clean order failed! qeury order err: %s", err)
+	}
+
+	// 更新订单状态
+	var targetStatus int32 = 3
+	_, err = client.UpdateManyOrderOrigins(prisma.OrderOriginUpdateManyParams{
+		Where: &prisma.OrderOriginWhereInput{
+			DatetimeGte: &dateMin,
+			DatetimeLte: &dateMax,
+		},
+		Data: prisma.OrderOriginUpdateManyMutationInput{
+			Status: &targetStatus,
+		},
+	}).Exec(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("clean order failed! update order err: %s", err)
+	}
+
+	return &pb.CleanReply{OrderOrigins: string(resByte)}, nil
 }
