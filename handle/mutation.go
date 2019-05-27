@@ -7,9 +7,10 @@ import (
 	"reflect"
 	"strconv"
 	"time"
-	"golang.org/x/net/context"
+
 	pb "../api/mutation"
 	"../prisma"
+	"golang.org/x/net/context"
 )
 
 type MutationServer struct {
@@ -239,7 +240,9 @@ func (s *MutationServer) CleanOrder(ctx context.Context, in *pb.CleanRequest) (*
 	if inDate.Interface().(int32) == 0 {
 		return nil, fmt.Errorf("clean order failed! the date is nil")
 	}
-	var cleanDate = int32(in.Date - 3*24*3600)
+	//TODO 测试环境 修改当天的订单
+	//var cleanDate = int32(in.Date - 3*24*3600)
+	var cleanDate = int32(in.Date)
 	var date int32
 
 	if (cleanDate+28800)%86400 == 0 {
@@ -280,6 +283,9 @@ func (s *MutationServer) CleanOrder(ctx context.Context, in *pb.CleanRequest) (*
 	      id
 	      ptId
 	      ptStatus
+          remark{
+            isWorked
+          }
 	    }
 	  }
 	}
