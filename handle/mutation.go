@@ -1,16 +1,17 @@
 package handle
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"reflect"
 	"strconv"
 	"time"
 
+	"encoding/json"
+	"golang.org/x/net/context"
+
 	pb "../api/mutation"
 	"../prisma"
-	"golang.org/x/net/context"
 )
 
 type MutationServer struct {
@@ -77,13 +78,14 @@ func (s *MutationServer) RegistryOrder(ctx context.Context, in *pb.RegistryReque
 	client := prisma.New(nil)
 
 	_, err := client.CreateOrderCandidate(prisma.OrderCandidateCreateInput{
-		AdviserId:           in.AdviserId,
-		PtId:                in.PtId,
-		ApplyTime:           &in.ApplyTime,
-		SignInTime:          &in.SignInTime,
-		PtStatus:            in.PtStatus,
-		RegistrationChannel: &in.RegistrationChannel,
-		OrderOrigin:         prisma.OrderOriginCreateOneWithoutOrderCandidatesInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
+		AdviserId:   in.AdviserId,
+		PtId:        in.PtId,
+		ApplyTime:   &in.ApplyTime,
+		SignInTime:  &in.SignInTime,
+		PtStatus:    in.PtStatus,
+		Type:        in.Type,
+		InviterId:   &in.InviterId,
+		OrderOrigin: prisma.OrderOriginCreateOneWithoutOrderCandidatesInput{Connect: &prisma.OrderOriginWhereUniqueInput{ID: &in.OrderId}},
 	}).Exec(ctx)
 	if err != nil {
 		log.Printf("create order candidate failed %v ", err)
@@ -318,4 +320,16 @@ func (s *MutationServer) CleanOrder(ctx context.Context, in *pb.CleanRequest) (*
 	}
 
 	return &pb.CleanReply{OrderOrigins: string(resByte)}, nil
+}
+
+func (s *MutationServer) TransmitOrder(ctx context.Context, in *pb.TransmitRequest) (*pb.TransmitReply, error) {
+	client := prisma.New(nil)
+	_, err := client.CreateOrderAgent(prisma.OrderAgentCreateInput{
+		OrderId: in.OrderId,
+		AgentId: in.AgentId,
+	}).Exec(ctx)
+	if err != nil {
+		return &pb.TransmitReply{TransmitResult: 0}, err
+	}
+	return &pb.TransmitReply{TransmitResult: 1}, nil
 }

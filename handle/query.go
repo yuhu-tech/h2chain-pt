@@ -1,6 +1,7 @@
 package handle
 
 import (
+	"fmt"
 	"log"
 	"reflect"
 	"strconv"
@@ -131,7 +132,8 @@ func (s *QueryServer) QueryOrder(ctx context.Context, in *pb.QueryRequest) (*pb.
 	      ptStatus
 	      ptPerformance
 	      objectReason
-	      registrationChannel
+	      type
+        inviterId
 	    }
 	  }
 	}
@@ -180,10 +182,14 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	}
 
 	// query pts of order by registrationChannel
-	registrationChannel := reflect.ValueOf(in.RegistrationChannel)
-	if registrationChannel.Interface().(string) != "" {
-		where.RegistrationChannel = &in.RegistrationChannel
+	registryType := reflect.ValueOf(in.Type)
+	if registryType.Interface().(int32) != 0 {
+		where.Type = &in.Type
+		if in.Type == 3 {
+			where.InviterId = &in.InviterId
+		}
 	}
+
 	orderBy := prisma.OrderCandidateOrderByInputPtStatusAsc
 	queryRes, err := client.OrderCandidates(&prisma.OrderCandidatesParams{
 		Where:   where,
@@ -204,6 +210,8 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 		pt.SignTime = *queryRes[i].SignInTime
 		pt.Id = queryRes[i].ID
 		pt.PtStatus = queryRes[i].PtStatus
+		pt.Type = queryRes[i].Type
+		pt.InviterId = *queryRes[i].InviterId
 		result = append(result, &pt)
 	}
 
@@ -296,4 +304,147 @@ func (s *QueryServer) QueryExperience(ctx context.Context, in *pb.QueryExperienc
 		return nil, err
 	}
 	return &pb.QueryExperienceReply{WorkExperience: string(resByte)}, nil
+}
+
+func (s *QueryServer) QueryAgentOfOrder(ctx context.Context, in *pb.QueryAgentRequest) (*pb.QueryAgentReply, error) {
+	client := prisma.New(nil)
+
+	orderId := reflect.ValueOf(in.OrderId)
+	if orderId.Interface().(string) == "" {
+		return nil, fmt.Errorf("订单id错误")
+	}
+
+	query := `
+      query{
+        orderOrigin(
+          where:{id:"` + in.OrderId + `"}
+        ){
+          orderCandidates(
+            where:{
+      	      type:3
+            }
+          ){
+            inviterId
+          }
+        }
+      }
+    `
+
+	variables := make(map[string]interface{})
+	res, err := client.GraphQL(ctx, query, variables)
+	if err != nil {
+		return nil, err
+	}
+	resByte, err := json.Marshal(res)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.QueryAgentReply{AgentList: string(resByte)}, nil
+}
+
+func (s *QueryServer) QueryOrderOfAgent(ctx context.Context, in *pb.QueryOOARequest) (*pb.QueryOOAReply, error) {
+	client := prisma.New(nil)
+	list := []string{}
+
+	agentId := reflect.ValueOf(in.AgentId)
+	if agentId.Interface().(string) == "" {
+		return nil, fmt.Errorf("agent_id is wrong")
+	}
+
+	limit := reflect.ValueOf(in.Limit)
+	if limit.Interface().(int32) == 0 {
+		return nil, fmt.Errorf("limit is wrong")
+	}
+
+	skip := reflect.ValueOf(in.Skip)
+	if skip.Interface().(int32) == 0 {
+		return nil, fmt.Errorf("skip is wrong")
+	}
+
+	// 拿到agentId , limit ,skip 查[orderId]
+	res, err := client.OrderAgents(&prisma.OrderAgentsParams{
+		Where: &prisma.OrderAgentWhereInput{
+			AgentId: &in.AgentId,
+		},
+		First: &in.Limit,
+		Skip:  &in.Skip,
+	}).Exec(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("") //TODO
+	}
+
+	// 遍历[orderId] 查 order
+	for i := 0; i < len(res); i++ {
+		query := `
+          query{
+            orderOrigin(
+              where:{id:"` + res[i].OrderId + `"}
+            ){
+              id
+              hotelId
+              hrId
+              adviserId
+              datetime
+              duration
+              job
+              mode
+              count
+              countMale
+              status
+              orderHotelModifies{
+                id
+                revision
+                timestamp
+                count
+                countMale
+                dateTime
+                duration
+                mode
+              }
+              orderAdviserModifies{
+                id
+                revision
+                timeStamp
+                isFloat
+                hourlySalary
+                workCount
+                attention
+              }
+              orderCandidates{
+                id
+                adviserId
+                agentId
+                ptId
+                applyTime
+                signInTime
+                ptStatus
+                ptPerformance
+                objectReason     
+                remark{
+                  ptId
+                  startDate
+                  endDate
+                  realSalary
+                  isWorked
+                }
+                type
+                inviterId
+              }
+            }
+          }
+		`
+		variables := make(map[string]interface{})
+		res, err := client.GraphQL(ctx, query, variables)
+		if err != nil {
+			return nil, err
+		}
+		resByte, err := json.Marshal(res)
+		if err != nil {
+			return nil, err
+		}
+		list = append(list, string(resByte))
+	}
+
+	return &pb.QueryOOAReply{OrderList: list}, nil
 }
