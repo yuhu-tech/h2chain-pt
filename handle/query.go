@@ -186,7 +186,11 @@ func (s *QueryServer) QueryPTOfOrder(ctx context.Context, in *pb.QueryPTRequest)
 	if registryType.Interface().(int32) != 0 {
 		where.Type = &in.Type
 		if in.Type == 3 {
-			where.InviterId = &in.InviterId
+			if &in.InviterId == nil {
+				return nil, fmt.Errorf("the inviterid is wrong")
+			} else {
+				where.InviterId = &in.InviterId
+			}
 		}
 	}
 
@@ -352,14 +356,9 @@ func (s *QueryServer) QueryOrderOfAgent(ctx context.Context, in *pb.QueryOOARequ
 		return nil, fmt.Errorf("agent_id is wrong")
 	}
 
-	limit := reflect.ValueOf(in.Limit)
-	if limit.Interface().(int32) == 0 {
-		return nil, fmt.Errorf("limit is wrong")
-	}
-
-	skip := reflect.ValueOf(in.Skip)
-	if skip.Interface().(int32) == 0 {
-		return nil, fmt.Errorf("skip is wrong")
+	status := reflect.ValueOf(in.Status)
+	if status.Interface().(int32) == 0 {
+		return nil, fmt.Errorf("status is wrong")
 	}
 
 	// 拿到agentId , limit ,skip 查[orderId]
@@ -367,73 +366,64 @@ func (s *QueryServer) QueryOrderOfAgent(ctx context.Context, in *pb.QueryOOARequ
 		Where: &prisma.OrderAgentWhereInput{
 			AgentId: &in.AgentId,
 		},
-		First: &in.Limit,
-		Skip:  &in.Skip,
 	}).Exec(ctx)
 	if err != nil {
-		return nil, fmt.Errorf("") //TODO
+		return nil, fmt.Errorf("qeury orderid by agentid failed")
 	}
 
 	// 遍历[orderId] 查 order
 	for i := 0; i < len(res); i++ {
+		where := `id:"` + res[i].OrderId + `"`
+		where = where + `status:` + strconv.Itoa(int(in.Status))
 		query := `
-          query{
-            orderOrigin(
-              where:{id:"` + res[i].OrderId + `"}
-            ){
-              id
-              hotelId
-              hrId
-              adviserId
-              datetime
-              duration
-              job
-              mode
-              count
-              countMale
-              status
-              orderHotelModifies{
-                id
-                revision
-                timestamp
-                count
-                countMale
-                dateTime
-                duration
-                mode
-              }
-              orderAdviserModifies{
-                id
-                revision
-                timeStamp
-                isFloat
-                hourlySalary
-                workCount
-                attention
-              }
-              orderCandidates{
-                id
-                adviserId
-                agentId
-                ptId
-                applyTime
-                signInTime
-                ptStatus
-                ptPerformance
-                objectReason     
-                remark{
-                  ptId
-                  startDate
-                  endDate
-                  realSalary
-                  isWorked
-                }
-                type
-                inviterId
-              }
-            }
-          }
-		`
+       	  query{
+       		orderOrigins(where:{` + where + `}orderBy:datetime_DESC){
+       		id
+       		hotelId
+       		hrId
+       		adviserId
+       		datetime
+       		duration
+       		job
+       		mode
+       		count
+       		countMale
+       		status
+       	    orderHotelModifies{
+       	      id
+       	      revision
+       	      timestamp
+       	      count
+       	      countMale
+       	      dateTime
+       	      duration
+       	      mode
+       	    }
+       	    orderAdviserModifies{
+       	      id
+       	      revision
+       	      timeStamp
+       	      isFloat
+       	      hourlySalary
+       	      workCount
+       	      attention
+       	    }
+       	    orderCandidates{
+       	      id
+       	      adviserId
+       	      agentId
+       	      ptId
+       	      applyTime
+       	      signInTime
+       	      ptStatus
+       	      ptPerformance
+       	      objectReason
+       	      type
+               inviterId
+       	    }
+       	  }
+       	}
+        `
 		variables := make(map[string]interface{})
 		res, err := client.GraphQL(ctx, query, variables)
 		if err != nil {
