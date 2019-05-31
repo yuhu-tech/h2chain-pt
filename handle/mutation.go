@@ -324,7 +324,22 @@ func (s *MutationServer) CleanOrder(ctx context.Context, in *pb.CleanRequest) (*
 
 func (s *MutationServer) TransmitOrder(ctx context.Context, in *pb.TransmitRequest) (*pb.TransmitReply, error) {
 	client := prisma.New(nil)
-	_, err := client.CreateOrderAgent(prisma.OrderAgentCreateInput{
+
+	// 防重保护
+	res, err := client.OrderAgents(&prisma.OrderAgentsParams{
+		Where: &prisma.OrderAgentWhereInput{
+			AgentId: &in.AgentId,
+			OrderId: &in.OrderId,
+		},
+	}).Exec(ctx)
+	if err != nil {
+		return &pb.TransmitReply{TransmitResult: 0}, fmt.Errorf("query the record of order of agent")
+	}
+	if len(res) != 0 {
+		return &pb.TransmitReply{TransmitResult: 0}, fmt.Errorf("the agent has bind the order")
+	}
+
+	_, err = client.CreateOrderAgent(prisma.OrderAgentCreateInput{
 		OrderId: in.OrderId,
 		AgentId: in.AgentId,
 	}).Exec(ctx)
