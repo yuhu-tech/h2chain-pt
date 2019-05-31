@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"encoding/json"
+
 	"golang.org/x/net/context"
 
 	pb "../api/query"
@@ -315,7 +316,7 @@ func (s *QueryServer) QueryAgentOfOrder(ctx context.Context, in *pb.QueryAgentRe
 
 	orderId := reflect.ValueOf(in.OrderId)
 	if orderId.Interface().(string) == "" {
-		return nil, fmt.Errorf("订单id错误")
+		return nil, fmt.Errorf("the orderId is wrong")
 	}
 
 	query := `
@@ -419,7 +420,7 @@ func (s *QueryServer) QueryOrderOfAgent(ctx context.Context, in *pb.QueryOOARequ
        	      ptPerformance
        	      objectReason
        	      type
-               inviterId
+              inviterId
        	    }
        	  }
        	}

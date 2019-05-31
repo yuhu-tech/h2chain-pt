@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"encoding/json"
+
 	"golang.org/x/net/context"
 
 	pb "../api/mutation"
@@ -46,7 +47,6 @@ func (s *MutationServer) PostOrder(ctx context.Context, in *pb.PostRequest) (*pb
 
 	client := prisma.New(nil)
 	// TODO how to achieve revision
-	// TODO add transaction to bind create and update
 
 	// create orderAdviserModify
 	_, err := client.CreateOrderAdviserModify(prisma.OrderAdviserModifyCreateInput{
@@ -242,9 +242,9 @@ func (s *MutationServer) CleanOrder(ctx context.Context, in *pb.CleanRequest) (*
 	if inDate.Interface().(int32) == 0 {
 		return nil, fmt.Errorf("clean order failed! the date is nil")
 	}
-	//TODO 测试环境 修改当天的订单
-	//var cleanDate = int32(in.Date - 3*24*3600)
-	var cleanDate = int32(in.Date)
+
+	var cleanDate = int32(in.Date - 3*24*3600)
+	//var cleanDate = int32(in.Date)
 	var date int32
 
 	if (cleanDate+28800)%86400 == 0 {
