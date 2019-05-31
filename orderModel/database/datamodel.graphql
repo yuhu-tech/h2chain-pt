@@ -50,7 +50,8 @@ type OrderCandidate {
     ptPerformance: Int
     objectReason: Int
     remark: Remark
-    registrationChannel: String
+    type: Int!
+    inviterId: String
     orderOrigin: OrderOrigin!
 }
 
@@ -64,4 +65,9 @@ type Remark {
     orderCandidate: OrderCandidate!
 }
 
+type OrderAgent {                                   #代理和订单 关联映射表
+    id: ID! @unique
+    orderId: String!                                #订单 id
+    agentId: String!                                #代理 id
+}
 
