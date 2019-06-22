@@ -1,4 +1,4 @@
-endpoint: http://localhost:8866
+endpoint: http://localhost:8866/h2chain/pt
 datamodel: ./database/datamodel.graphql
 
 generate:
