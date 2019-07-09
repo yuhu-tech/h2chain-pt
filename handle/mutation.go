@@ -18,6 +18,29 @@ import (
 type MutationServer struct {
 }
 
+type Order struct {
+	OrderOrigin struct {
+		Datetime           int32  `json:"datetime"`
+		Duration           int32  `json:"duration"`
+		ID                 string `json:"id"`
+		OrderHotelModifies []struct {
+			DateTime int32 `json:"dateTime"`
+			Duration int32 `json:"duration"`
+		} `json:"orderHotelModifies"`
+	} `json:"orderOrigin"`
+}
+
+type Orders struct {
+	OrderOrigins []struct {
+		Datetime           int32 `json:"datetime"`
+		Duration           int32 `json:"duration"`
+		OrderHotelModifies []struct {
+			DateTime int32 `json:"dateTime"`
+			Duration int32 `json:"duration"`
+		} `json:"orderHotelModifies"`
+	} `json:"orderOrigins"`
+}
+
 func (s *MutationServer) CreateOrder(ctx context.Context, in *pb.CreateRequest) (*pb.CreateReply, error) {
 
 	client := prisma.New(nil)
@@ -77,7 +100,15 @@ func (s *MutationServer) RegistryOrder(ctx context.Context, in *pb.RegistryReque
 
 	client := prisma.New(nil)
 
-	_, err := client.CreateOrderCandidate(prisma.OrderCandidateCreateInput{
+	res, err := RegistryConflict(in.OrderId, in.PtId)
+	if err != nil {
+		return &pb.RegistryReply{RegistryResult: 0}, err
+	}
+	if res == true {
+		return &pb.RegistryReply{RegistryResult: 2}, err
+	}
+
+	_, err = client.CreateOrderCandidate(prisma.OrderCandidateCreateInput{
 		AdviserId:   in.AdviserId,
 		PtId:        in.PtId,
 		ApplyTime:   &in.ApplyTime,
@@ -347,4 +378,101 @@ func (s *MutationServer) TransmitOrder(ctx context.Context, in *pb.TransmitReque
 		return &pb.TransmitReply{TransmitResult: 0}, err
 	}
 	return &pb.TransmitReply{TransmitResult: 1}, nil
+}
+
+func RegistryConflict(orderId, ptId string) (bool, error) {
+	client := prisma.New(nil)
+	ctx := context.TODO()
+
+	// 获取待报名订单时间信息
+	query := `
+	  query{
+		orderOrigin(where:{id:"` + orderId + `"}){
+		  id
+		  datetime
+		  duration
+		  orderHotelModifies{
+			dateTime
+			duration
+		  }
+		}
+	  }
+	`
+	variables := make(map[string]interface{})
+	res, err := client.GraphQL(ctx, query, variables)
+	if err != nil {
+		return true, err
+	}
+	resByte, err := json.Marshal(res)
+	if err != nil {
+		return true, err
+	}
+	var targetOrder Order
+	json.Unmarshal(resByte, &targetOrder)
+
+	// 获取 pt 已报名且未关闭订单的时间信息
+	query = `
+	  query{
+		orderOrigins(
+		  where:{
+			  status:2
+			orderCandidates_some:{
+			  ptId:"` + ptId + `"
+			}
+		  }
+		){
+		  datetime
+		  duration
+		  orderHotelModifies{
+			dateTime
+			duration
+		  }
+		}
+	  }
+	`
+
+	result, err := client.GraphQL(ctx, query, variables)
+	if err != nil {
+		return true, err
+	}
+	resultByte, err := json.Marshal(result)
+	if err != nil {
+		return true, err
+	}
+	var registeredOrders Orders
+	json.Unmarshal(resultByte, &registeredOrders)
+
+	// fmt.Println("targetOrder:", targetOrder)
+	// fmt.Println("registeredOrders:", registeredOrders)
+
+	// 判断是否产生时间冲突
+	var tDatetime int32
+	var tDuration int32
+	if len(targetOrder.OrderOrigin.OrderHotelModifies) != 0 {
+		tDatetime = targetOrder.OrderOrigin.OrderHotelModifies[0].DateTime
+		tDuration = targetOrder.OrderOrigin.OrderHotelModifies[0].Duration
+	} else {
+		tDatetime = targetOrder.OrderOrigin.Datetime
+		tDuration = targetOrder.OrderOrigin.Duration
+	}
+	tarMax := tDatetime + tDuration
+
+	for _, ele := range registeredOrders.OrderOrigins {
+		var da int32
+		var du int32
+		da = ele.OrderHotelModifies[0].DateTime
+		du = ele.OrderHotelModifies[0].Duration
+		if len(ele.OrderHotelModifies) != 0 {
+			da = ele.OrderHotelModifies[0].DateTime
+			du = ele.OrderHotelModifies[0].Duration
+		}
+		regMax := da + du
+
+		if tDatetime <= regMax || tarMax >= da {
+			return true, nil
+		}
+
+	}
+
+	return false, nil
 }
