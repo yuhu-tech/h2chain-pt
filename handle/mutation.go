@@ -460,15 +460,15 @@ func RegistryConflict(orderId, ptId string) (bool, error) {
 	for _, ele := range registeredOrders.OrderOrigins {
 		var da int32
 		var du int32
-		da = ele.OrderHotelModifies[0].DateTime
-		du = ele.OrderHotelModifies[0].Duration
+		da = ele.Datetime
+		du = ele.Duration
 		if len(ele.OrderHotelModifies) != 0 {
 			da = ele.OrderHotelModifies[0].DateTime
 			du = ele.OrderHotelModifies[0].Duration
 		}
 		regMax := da + du
 
-		if tDatetime <= regMax || tarMax >= da {
+		if tDatetime <= regMax && tarMax >= da {
 			return true, nil
 		}
 
