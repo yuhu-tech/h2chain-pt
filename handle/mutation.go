@@ -160,6 +160,15 @@ func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtReq
 	data := prisma.OrderCandidateUpdateManyMutationInput{}
 	targetStatus := reflect.ValueOf(in.TargetStatus)
 	if targetStatus.Interface().(int32) != 0 {
+		if in.TargetStatus == 3 {
+			result, err := RegistryConflict(in.OrderId, in.PtId)
+			if err!= nil {
+				return &pb.ModifyPtReply{ModifyResult: 0}, err
+			}
+			if result == true {
+				return &pb.ModifyPtReply{ModifyResult: 2}, nil
+			}
+		}
 		data.PtStatus = &in.TargetStatus
 	}
 

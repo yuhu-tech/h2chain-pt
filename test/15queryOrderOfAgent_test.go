@@ -13,10 +13,11 @@ func TestQueryOrderOfAgent(t *testing.T) {
 	ctx := context.TODO()
 	obj := &handle.QueryServer{}
 	ret, err := obj.QueryOrderOfAgent(ctx, &pb.QueryOOARequest{
-		AgentId: "",
+		AgentId: "Inviter001",
+		Status:1,
 	})
 	if err != nil {
 		t.Error(err)
 	}
-	t.Log(ret)
+	t.Log(ret.OrderList)
 }

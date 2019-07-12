@@ -14,11 +14,11 @@ func TestCreateOrder(t *testing.T) {
 	ctx := context.TODO()
 	obj := &handle.MutationServer{}
 	ret, _ := obj.CreateOrder(ctx, &pb.CreateRequest{
-		HotelId:     "1001",
-		AdviserId:   "2001",
+		HotelId:     "1002",
+		AdviserId:   "2002",
 		Job:         "clean",
 		Date:        int32(time.Now().Unix()),
-		Duration:    3,
+		Duration:    4,
 		Count:       10,
 		CountFemale: 5,
 		Mode:        0,

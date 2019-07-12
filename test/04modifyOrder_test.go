@@ -14,9 +14,9 @@ func TestModifyOrder(t *testing.T) {
 	ctx := context.TODO()
 	obj := &handle.MutationServer{}
 	ret, err := obj.ModifyOrder(ctx, &pb.ModifyRequest{
-		OrderId:          "cju9jjub0000g0a10levs5wqa",
+		OrderId:          "cjxvdldng000l09380nyl6qw6",
 		DateChanged:      int32(time.Now().Unix()),
-		DurationChanged:  3,
+		DurationChanged:  4,
 		CountChanged:     12,
 		CountMaleChanged: 10,
 		Mode:             1,

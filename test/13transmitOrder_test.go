@@ -13,8 +13,8 @@ func TestTransmitOrder(t *testing.T) {
 	ctx := context.TODO()
 	obj := &handle.MutationServer{}
 	ret, err := obj.TransmitOrder(ctx, &pb.TransmitRequest{
-		OrderId: "123456",
-		AgentId: "qwertyui",
+		OrderId: "cjwae3d9c19j509103h9fcmuy",
+		AgentId: "cjwa4p7eo001v095406dcozn0",
 	})
 	if err != nil {
 		t.Error(err)

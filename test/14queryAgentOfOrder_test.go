@@ -13,10 +13,10 @@ func TestQueryAgentOfOrder(t *testing.T) {
 	ctx := context.TODO()
 	obj := &handle.QueryServer{}
 	ret, err := obj.QueryAgentOfOrder(ctx, &pb.QueryAgentRequest{
-		OrderId: "",
+		OrderId: "cjw8z8k4v00xn0910gd2b36yg",
 	})
 	if err != nil {
 		t.Error(err)
 	}
-	t.Log(ret)
+	t.Log(ret.AgentList)
 }
