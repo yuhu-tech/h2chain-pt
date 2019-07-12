@@ -32,8 +32,9 @@ type Order struct {
 
 type Orders struct {
 	OrderOrigins []struct {
-		Datetime           int32 `json:"datetime"`
-		Duration           int32 `json:"duration"`
+		Datetime           int32  `json:"datetime"`
+		Duration           int32  `json:"duration"`
+		ID                 string `json:"id"`
 		OrderHotelModifies []struct {
 			DateTime int32 `json:"dateTime"`
 			Duration int32 `json:"duration"`
@@ -160,15 +161,15 @@ func (s *MutationServer) ModifyPTOfOrder(ctx context.Context, in *pb.ModifyPtReq
 	data := prisma.OrderCandidateUpdateManyMutationInput{}
 	targetStatus := reflect.ValueOf(in.TargetStatus)
 	if targetStatus.Interface().(int32) != 0 {
-		if in.TargetStatus == 3 {
-			result, err := RegistryConflict(in.OrderId, in.PtId)
-			if err!= nil {
-				return &pb.ModifyPtReply{ModifyResult: 0}, err
-			}
-			if result == true {
-				return &pb.ModifyPtReply{ModifyResult: 2}, nil
-			}
-		}
+		// if in.TargetStatus == 3 {
+		// 	result, err := RegistryConflict(in.OrderId, in.PtId)
+		// 	if err != nil {
+		// 		return &pb.ModifyPtReply{ModifyResult: 0}, err
+		// 	}
+		// 	if result == true {
+		// 		return &pb.ModifyPtReply{ModifyResult: 2}, nil
+		// 	}
+		// }
 		data.PtStatus = &in.TargetStatus
 	}
 
@@ -430,6 +431,7 @@ func RegistryConflict(orderId, ptId string) (bool, error) {
 			}
 		  }
 		){
+		  id
 		  datetime
 		  duration
 		  orderHotelModifies{
@@ -467,20 +469,21 @@ func RegistryConflict(orderId, ptId string) (bool, error) {
 	tarMax := tDatetime + tDuration
 
 	for _, ele := range registeredOrders.OrderOrigins {
-		var da int32
-		var du int32
-		da = ele.Datetime
-		du = ele.Duration
-		if len(ele.OrderHotelModifies) != 0 {
-			da = ele.OrderHotelModifies[0].DateTime
-			du = ele.OrderHotelModifies[0].Duration
-		}
-		regMax := da + du
+		if targetOrder.OrderOrigin.ID != ele.ID {
+			var da int32
+			var du int32
+			da = ele.Datetime
+			du = ele.Duration
+			if len(ele.OrderHotelModifies) != 0 {
+				da = ele.OrderHotelModifies[0].DateTime
+				du = ele.OrderHotelModifies[0].Duration
+			}
+			regMax := da + du
 
-		if tDatetime <= regMax && tarMax >= da {
-			return true, nil
+			if tDatetime < regMax && tarMax > da {
+				return true, nil
+			}
 		}
-
 	}
 
 	return false, nil
