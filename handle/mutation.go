@@ -32,8 +32,9 @@ type Order struct {
 
 type Orders struct {
 	OrderOrigins []struct {
-		Datetime           int32 `json:"datetime"`
-		Duration           int32 `json:"duration"`
+		Datetime           int32  `json:"datetime"`
+		Duration           int32  `json:"duration"`
+		ID                 string `json:"id"`
 		OrderHotelModifies []struct {
 			DateTime int32 `json:"dateTime"`
 			Duration int32 `json:"duration"`
@@ -468,21 +469,21 @@ func RegistryConflict(orderId, ptId string) (bool, error) {
 	tarMax := tDatetime + tDuration
 
 	for _, ele := range registeredOrders.OrderOrigins {
-		//if targetOrder.OrderOrigin.ID != ele.ID {
-		var da int32
-		var du int32
-		da = ele.Datetime
-		du = ele.Duration
-		if len(ele.OrderHotelModifies) != 0 {
-			da = ele.OrderHotelModifies[0].DateTime
-			du = ele.OrderHotelModifies[0].Duration
-		}
-		regMax := da + du
+		if targetOrder.OrderOrigin.ID != ele.ID {
+			var da int32
+			var du int32
+			da = ele.Datetime
+			du = ele.Duration
+			if len(ele.OrderHotelModifies) != 0 {
+				da = ele.OrderHotelModifies[0].DateTime
+				du = ele.OrderHotelModifies[0].Duration
+			}
+			regMax := da + du
 
-		if tDatetime < regMax && tarMax > da {
-			return true, nil
+			if tDatetime < regMax && tarMax > da {
+				return true, nil
+			}
 		}
-		//}
 	}
 
 	return false, nil
