@@ -53,7 +53,7 @@ message CreateReply {
 message PostRequest {
     string orderId = 1;
     int32 isFloat = 2;
-    int32 hourlySalary = 3;
+    float hourlySalary = 3;
     string workContent = 4;
     string attention = 5;
 }
@@ -119,7 +119,7 @@ message EditRequest {
     string ptId = 2;
     int32 startDate = 3;
     int32 endDate = 4;
-    int32 realSalary = 5;
+    float realSalary = 5;
     int32 isWorked = 6;
     int32 type = 7;
 }
