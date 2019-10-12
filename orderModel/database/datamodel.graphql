@@ -33,7 +33,7 @@ type OrderAdviserModify{
     revision: Int!
     timeStamp: Int!
     isFloat: Int
-    hourlySalary: Int
+    hourlySalary: Float
     workCount: String
     attention: String
     orderOrigin: OrderOrigin!
@@ -60,7 +60,7 @@ type Remark {
     ptId: String!
     startDate: Int
     endDate: Int
-    realSalary: Int
+    realSalary: Float
     isWorked: Int!
     orderCandidate: OrderCandidate!
 }
